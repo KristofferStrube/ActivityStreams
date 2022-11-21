@@ -70,5 +70,32 @@ public class ObjectTests
         ex62.Type.First().Should().Be("http://example.org/Foo");
         ex62.TypeAsUri.First().Should().Be(new Uri("http://example.org/Foo"));
     }
+
+    [Fact]
+    /// <remarks>Example 66 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attachment</remarks>
+    public void Example_66()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Note",
+              "name": "Have you seen my cat?",
+              "attachment": [
+                {
+                  "type": "Image",
+                  "content": "This is what he looks like.",
+                  "url": "http://example.org/cat.jpeg"
+                }
+              ]
+            }
+            """;
+
+        // Act
+        var ex66 = Deserialize<Object>(input);
+
+        // Assert
+        ex66.Attachment.Should().HaveCount(1);
+    }
 }
 

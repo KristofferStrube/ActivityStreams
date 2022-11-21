@@ -1,21 +1,12 @@
-﻿namespace KristofferStrube.ActivityStreams;
+﻿using System.Text.Json.Serialization;
 
-public class ObjectOrLink
+namespace KristofferStrube.ActivityStreams;
+
+[JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
+[JsonDerivedType(typeof(Object), "Object")]
+[JsonDerivedType(typeof(Link), "Link")]
+[JsonDerivedType(typeof(Document), "Document")]
+[JsonDerivedType(typeof(Image), "Image")]
+public interface ObjectOrLink
 {
-    private ObjectOrLink(object value)
-    {
-        Value = value;
-    }
-
-    public static implicit operator ObjectOrLink(Object obj)
-    {
-        return new ObjectOrLink(obj);
-    }
-
-    public static implicit operator ObjectOrLink(Link link)
-    {
-        return new ObjectOrLink(link);
-    }
-
-    public object Value { get; init; }
 }

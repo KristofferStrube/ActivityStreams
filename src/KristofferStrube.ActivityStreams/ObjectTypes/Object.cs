@@ -1,5 +1,4 @@
 ﻿using KristofferStrube.ActivityStreams.JsonConverters;
-using KristofferStrube.ActivityStreams.Ranges;
 using System.Diagnostics;
 using System.Text.Json.Serialization;
 
@@ -8,7 +7,8 @@ namespace KristofferStrube.ActivityStreams;
 /// <summary>
 /// Describes an object of any kind. The Object type serves as the base type for most of the other kinds of objects defined in the Activity Vocabulary, including other Core types such as Activity, IntransitiveActivity, Collection and OrderedCollection.
 /// </summary>
-public class Object
+[JsonDerivedType(typeof(Image), "Image")]
+public class Object : ObjectOrLink
 {
     /// <summary>
     /// The context of the JSON-LD object.

@@ -8,16 +8,13 @@ internal class OneOrMultipleConverter<T> : JsonConverter<IEnumerable<T>?>
 {
     public override IEnumerable<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        var value = reader.GetString();
-        if (value is null) return null;
-
-        if (value.StartsWith('['))
+        if (reader.TokenType == JsonTokenType.StartArray)
         {
-            return Deserialize<IEnumerable<T>>($"\"{value}\"", options);
+            return Deserialize<IEnumerable<T>>($"\"{reader.GetString()!}\"", options);
         }
         else
         {
-            var element = Deserialize<T>($"\"{value}\"", options);
+            var element = Deserialize<T>($"\"{reader.GetString()!}\"", options);
             if (element is null) return null;
             return new List<T>() { element };
         }

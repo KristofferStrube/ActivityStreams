@@ -1,6 +1,6 @@
 ﻿namespace KristofferStrube.ActivityStreams;
 
-public class Link
+public class Link : ObjectOrLink
 {
 
 }
