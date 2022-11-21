@@ -20,7 +20,13 @@ public class Object
     /// Provides the globally unique identifier for an Object or Link.
     /// </summary>
     [JsonPropertyName("id")]
-    public Uri? Id { get; set; }
+    public string? Id { get; set; }
+
+    /// <summary>
+    /// Provides the globally unique identifier for an Object or Link.
+    /// </summary>
+    [JsonIgnore]
+    public Uri? IdAsUri => Id is null || JsonLDContext is null ? null : Uri.TryCreate(Id, new UriCreationOptions(), out var uri) ? uri : new Uri($"{JsonLDContext.AbsoluteUri}/{Id}");
 
     /// <summary>
     /// Identifies the Object or Link type. Multiple values may be specified.
@@ -33,7 +39,7 @@ public class Object
     /// Identifies the Object or Link type. Multiple values may be specified.
     /// </summary>
     [JsonIgnore]
-    public IEnumerable<Uri>? TypeAsUri => Type is null || JsonLDContext is null ? null : Type.Select(t => new Uri($"{JsonLDContext.AbsoluteUri}/{t}"));
+    public IEnumerable<Uri>? TypeAsUri => Type is null || JsonLDContext is null ? null : Type.Select(t => Uri.TryCreate(t, new UriCreationOptions(), out var uri) ? uri : new Uri($"{JsonLDContext.AbsoluteUri}/{t}"));
 
     /// <summary>
     /// Identifies a resource attached or related to an object that potentially requires special handling. The intent is to provide a model that is at least semantically similar to attachments in email.
