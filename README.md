@@ -5,6 +5,8 @@ The specifications can be seen here: https://www.w3.org/TR/activitystreams-vocab
 
 These types are famously used in the [ActivityPub](https://www.w3.org/TR/activitypub/) implementation which is used in the Fediverse inclusing Mastodon.
 
+**This implementation is still being developed, so progress is still very limited.**
+
 ## Goals
 - [ ] Add classes for Core Types.
 - [ ] Add extended classes for Activity Types.
