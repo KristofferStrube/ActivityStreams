@@ -1,5 +1,5 @@
 # ActivityStreams
-A .NET implementation of the Activity Streams vocabulary in the form of classes that can be serialized using System.Text.JSON
+A .NET implementation of the Activity Streams vocabulary in the form of classes that can be serialized using System.Text.Json
 
 The specifications can be seen here: https://www.w3.org/TR/activitystreams-vocabulary/
 
