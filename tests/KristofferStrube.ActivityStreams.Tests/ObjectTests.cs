@@ -157,5 +157,32 @@ public class ObjectTests
         ex68.AttributedTo.ElementAt(1).Should().BeAssignableTo<Object>();
         ex68.AttributedTo.ElementAt(1).As<Object>().Name.Should().Be("Sally");
     }
+
+    [Fact]
+    /// <remarks>Example 69 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-audience</remarks>
+    public void Example_69()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "name": "Holiday announcement",
+              "type": "Note",
+              "content": "Thursday will be a company-wide holiday. Enjoy your day off!",
+              "audience": {
+                "type": "http://example.org/Organization",
+                "name": "ExampleCo LLC"
+              }
+            }
+            """;
+
+        // Act
+        var ex69 = Deserialize<Note>(input);
+
+        // Assert
+        ex69.Audience.Should().HaveCount(1);
+        ex69.Audience.First().Should().BeAssignableTo<Object>();
+        ex69.Audience.First().As<Object>().Name.Should().Be("ExampleCo LLC");
+    }
 }
 

@@ -24,6 +24,8 @@ public class Object : ObjectOrLink
     /// <summary>
     /// Identifies one or more entities that represent the total population of entities for which the object can considered to be relevant.
     /// </summary>
+    [JsonPropertyName("audience")]
+    [JsonConverter(typeof(OneOrMultipleConverter<ObjectOrLink>))]
     public IEnumerable<ObjectOrLink>? Audience { get; set; }
 
     /// <summary>
