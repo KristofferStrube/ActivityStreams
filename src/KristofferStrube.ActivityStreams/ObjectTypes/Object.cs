@@ -31,6 +31,8 @@ public class Object : ObjectOrLink
     /// <summary>
     /// Identifies one or more Objects that are part of the private secondary audience of this Object.
     /// </summary>
+    [JsonPropertyName("bcc")]
+    [JsonConverter(typeof(OneOrMultipleConverter<ObjectOrLink>))]
     public IEnumerable<ObjectOrLink>? Bcc { get; set; }
 
     /// <summary>

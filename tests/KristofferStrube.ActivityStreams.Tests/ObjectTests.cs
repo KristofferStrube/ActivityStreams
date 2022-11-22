@@ -184,5 +184,31 @@ public class ObjectTests
         ex69.Audience.First().Should().BeAssignableTo<Object>();
         ex69.Audience.First().As<Object>().Name.Should().Be("ExampleCo LLC");
     }
+
+    [Fact]
+    /// <remarks>Example 70 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-bcc</remarks>
+    public void Example_70()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Sally offered a post to John",
+              "type": "Offer",
+              "actor": "http://sally.example.org",
+              "object": "http://example.org/posts/1",
+              "target": "http://john.example.org",
+              "bcc": [ "http://joe.example.org" ]
+            }
+            """;
+
+        // Act
+        var ex70 = Deserialize<Note>(input);
+
+        // Assert
+        ex70.Bcc.Should().HaveCount(1);
+        ex70.Bcc.First().Should().BeAssignableTo<Link>();
+        ex70.Bcc.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
+    }
 }
 
