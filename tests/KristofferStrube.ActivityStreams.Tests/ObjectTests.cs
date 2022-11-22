@@ -94,7 +94,6 @@ public class ObjectTests
         ex66.Attachment.First().Should().BeAssignableTo<Image>();
         ex66.Attachment.First().As<Image>().Content.Should().Be("This is what he looks like.");
         ex66.Attachment.First().As<Image>().Url.Should().HaveCount(1);
-        ex66.Attachment.First().As<Image>().Url.First().Should().BeAssignableTo<Uri>();
         ex66.Attachment.First().As<Image>().Url.First().Should().Be(new Uri("http://example.org/cat.jpeg"));
     }
 }
