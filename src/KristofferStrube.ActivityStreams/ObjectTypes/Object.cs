@@ -86,6 +86,8 @@ public class Object : IObject
     /// <summary>
     /// Identifies the entity (e.g. an application) that generated the object.
     /// </summary>
+    [JsonPropertyName("generator")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
     public IEnumerable<IObjectOrLink>? Generator { get; set; }
 
     /// <summary>

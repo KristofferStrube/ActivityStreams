@@ -300,9 +300,37 @@ public class ObjectTests
         var ex73 = Deserialize<IObjectOrLink>(input);
 
         // Assert
-        var collection = ex73.As<Collection>();
-        collection.Items.First().As<Offer>().Context.First().As<Link>().Href.Should().Be("http://example.org/contexts/1");
-        collection.Items.Last().As<Like>().Context.First().As<Link>().Href.Should().Be("http://example.org/contexts/1");
+        ex73.Should().BeAssignableTo<Collection>();
+        ex73.As<Collection>().Items.First().As<Offer>().Context.First().As<Link>().Href.Should().Be("http://example.org/contexts/1");
+        ex73.As<Collection>().Items.Last().As<Like>().Context.First().As<Link>().Href.Should().Be("http://example.org/contexts/1");
+    }
+
+    [Fact]
+    /// <remarks>Example 78 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-generator</remarks>
+    public void Example_78()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "A simple note",
+              "type": "Note",
+              "content": "This is all there is.",
+              "generator": {
+                "type": "Application",
+                "name": "Exampletron 3000"
+              }
+            }
+            """;
+
+        // Act
+        var ex78 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex78.Should().BeAssignableTo<Note>();
+        ex78.As<Note>().Generator.Should().HaveCount(1);
+        ex78.As<Note>().Generator.First().Should().BeAssignableTo<Application>();
+        ex78.As<Note>().Generator.First().As<Application>().Name.Should().Be("Exampletron 3000");
     }
 }
 
