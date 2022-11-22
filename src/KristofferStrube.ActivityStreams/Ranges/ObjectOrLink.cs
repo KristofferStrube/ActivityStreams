@@ -3,11 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
-[JsonPolymorphic(TypeDiscriminatorPropertyName = "type")]
-[JsonDerivedType(typeof(Object), "Object")]
-[JsonDerivedType(typeof(Link), "Link")]
-[JsonDerivedType(typeof(Document), "Document")]
-[JsonDerivedType(typeof(Image), "Image")]
+[JsonConverter(typeof(ObjectOrLinkConverter))]
 public class ObjectOrLink
 {
     /// <summary>
@@ -26,5 +22,5 @@ public class ObjectOrLink
     /// Provides the globally unique identifier for an Object or Link.
     /// </summary>
     [JsonIgnore]
-    public Uri? IdAsUri => Id is null || JsonLDContext is null ? null : Uri.TryCreate(Id, new UriCreationOptions(), out var uri) ? uri : new Uri($"{JsonLDContext.AbsoluteUri}/{Id}");
+    public Uri? IdAsUri => Id is null || JsonLDContext is null ? null : new Uri(JsonLDContext, Id);
 }

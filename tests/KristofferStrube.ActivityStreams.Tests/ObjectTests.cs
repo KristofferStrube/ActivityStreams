@@ -96,5 +96,66 @@ public class ObjectTests
         ex66.Attachment.First().As<Image>().Url.Should().HaveCount(1);
         ex66.Attachment.First().As<Image>().Url.First().Should().Be(new Uri("http://example.org/cat.jpeg"));
     }
+
+    [Fact]
+    /// <remarks>Example 67 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attributedto</remarks>
+    public void Example_67()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Image",
+              "name": "My cat taking a nap",
+              "url": "http://example.org/cat.jpeg",
+              "attributedTo": [
+                {
+                  "type": "Person",
+                  "name": "Sally"
+                }
+              ]
+            }
+            """;
+
+        // Act
+        var ex67 = Deserialize<Image>(input);
+
+        // Assert
+        ex67.AttributedTo.Should().HaveCount(1);
+        ex67.AttributedTo.First().Should().BeAssignableTo<Person>();
+        ex67.AttributedTo.First().As<Person>().Name.Should().Be("Sally");
+    }
+
+    [Fact]
+    /// <remarks>Example 68 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attributedto</remarks>
+    public void Example_68()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Image",
+              "name": "My cat taking a nap",
+              "url": "http://example.org/cat.jpeg",
+              "attributedTo": [
+                "http://joe.example.org",
+                {
+                  "type": "Person",
+                  "name": "Sally"
+                }
+              ]
+            }
+            """;
+
+        // Act
+        var ex68 = Deserialize<Image>(input);
+
+        // Assert
+        ex68.AttributedTo.Should().HaveCount(2);
+        ex68.AttributedTo.ElementAt(0).Should().BeAssignableTo<Link>();
+        ex68.AttributedTo.ElementAt(0).As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
+        ex68.AttributedTo.ElementAt(1).Should().BeAssignableTo<Object>();
+        ex68.AttributedTo.ElementAt(1).As<Object>().Name.Should().Be("Sally");
+    }
 }
 
