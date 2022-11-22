@@ -7,38 +7,66 @@ namespace KristofferStrube.ActivityStreams;
 /// <summary>
 /// Describes an object of any kind. The Object type serves as the base type for most of the other kinds of objects defined in the Activity Vocabulary, including other Core types such as Activity, IntransitiveActivity, Collection and OrderedCollection.
 /// </summary>
-public class Object : ObjectOrLink
+public class Object : IObject
 {
+    /// <summary>
+    /// The context of the JSON-LD object.
+    /// </summary>
+    [JsonPropertyName("@context")]
+    public Uri? JsonLDContext { get; set; }
+
+    /// <summary>
+    /// Provides the globally unique identifier for an Object or Link.
+    /// </summary>
+    [JsonPropertyName("id")]
+    public string? Id { get; set; }
+
+    /// <summary>
+    /// Provides the globally unique identifier for an Object or Link.
+    /// </summary>
+    [JsonIgnore]
+    public Uri? IdAsUri => Id is null || JsonLDContext is null ? null : new Uri(JsonLDContext, Id);
+
+    /// <summary>
+    /// Provides the globally unique identifier for an Object or Link.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public string? Type { get; set; }
+
     /// <summary>
     /// Identifies a resource attached or related to an object that potentially requires special handling. The intent is to provide a model that is at least semantically similar to attachments in email.
     /// </summary>
     [JsonPropertyName("attachment")]
-    public IEnumerable<ObjectOrLink>? Attachment { get; set; }
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? Attachment { get; set; }
 
     /// <summary>
     /// Identifies one or more entities to which this object is attributed. The attributed entities might not be Actors. For instance, an object might be attributed to the completion of another activity.
     /// </summary>
     [JsonPropertyName("attributedTo")]
-    public IEnumerable<ObjectOrLink>? AttributedTo { get; set; }
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? AttributedTo { get; set; }
 
     /// <summary>
     /// Identifies one or more entities that represent the total population of entities for which the object can considered to be relevant.
     /// </summary>
     [JsonPropertyName("audience")]
-    [JsonConverter(typeof(OneOrMultipleConverter<ObjectOrLink>))]
-    public IEnumerable<ObjectOrLink>? Audience { get; set; }
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? Audience { get; set; }
 
     /// <summary>
     /// Identifies one or more Objects that are part of the private secondary audience of this Object.
     /// </summary>
     [JsonPropertyName("bcc")]
-    [JsonConverter(typeof(OneOrMultipleConverter<ObjectOrLink>))]
-    public IEnumerable<ObjectOrLink>? Bcc { get; set; }
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? Bcc { get; set; }
 
     /// <summary>
     /// Identifies an Object that is part of the private primary audience of this Object.
     /// </summary>
-    public IEnumerable<ObjectOrLink>? Bto { get; set; }
+    [JsonPropertyName("bto")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? Bto { get; set; }
 
     /// <summary>
     /// Identifies an Object that is part of the public secondary audience of this Object.

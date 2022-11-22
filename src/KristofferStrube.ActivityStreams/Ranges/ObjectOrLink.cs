@@ -1,10 +1,8 @@
-﻿using KristofferStrube.ActivityStreams.JsonConverters;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
-[JsonConverter(typeof(ObjectOrLinkConverter))]
-public class ObjectOrLink
+public class ObjectOrLink : IObjectOrLink
 {
     /// <summary>
     /// The context of the JSON-LD object.
@@ -23,4 +21,10 @@ public class ObjectOrLink
     /// </summary>
     [JsonIgnore]
     public Uri? IdAsUri => Id is null || JsonLDContext is null ? null : new Uri(JsonLDContext, Id);
+
+    /// <summary>
+    /// Provides the globally unique identifier for an Object or Link.
+    /// </summary>
+    [JsonPropertyName("type")]
+    public string? Type { get; set; }
 }

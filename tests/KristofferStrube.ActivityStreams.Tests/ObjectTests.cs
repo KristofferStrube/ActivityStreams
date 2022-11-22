@@ -17,12 +17,13 @@ public class ObjectTests
             """;
 
         // Act
-        var ex1 = Deserialize<Object>(input);
+        var ex1 = Deserialize<IObjectOrLink>(input);
 
         // Assert
-        ex1.JsonLDContext.Should().Be(new Uri("https://www.w3.org/ns/activitystreams"));
-        ex1.Id.Should().Be("http://www.test.example/object/1");
-        ex1.Name.Should().Be("A Simple, non-specific object");
+        ex1.Should().BeAssignableTo<Object>();
+        ex1.As<Object>().JsonLDContext.Should().Be(new Uri("https://www.w3.org/ns/activitystreams"));
+        ex1.As<Object>().Id.Should().Be("http://www.test.example/object/1");
+        ex1.As<Object>().Name.Should().Be("A Simple, non-specific object");
     }
 
     [Fact]
@@ -39,7 +40,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex61 = Deserialize<Object>(input);
+        var ex61 = Deserialize<ObjectOrLink>(input);
 
         // Assert
         ex61.Id.Should().Be("http://example.org/foo");
@@ -60,10 +61,10 @@ public class ObjectTests
             """;
 
         // Act
-        var ex62 = Deserialize<Object>(input);
+        var ex62 = Deserialize<IObjectOrLink>(input);
 
         // Assert
-        ex62.Summary.First().Should().Be("A foo");
+        ex62.Type.Should().Be("http://example.org/Foo");
     }
 
     [Fact]
@@ -87,14 +88,15 @@ public class ObjectTests
             """;
 
         // Act
-        var ex66 = Deserialize<Object>(input);
+        var ex66 = Deserialize<IObjectOrLink>(input);
 
         // Assert
-        ex66.Attachment.Should().HaveCount(1);
-        ex66.Attachment.First().Should().BeAssignableTo<Image>();
-        ex66.Attachment.First().As<Image>().Content.Should().Be("This is what he looks like.");
-        ex66.Attachment.First().As<Image>().Url.Should().HaveCount(1);
-        ex66.Attachment.First().As<Image>().Url.First().Should().Be(new Uri("http://example.org/cat.jpeg"));
+        ex66.Should().BeAssignableTo<Note>();
+        ex66.As<Note>().Attachment.Should().HaveCount(1);
+        ex66.As<Note>().Attachment.First().Should().BeAssignableTo<Image>();
+        ex66.As<Note>().Attachment.First().As<Image>().Content.Should().Be("This is what he looks like.");
+        ex66.As<Note>().Attachment.First().As<Image>().Url.Should().HaveCount(1);
+        ex66.As<Note>().Attachment.First().As<Image>().Url.First().Should().Be(new Uri("http://example.org/cat.jpeg"));
     }
 
     [Fact]
@@ -118,12 +120,13 @@ public class ObjectTests
             """;
 
         // Act
-        var ex67 = Deserialize<Image>(input);
+        var ex67 = Deserialize<IObjectOrLink>(input);
 
         // Assert
-        ex67.AttributedTo.Should().HaveCount(1);
-        ex67.AttributedTo.First().Should().BeAssignableTo<Person>();
-        ex67.AttributedTo.First().As<Person>().Name.Should().Be("Sally");
+        ex67.Should().BeAssignableTo<Image>();
+        ex67.As<Image>().AttributedTo.Should().HaveCount(1);
+        ex67.As<Image>().AttributedTo.First().Should().BeAssignableTo<Person>();
+        ex67.As<Image>().AttributedTo.First().As<Person>().Name.Should().Be("Sally");
     }
 
     [Fact]
@@ -148,14 +151,15 @@ public class ObjectTests
             """;
 
         // Act
-        var ex68 = Deserialize<Image>(input);
+        var ex68 = Deserialize<IObjectOrLink>(input);
 
         // Assert
-        ex68.AttributedTo.Should().HaveCount(2);
-        ex68.AttributedTo.ElementAt(0).Should().BeAssignableTo<Link>();
-        ex68.AttributedTo.ElementAt(0).As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
-        ex68.AttributedTo.ElementAt(1).Should().BeAssignableTo<Object>();
-        ex68.AttributedTo.ElementAt(1).As<Object>().Name.Should().Be("Sally");
+        ex68.Should().BeAssignableTo<Image>();
+        ex68.As<Image>().AttributedTo.Should().HaveCount(2);
+        ex68.As<Image>().AttributedTo.ElementAt(0).Should().BeAssignableTo<Link>();
+        ex68.As<Image>().AttributedTo.ElementAt(0).As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
+        ex68.As<Image>().AttributedTo.ElementAt(1).Should().BeAssignableTo<Object>();
+        ex68.As<Image>().AttributedTo.ElementAt(1).As<Object>().Name.Should().Be("Sally");
     }
 
     [Fact]
@@ -177,12 +181,12 @@ public class ObjectTests
             """;
 
         // Act
-        var ex69 = Deserialize<Note>(input);
+        var ex69 = Deserialize<IObjectOrLink>(input);
 
         // Assert
-        ex69.Audience.Should().HaveCount(1);
-        ex69.Audience.First().Should().BeAssignableTo<Object>();
-        ex69.Audience.First().As<Object>().Name.Should().Be("ExampleCo LLC");
+        ex69.Should().BeAssignableTo<Note>();
+        ex69.As<Note>().Audience.Should().HaveCount(1);
+        ex69.As<Note>().Audience.First().Type.Should().Be("http://example.org/Organization");
     }
 
     [Fact]
@@ -203,12 +207,40 @@ public class ObjectTests
             """;
 
         // Act
-        var ex70 = Deserialize<Note>(input);
+        var ex70 = Deserialize<IObjectOrLink>(input);
 
         // Assert
-        ex70.Bcc.Should().HaveCount(1);
-        ex70.Bcc.First().Should().BeAssignableTo<Link>();
-        ex70.Bcc.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
+        ex70.Should().BeAssignableTo<Offer>();
+        ex70.As<Offer>().Bcc.Should().HaveCount(1);
+        ex70.As<Offer>().Bcc.First().Should().BeAssignableTo<Link>();
+        ex70.As<Offer>().Bcc.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
+    }
+
+    [Fact]
+    /// <remarks>Example 71 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-bto</remarks>
+    public void Example_71()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Sally offered a post to John",
+              "type": "Offer",
+              "actor": "http://sally.example.org",
+              "object": "http://example.org/posts/1",
+              "target": "http://john.example.org",
+              "bto": [ "http://joe.example.org" ]
+            }
+            """;
+
+        // Act
+        var ex71 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex71.Should().BeAssignableTo<Offer>();
+        ex71.As<Offer>().Bto.Should().HaveCount(1);
+        ex71.As<Offer>().Bto.First().Should().BeAssignableTo<Link>();
+        ex71.As<Offer>().Bto.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
     }
 }
 

@@ -1,12 +1,13 @@
-﻿using System.Text.Json;
+﻿using System.Diagnostics;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams.JsonConverters;
 
-internal class ObjectOrLinkConverter : JsonConverter<ObjectOrLink?>
+internal class ObjectOrLinkConverter : JsonConverter<IObjectOrLink?>
 {
-    public override ObjectOrLink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override IObjectOrLink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (JsonDocument.TryParseValue(ref reader, out var doc))
         {
@@ -18,24 +19,18 @@ internal class ObjectOrLinkConverter : JsonConverter<ObjectOrLink?>
             {
                 return type.GetString() switch {
                     "Link" => (new LinkConverter()).Read(ref reader, typeof(Link), options),
-                    // Objects
-                    "Document" => doc.Deserialize<Document>(options),
-                    "Image" => doc.Deserialize<Image>(options),
-                    "Note" => doc.Deserialize<Note>(options),
-                    // Actors
-                    "Person" => doc.Deserialize<Person>(options),
-                    _ => doc.Deserialize<Object>(options),
+                    _ => doc.Deserialize<IObject>(options),
                 };
             }
             else
             {
-                throw new JsonException("JSON Object didn't have type property");
+                return doc.Deserialize<ObjectOrLink>(options);
             }
         }
         throw new JsonException("Could not be parsed as a JsonDocument");
     }
 
-    public override void Write(Utf8JsonWriter writer, ObjectOrLink? value, JsonSerializerOptions options)
+    public override void Write(Utf8JsonWriter writer, IObjectOrLink? value, JsonSerializerOptions options)
     {
         throw new NotImplementedException();
     }
