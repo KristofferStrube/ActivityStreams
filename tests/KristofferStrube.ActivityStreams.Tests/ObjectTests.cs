@@ -363,5 +363,46 @@ public class ObjectTests
         ex79.As<Note>().Icon.First().Should().BeAssignableTo<Image>();
         ex79.As<Note>().Icon.First().As<Image>().Name.First().Should().Be("Note icon");
     }
+
+    [Fact]
+    /// <remarks>Example 80 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-icon</remarks>
+    public void Example_80()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "A simple note",
+              "type": "Note",
+              "content": "A simple note",
+              "icon": [
+                {
+                  "type": "Image",
+                  "summary": "Note (16x16)",
+                  "url": "http://example.org/note1.png",
+                  "width": 16,
+                  "height": 16
+                },
+                {
+                  "type": "Image",
+                  "summary": "Note (32x32)",
+                  "url": "http://example.org/note2.png",
+                  "width": 32,
+                  "height": 32
+                }
+              ]
+            }
+            """;
+
+        // Act
+        var ex80 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex80.Should().BeAssignableTo<Note>();
+        ex80.As<Note>().Icon.Should().HaveCount(2);
+        ex80.As<Note>().Icon.First().Should().BeAssignableTo<Image>();
+        ex80.As<Note>().Icon.First().As<Image>().Summary.First().Should().Be("Note (16x16)");
+        ex80.As<Note>().Icon.Last().As<Image>().Summary.First().Should().Be("Note (32x32)");
+    }
 }
 

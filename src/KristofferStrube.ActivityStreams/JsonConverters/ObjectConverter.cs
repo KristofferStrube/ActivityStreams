@@ -33,7 +33,7 @@ internal class ObjectConverter : JsonConverter<IObject?>
             }
             else
             {
-                throw new JsonException("JSON Object did not have a type property");
+                throw new JsonException("JSON Object did not have a type property.");
             }
         }
         throw new JsonException("Could not be parsed as a JsonDocument.");
