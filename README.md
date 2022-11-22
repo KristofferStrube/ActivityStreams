@@ -9,6 +9,14 @@ These types are famously used in the [ActivityPub](https://www.w3.org/TR/activit
 
 ## Goals
 - [ ] Add classes for Core Types.
+  - [] Add class for Object
+  - [] Add class for Link
+  - [] Add class for Activity
+  - [] Add class for IntransitiveActivity
+  - [] Add class for Collection
+  - [] Add class for OrderedCollection
+  - [] Add class for CollectionPage
+  - [] Add class for OrderedCollectionPage
 - [ ] Add extended classes for Activity Types.
 - [ ] Add extended classes for Actor Types.
 - [ ] Add extended classes for Object and Link Types.
