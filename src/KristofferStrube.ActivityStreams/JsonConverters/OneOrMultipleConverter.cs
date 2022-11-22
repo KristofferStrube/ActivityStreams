@@ -16,7 +16,7 @@ internal class OneOrMultipleConverter<T> : JsonConverter<IEnumerable<T>?>
             }
             return Enumerable.Range(0,1).Select(_ => doc.Deserialize<T>()!);
         }
-        throw new JsonException("Could not be parsed as a JsonDocument");
+        throw new JsonException("Could not be parsed as a JsonDocument.");
     }
 
     public override void Write(Utf8JsonWriter writer, IEnumerable<T>? value, JsonSerializerOptions options)

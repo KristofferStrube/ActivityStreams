@@ -93,12 +93,14 @@ public class Object : IObject
     /// <summary>
     /// Indicates an entity that describes an icon for this object. The image should have an aspect ratio of one (horizontal) to one (vertical) and should be suitable for presentation at a small size.
     /// </summary>
-    public IEnumerable<ImageOrLink>? Icon { get; set; }
+    [JsonPropertyName("icon")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IImageOrLink>))]
+    public IEnumerable<IImageOrLink>? Icon { get; set; }
 
     /// <summary>
     /// Indicates an entity that describes an image for this object. Unlike the icon property, there are no aspect ratio or display size limitations assumed.
     /// </summary>
-    public IEnumerable<ImageOrLink>? Image { get; set; }
+    public IEnumerable<IImageOrLink>? Image { get; set; }
 
     /// <summary>
     /// Indicates one or more entities for which this object is considered a response.
@@ -147,15 +149,17 @@ public class Object : IObject
     /// The content may be expressed using multiple language-tagged values.
     /// </summary>
     /// <remarks>We haven't implimented support for the <c>rdf:langString</c> type.</remarks>
+    [JsonConverter(typeof(OneOrMultipleConverter<string>))]
     [JsonPropertyName("content")]
-    public string? Content { get; set; }
+    public IEnumerable<string>? Content { get; set; }
 
     /// <summary>
     /// A simple, human-readable, plain-text name for the object. HTML markup must not be included. The name may be expressed using multiple language-tagged values.
     /// </summary>
     /// <remarks>We haven't implimented support for the <c>rdf:langString</c> type.</remarks>
+    [JsonConverter(typeof(OneOrMultipleConverter<string>))]
     [JsonPropertyName("name")]
-    public string? Name { get; set; }
+    public IEnumerable<string>? Name { get; set; }
 
     /// <summary>
     /// When the object describes a time-bound resource, such as an audio or video, a meeting, etc, the duration property indicates the object's approximate duration. The value must be expressed as an xsd:duration as defined by [ xmlschema11-2], section 3.3.6 (e.g. a period of 5 seconds is represented as "PT5S").

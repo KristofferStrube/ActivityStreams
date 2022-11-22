@@ -1,10 +1,10 @@
-﻿using System.Text.Json.Serialization;
+﻿using KristofferStrube.ActivityStreams.JsonConverters;
+using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
-[JsonDerivedType(typeof(Image), "Image")]
-[JsonDerivedType(typeof(Link), "Link")]
-public interface ImageOrLink
+[JsonConverter(typeof(ImageOrLinkConverter))]
+public interface IImageOrLink : IObjectOrLink
 {
 
 }

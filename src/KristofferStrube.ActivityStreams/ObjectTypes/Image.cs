@@ -1,5 +1,5 @@
 ﻿namespace KristofferStrube.ActivityStreams;
 
-public class Image : Document
+public class Image : Document, IImageOrLink
 {
 }

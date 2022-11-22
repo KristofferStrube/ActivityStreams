@@ -36,7 +36,7 @@ internal class ObjectConverter : JsonConverter<IObject?>
                 throw new JsonException("JSON Object didn't have type property");
             }
         }
-        throw new JsonException("Could not be parsed as a JsonDocument");
+        throw new JsonException("Could not be parsed as a JsonDocument.");
     }
 
     private IObject DeserializeGenericType(JsonDocument doc, string type, JsonSerializerOptions options)

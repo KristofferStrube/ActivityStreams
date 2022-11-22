@@ -23,7 +23,7 @@ public class ObjectTests
         ex1.Should().BeAssignableTo<Object>();
         ex1.As<Object>().JsonLDContext.Should().Be(new Uri("https://www.w3.org/ns/activitystreams"));
         ex1.As<Object>().Id.Should().Be("http://www.test.example/object/1");
-        ex1.As<Object>().Name.Should().Be("A Simple, non-specific object");
+        ex1.As<Object>().Name.First().Should().Be("A Simple, non-specific object");
     }
 
     [Fact]
@@ -94,7 +94,7 @@ public class ObjectTests
         ex66.Should().BeAssignableTo<Note>();
         ex66.As<Note>().Attachment.Should().HaveCount(1);
         ex66.As<Note>().Attachment.First().Should().BeAssignableTo<Image>();
-        ex66.As<Note>().Attachment.First().As<Image>().Content.Should().Be("This is what he looks like.");
+        ex66.As<Note>().Attachment.First().As<Image>().Content.First().Should().Be("This is what he looks like.");
     }
 
     [Fact]
@@ -124,7 +124,7 @@ public class ObjectTests
         ex67.Should().BeAssignableTo<Image>();
         ex67.As<Image>().AttributedTo.Should().HaveCount(1);
         ex67.As<Image>().AttributedTo.First().Should().BeAssignableTo<Person>();
-        ex67.As<Image>().AttributedTo.First().As<Person>().Name.Should().Be("Sally");
+        ex67.As<Image>().AttributedTo.First().As<Person>().Name.First().Should().Be("Sally");
     }
 
     [Fact]
@@ -157,7 +157,7 @@ public class ObjectTests
         ex68.As<Image>().AttributedTo.ElementAt(0).Should().BeAssignableTo<Link>();
         ex68.As<Image>().AttributedTo.ElementAt(0).As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
         ex68.As<Image>().AttributedTo.ElementAt(1).Should().BeAssignableTo<Object>();
-        ex68.As<Image>().AttributedTo.ElementAt(1).As<Object>().Name.Should().Be("Sally");
+        ex68.As<Image>().AttributedTo.ElementAt(1).As<Object>().Name.First().Should().Be("Sally");
     }
 
     [Fact]
@@ -330,7 +330,38 @@ public class ObjectTests
         ex78.Should().BeAssignableTo<Note>();
         ex78.As<Note>().Generator.Should().HaveCount(1);
         ex78.As<Note>().Generator.First().Should().BeAssignableTo<Application>();
-        ex78.As<Note>().Generator.First().As<Application>().Name.Should().Be("Exampletron 3000");
+        ex78.As<Note>().Generator.First().As<Application>().Name.First().Should().Be("Exampletron 3000");
+    }
+
+    [Fact]
+    /// <remarks>Example 79 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-icon</remarks>
+    public void Example_79()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "A simple note",
+              "type": "Note",
+              "content": "This is all there is.",
+              "icon": {
+                "type": "Image",
+                "name": "Note icon",
+                "url": "http://example.org/note.png",
+                "width": 16,
+                "height": 16
+              }
+            }
+            """;
+
+        // Act
+        var ex79 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex79.Should().BeAssignableTo<Note>();
+        ex79.As<Note>().Icon.Should().HaveCount(1);
+        ex79.As<Note>().Icon.First().Should().BeAssignableTo<Image>();
+        ex79.As<Note>().Icon.First().As<Image>().Name.First().Should().Be("Note icon");
     }
 }
 
