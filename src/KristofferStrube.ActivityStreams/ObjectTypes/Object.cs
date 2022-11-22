@@ -100,6 +100,8 @@ public class Object : IObject
     /// <summary>
     /// Indicates an entity that describes an image for this object. Unlike the icon property, there are no aspect ratio or display size limitations assumed.
     /// </summary>
+    [JsonPropertyName("image")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IImageOrLink>))]
     public IEnumerable<IImageOrLink>? Image { get; set; }
 
     /// <summary>

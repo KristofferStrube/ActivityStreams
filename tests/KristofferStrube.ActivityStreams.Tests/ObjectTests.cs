@@ -404,5 +404,69 @@ public class ObjectTests
         ex80.As<Note>().Icon.First().As<Image>().Summary.First().Should().Be("Note (16x16)");
         ex80.As<Note>().Icon.Last().As<Image>().Summary.First().Should().Be("Note (32x32)");
     }
+
+    [Fact]
+    /// <remarks>Example 81 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-image</remarks>
+    public void Example_81()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "name": "A simple note",
+              "type": "Note",
+              "content": "This is all there is.",
+              "image": {
+                "type": "Image",
+                "name": "A Cat",
+                "url": "http://example.org/cat.png"
+              }
+            }
+            """;
+
+        // Act
+        var ex81 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex81.Should().BeAssignableTo<Note>();
+        ex81.As<Note>().Image.Should().HaveCount(1);
+        ex81.As<Note>().Image.First().Should().BeAssignableTo<Image>();
+        ex81.As<Note>().Image.First().As<Image>().Name.First().Should().Be("A Cat");
+    }
+
+    [Fact]
+    /// <remarks>Example 82 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-image</remarks>
+    public void Example_82()
+    {
+        // Arrange
+        // We changed the second element in the below image list to be a url to validate that that is possible.
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "name": "A simple note",
+              "type": "Note",
+              "content": "This is all there is.",
+              "image": [
+                {
+                  "type": "Image",
+                  "name": "Cat 1",
+                  "url": "http://example.org/cat1.png"
+                },
+                "http://example.org/cat2.png"
+              ]
+            }
+            """;
+
+        // Act
+        var ex82 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex82.Should().BeAssignableTo<Note>();
+        ex82.As<Note>().Image.Should().HaveCount(2);
+        ex82.As<Note>().Image.First().Should().BeAssignableTo<Image>();
+        ex82.As<Note>().Image.First().As<Image>().Name.First().Should().Be("Cat 1");
+        ex82.As<Note>().Image.Last().Should().BeAssignableTo<Link>();
+        ex82.As<Note>().Image.Last().As<Link>().Href.Should().Be(new Uri("http://example.org/cat2.png"));
+    }
 }
 
