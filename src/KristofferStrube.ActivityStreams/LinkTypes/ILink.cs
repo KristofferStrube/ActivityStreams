@@ -3,8 +3,8 @@ using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
-public class Link : ObjectOrLink, ILink
+[JsonConverter(typeof(LinkConverter))]
+public interface ILink : IImageOrLink
 {
-    [JsonPropertyName("href")]
-    public Uri? Href { get; set; }
+    Uri? Href { get; set; }
 }

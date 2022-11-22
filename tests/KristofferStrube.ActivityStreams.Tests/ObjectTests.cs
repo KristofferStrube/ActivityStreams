@@ -440,6 +440,7 @@ public class ObjectTests
     {
         // Arrange
         // We changed the second element in the below image list to be a url to validate that that is possible.
+        // We also added an explicit Link after that.
         var input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
@@ -452,7 +453,11 @@ public class ObjectTests
                   "name": "Cat 1",
                   "url": "http://example.org/cat1.png"
                 },
-                "http://example.org/cat2.png"
+                "http://example.org/cat2.png",
+                {
+                  "type": "Link",
+                  "href": "http://example.org/cat3.png"
+                }
               ]
             }
             """;
@@ -462,11 +467,13 @@ public class ObjectTests
 
         // Assert
         ex82.Should().BeAssignableTo<Note>();
-        ex82.As<Note>().Image.Should().HaveCount(2);
-        ex82.As<Note>().Image.First().Should().BeAssignableTo<Image>();
-        ex82.As<Note>().Image.First().As<Image>().Name.First().Should().Be("Cat 1");
-        ex82.As<Note>().Image.Last().Should().BeAssignableTo<Link>();
-        ex82.As<Note>().Image.Last().As<Link>().Href.Should().Be(new Uri("http://example.org/cat2.png"));
+        ex82.As<Note>().Image.Should().HaveCount(3);
+        ex82.As<Note>().Image.ElementAt(0).Should().BeAssignableTo<Image>();
+        ex82.As<Note>().Image.ElementAt(0).As<Image>().Name.First().Should().Be("Cat 1");
+        ex82.As<Note>().Image.ElementAt(1).Should().BeAssignableTo<ILink>();
+        ex82.As<Note>().Image.ElementAt(1).As<ILink>().Href.Should().Be(new Uri("http://example.org/cat2.png"));
+        ex82.As<Note>().Image.ElementAt(2).Should().BeAssignableTo<ILink>();
+        ex82.As<Note>().Image.ElementAt(2).As<ILink>().Href.Should().Be(new Uri("http://example.org/cat3.png"));
     }
 }
 

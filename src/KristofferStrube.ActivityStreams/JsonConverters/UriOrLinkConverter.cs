@@ -12,7 +12,7 @@ internal class UriOrLinkConverter : JsonConverter<UriOrLink?>
         if (value is null) return null;
         if (value.StartsWith("{"))
         {
-            return Deserialize<Link>(value)!;
+            return (Link)Deserialize<ILink>(value)!;
         }
         return (UriOrLink)new Uri(value);
     }

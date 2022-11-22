@@ -13,12 +13,12 @@ internal class ObjectOrLinkConverter : JsonConverter<IObjectOrLink?>
         {
             if (doc.RootElement.ValueKind == JsonValueKind.String)
             {
-                return (new LinkConverter()).Read(ref reader, typeof(Link), options);
+                return doc.Deserialize<ILink>(options);
             }
             else if (doc.RootElement.TryGetProperty("type", out var type))
             {
                 return type.GetString() switch {
-                    "Link" => (new LinkConverter()).Read(ref reader, typeof(Link), options),
+                    "Link" => doc.Deserialize<ILink>(options),
                     _ => doc.Deserialize<IObject>(options),
                 };
             }

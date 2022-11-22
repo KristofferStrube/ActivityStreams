@@ -13,20 +13,18 @@ internal class ImageOrLinkConverter : JsonConverter<IImageOrLink?>
         {
             if (doc.RootElement.ValueKind == JsonValueKind.String)
             {
-                return (new LinkConverter()).Read(ref reader, typeof(Link), options);
+                return doc.Deserialize<ILink>(options);
             }
             else if (doc.RootElement.TryGetProperty("type", out var type))
             {
-                return type.GetString() switch {
-                    "Link" => (new LinkConverter()).Read(ref reader, typeof(Link), options),
+                return type.GetString() switch
+                {
+                    "Link" => doc.Deserialize<ILink>(options),
                     "Image" => doc.Deserialize<Image>(options),
                     _ => throw new JsonException("JSON element was not an Image or Link."),
                 };
             }
-            else
-            {
-                throw new JsonException("JSON element did not have a type property nor was it a string.");
-            }
+            throw new JsonException("JSON element did not have a type property nor was it a string.");
         }
         throw new JsonException("Could not be parsed as a JsonDocument.");
     }
