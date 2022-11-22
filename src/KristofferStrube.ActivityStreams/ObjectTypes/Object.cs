@@ -71,18 +71,22 @@ public class Object : IObject
     /// <summary>
     /// Identifies an Object that is part of the public secondary audience of this Object.
     /// </summary>
-    public IEnumerable<ObjectOrLink>? Cc { get; set; }
+    [JsonPropertyName("cc")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? Cc { get; set; }
 
     /// <summary>
     /// Identifies the context within which the object exists or an activity was performed.
     /// The notion of "context" used is intentionally vague.The intended function is to serve as a means of grouping objects and activities that share a common originating context or purpose.An example could be all activities relating to a common project or event.
     /// </summary>
-    public IEnumerable<ObjectOrLink>? Context { get; set; }
+    [JsonPropertyName("context")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? Context { get; set; }
 
     /// <summary>
     /// Identifies the entity (e.g. an application) that generated the object.
     /// </summary>
-    public IEnumerable<ObjectOrLink>? Generator { get; set; }
+    public IEnumerable<IObjectOrLink>? Generator { get; set; }
 
     /// <summary>
     /// Indicates an entity that describes an icon for this object. The image should have an aspect ratio of one (horizontal) to one (vertical) and should be suitable for presentation at a small size.
@@ -97,17 +101,17 @@ public class Object : IObject
     /// <summary>
     /// Indicates one or more entities for which this object is considered a response.
     /// </summary>
-    public IEnumerable<ObjectOrLink>? InReplyTo { get; set; }
+    public IEnumerable<IObjectOrLink>? InReplyTo { get; set; }
 
     /// <summary>
     /// Indicates one or more physical or logical locations associated with the object.
     /// </summary>
-    public IEnumerable<ObjectOrLink>? Location { get; set; }
+    public IEnumerable<IObjectOrLink>? Location { get; set; }
 
     /// <summary>
     /// Identifies an entity that provides a preview of this object.
     /// </summary>
-    public IEnumerable<ObjectOrLink>? Preview { get; set; }
+    public IEnumerable<IObjectOrLink>? Preview { get; set; }
 
     /// <summary>
     /// Identifies a Collection containing objects considered to be responses to this object.
@@ -117,12 +121,12 @@ public class Object : IObject
     /// <summary>
     /// One or more "tags" that have been associated with an objects. A tag can be any kind of Object. The key difference between attachment and tag is that the former implies association by inclusion, while the latter implies associated by reference.
     /// </summary>
-    public IEnumerable<ObjectOrLink>? Tag { get; set; }
+    public IEnumerable<IObjectOrLink>? Tag { get; set; }
 
     /// <summary>
     /// Identifies an entity considered to be part of the public primary audience of an Object.
     /// </summary>
-    public IEnumerable<ObjectOrLink>? To { get; set; }
+    public IEnumerable<IObjectOrLink>? To { get; set; }
 
     /// <summary>
     /// Identifies one or more links to representations of the object.

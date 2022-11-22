@@ -16,6 +16,7 @@ internal class ObjectConverter : JsonConverter<IObject?>
                 return type.GetString() switch {
                     // Objects
                     "Object" => doc.Deserialize<Object>(options),
+                    "Collection" => doc.Deserialize<Collection>(options),
                     "Document" => doc.Deserialize<Document>(options),
                     "Image" => doc.Deserialize<Image>(options),
                     "Note" => doc.Deserialize<Note>(options),
@@ -24,6 +25,7 @@ internal class ObjectConverter : JsonConverter<IObject?>
                     // Activities
                     "Activity" => doc.Deserialize<Activity>(options),
                     "Offer" => doc.Deserialize<Offer>(options),
+                    "Like" => doc.Deserialize<Like>(options),
                     var value => DeserializeGenericType(doc, value, options),
                 };
             }

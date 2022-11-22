@@ -95,8 +95,6 @@ public class ObjectTests
         ex66.As<Note>().Attachment.Should().HaveCount(1);
         ex66.As<Note>().Attachment.First().Should().BeAssignableTo<Image>();
         ex66.As<Note>().Attachment.First().As<Image>().Content.Should().Be("This is what he looks like.");
-        ex66.As<Note>().Attachment.First().As<Image>().Url.Should().HaveCount(1);
-        ex66.As<Note>().Attachment.First().As<Image>().Url.First().Should().Be(new Uri("http://example.org/cat.jpeg"));
     }
 
     [Fact]
@@ -241,6 +239,70 @@ public class ObjectTests
         ex71.As<Offer>().Bto.Should().HaveCount(1);
         ex71.As<Offer>().Bto.First().Should().BeAssignableTo<Link>();
         ex71.As<Offer>().Bto.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
+    }
+
+    [Fact]
+    /// <remarks>Example 72 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-cc</remarks>
+    public void Example_72()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Sally offered a post to John",
+              "type": "Offer",
+              "actor": "http://sally.example.org",
+              "object": "http://example.org/posts/1",
+              "target": "http://john.example.org",
+              "cc": [ "http://joe.example.org" ]
+            }
+            """;
+
+        // Act
+        var ex72 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex72.Should().BeAssignableTo<Offer>();
+        ex72.As<Offer>().Cc.Should().HaveCount(1);
+        ex72.As<Offer>().Cc.First().Should().BeAssignableTo<Link>();
+        ex72.As<Offer>().Cc.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
+    }
+
+    [Fact]
+    /// <remarks>Example 73 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-context</remarks>
+    public void Example_73()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Activities in context 1",
+              "type": "Collection",
+              "items": [
+                {
+                  "type": "Offer",
+                  "actor": "http://sally.example.org",
+                  "object": "http://example.org/posts/1",
+                  "target": "http://john.example.org",
+                  "context": "http://example.org/contexts/1"
+                },
+                {
+                  "type": "Like",
+                  "actor": "http://joe.example.org",
+                  "object": "http://example.org/posts/2",
+                  "context": "http://example.org/contexts/1"
+                }
+              ]
+            }
+            """;
+
+        // Act
+        var ex73 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        var collection = ex73.As<Collection>();
+        collection.Items.First().As<Offer>().Context.First().As<Link>().Href.Should().Be("http://example.org/contexts/1");
+        collection.Items.Last().As<Like>().Context.First().As<Link>().Href.Should().Be("http://example.org/contexts/1");
     }
 }
 
