@@ -21,9 +21,6 @@ public class ObjectTests
 
         // Assert
         ex1.JsonLDContext.Should().Be(new Uri("https://www.w3.org/ns/activitystreams"));
-        ex1.Type.Should().HaveCount(1);
-        ex1.Type.First().Should().Be("Object");
-        ex1.TypeAsUri.First().Should().Be(new Uri("https://www.w3.org/ns/activitystreams/Object"));
         ex1.Id.Should().Be("http://www.test.example/object/1");
         ex1.Name.Should().Be("A Simple, non-specific object");
     }
@@ -66,9 +63,7 @@ public class ObjectTests
         var ex62 = Deserialize<Object>(input);
 
         // Assert
-        ex62.Type.Should().HaveCount(1);
-        ex62.Type.First().Should().Be("http://example.org/Foo");
-        ex62.TypeAsUri.First().Should().Be(new Uri("http://example.org/Foo"));
+        ex62.Summary.First().Should().Be("A foo");
     }
 
     [Fact]
@@ -96,6 +91,11 @@ public class ObjectTests
 
         // Assert
         ex66.Attachment.Should().HaveCount(1);
+        ex66.Attachment.First().Should().BeAssignableTo(typeof(Image));
+        ex66.Attachment.First().As<Image>().Content.Should().Be("This is what he looks like.");
+        ex66.Attachment.First().As<Image>().Url.Should().HaveCount(1);
+        ex66.Attachment.First().As<Image>().Url.First().Should().Be(new Uri("http://example.org/cat.jpeg"));
+        ex66.Attachment.First().As<Image>().Url.First().Should().Be(new Uri("http://example.org/cat.jpeg"));
     }
 }
 

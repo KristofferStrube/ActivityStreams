@@ -11,37 +11,6 @@ namespace KristofferStrube.ActivityStreams;
 public class Object : ObjectOrLink
 {
     /// <summary>
-    /// The context of the JSON-LD object.
-    /// </summary>
-    [JsonPropertyName("@context")]
-    public Uri? JsonLDContext { get; set; }
-
-    /// <summary>
-    /// Provides the globally unique identifier for an Object or Link.
-    /// </summary>
-    [JsonPropertyName("id")]
-    public string? Id { get; set; }
-
-    /// <summary>
-    /// Provides the globally unique identifier for an Object or Link.
-    /// </summary>
-    [JsonIgnore]
-    public Uri? IdAsUri => Id is null || JsonLDContext is null ? null : Uri.TryCreate(Id, new UriCreationOptions(), out var uri) ? uri : new Uri($"{JsonLDContext.AbsoluteUri}/{Id}");
-
-    /// <summary>
-    /// Identifies the Object or Link type. Multiple values may be specified.
-    /// </summary>
-    [JsonPropertyName("type")]
-    [JsonConverter(typeof(OneOrMultipleConverter<string>))]
-    public IEnumerable<string>? Type { get; set; }
-
-    /// <summary>
-    /// Identifies the Object or Link type. Multiple values may be specified.
-    /// </summary>
-    [JsonIgnore]
-    public IEnumerable<Uri>? TypeAsUri => Type is null || JsonLDContext is null ? null : Type.Select(t => Uri.TryCreate(t, new UriCreationOptions(), out var uri) ? uri : new Uri($"{JsonLDContext.AbsoluteUri}/{t}"));
-
-    /// <summary>
     /// Identifies a resource attached or related to an object that potentially requires special handling. The intent is to provide a model that is at least semantically similar to attachments in email.
     /// </summary>
     [JsonPropertyName("attachment")]
@@ -127,6 +96,8 @@ public class Object : ObjectOrLink
     /// <summary>
     /// Identifies one or more links to representations of the object.
     /// </summary>
+    [JsonConverter(typeof(OneOrMultipleConverter<UriOrLink>))]
+    [JsonPropertyName("url")]
     public IEnumerable<UriOrLink>? Url { get; set; }
 
     /// <summary>
@@ -139,6 +110,7 @@ public class Object : ObjectOrLink
     /// The content may be expressed using multiple language-tagged values.
     /// </summary>
     /// <remarks>We haven't implimented support for the <c>rdf:langString</c> type.</remarks>
+    [JsonPropertyName("content")]
     public string? Content { get; set; }
 
     /// <summary>
@@ -178,6 +150,8 @@ public class Object : ObjectOrLink
     /// A natural language summarization of the object encoded as HTML. Multiple language tagged summaries may be provided.
     /// </summary>
     /// <remarks>We haven't implimented support for the <c>rdf:langString</c> type.</remarks>
+    [JsonConverter(typeof(OneOrMultipleConverter<string>))]
+    [JsonPropertyName("summary")]
     public IEnumerable<string>? Summary { get; set; }
 
     /// <summary>
