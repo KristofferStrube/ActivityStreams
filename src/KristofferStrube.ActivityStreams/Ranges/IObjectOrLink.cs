@@ -10,4 +10,5 @@ public interface IObjectOrLink
     Uri? IdAsUri { get; }
     Uri? JsonLDContext { get; set; }
     string? Type { get; set; }
+    Uri? TypeAsUri { get; }
 }
