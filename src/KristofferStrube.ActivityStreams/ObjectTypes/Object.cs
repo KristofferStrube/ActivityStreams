@@ -128,11 +128,14 @@ public class Object : IObject
     /// <summary>
     /// Identifies a Collection containing objects considered to be responses to this object.
     /// </summary>
+    [JsonPropertyName("replies")]
     public Collection? Replies { get; set; }
 
     /// <summary>
     /// One or more "tags" that have been associated with an objects. A tag can be any kind of Object. The key difference between attachment and tag is that the former implies association by inclusion, while the latter implies associated by reference.
     /// </summary>
+    [JsonPropertyName("tag")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
     public IEnumerable<IObjectOrLink>? Tag { get; set; }
 
     /// <summary>

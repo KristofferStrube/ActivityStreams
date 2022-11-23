@@ -657,5 +657,70 @@ public class ObjectTests
         ex102.As<Video>().Preview.Should().HaveCount(1);
         ex102.As<Video>().Preview.First().As<Video>().Name.First().Should().Be("Trailer");
     }
+
+    [Fact]
+    /// <remarks>Example 104 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-replies</remarks>
+    public void Example_104()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "A simple note",
+              "type": "Note",
+              "id": "http://www.test.example/notes/1",
+              "content": "I am fine.",
+              "replies": {
+                "type": "Collection",
+                "totalItems": 1,
+                "items": [
+                  {
+                    "summary": "A response to the note",
+                    "type": "Note",
+                    "content": "I am glad to hear it.",
+                    "inReplyTo": "http://www.test.example/notes/1"
+                  }
+                ]
+              }
+            }
+            """;
+
+        // Act
+        var ex104 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex104.Should().BeAssignableTo<Note>();
+        ex104.As<Note>().Replies.As<Collection>().Items.First().As<Note>().Content.First().Should().Be("I am glad to hear it.");
+    }
+
+    [Fact]
+    /// <remarks>Example 105 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-tag</remarks>
+    public void Example_105()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Image",
+              "summary": "Picture of Sally",
+              "url": "http://example.org/sally.jpg",
+              "tag": [
+                {
+                  "type": "Person",
+                  "id": "http://sally.example.org",
+                  "name": "Sally"
+                }
+              ]
+            }
+            """;
+
+        // Act
+        var ex105 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex105.Should().BeAssignableTo<Image>();
+        ex105.As<Image>().Tag.Should().HaveCount(1);
+        ex105.As<Image>().Tag.First().As<Person>().Name.First().Should().Be("Sally");
+    }
 }
 
