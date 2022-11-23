@@ -503,5 +503,29 @@ public class ObjectTests
         ex83.As<Note>().InReplyTo.Should().HaveCount(1);
         ex83.As<Note>().InReplyTo.First().As<Note>().Content.First().Should().Be("What else is there?");
     }
+
+    [Fact]
+    /// <remarks>Example 84 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-inreplyto</remarks>
+    public void Example_84()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "A simple note",
+              "type": "Note",
+              "content": "This is all there is.",
+              "inReplyTo": "http://example.org/posts/1"
+            }
+            """;
+
+        // Act
+        var ex84 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex84.Should().BeAssignableTo<Note>();
+        ex84.As<Note>().InReplyTo.Should().HaveCount(1);
+        ex84.As<Note>().InReplyTo.First().As<Link>().Href.Should().Be("http://example.org/posts/1");
+    }
 }
 
