@@ -20,6 +20,5 @@ These types are famously used in the [ActivityPub](https://www.w3.org/TR/activit
 - [ ] Add extended classes for Activity Types.
 - [ ] Add extended classes for Actor Types.
 - [ ] Add extended classes for Object and Link Types.
-- [ ] Add Unit Test project that validates the serialization of the classes.
-- [ ] Add Unit Test project that validates the deserialization of the classes.
+- [ ] Add support for deserializing/serializing and using @context JSON-LD attribute.
 - [ ] Look into the [Implementation Notes](https://www.w3.org/TR/activitystreams-vocabulary/#notes) that hint at Ease-Of-Use-Scenarios.
