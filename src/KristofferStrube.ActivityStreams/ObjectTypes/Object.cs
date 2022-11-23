@@ -168,6 +168,8 @@ public class Object : ObjectOrLink, IObject
     /// When the object describes a time-bound resource, such as an audio or video, a meeting, etc, the duration property indicates the object's approximate duration. The value must be expressed as an xsd:duration as defined by [ xmlschema11-2], section 3.3.6 (e.g. a period of 5 seconds is represented as "PT5S").
     /// </summary>
     /// <remarks>We should use the XmlConvert.ToTimeSpan method.</remarks>
+    [JsonConverter(typeof(XMLTimeSpanConverter))]
+    [JsonPropertyName("duration")]
     public TimeSpan? Duration { get; set; }
 
     /// <summary>

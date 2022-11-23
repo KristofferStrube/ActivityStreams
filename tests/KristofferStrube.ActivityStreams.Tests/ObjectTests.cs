@@ -985,5 +985,28 @@ public class ObjectTests
         ex118.As<Note>().NameMap.First()["es"].Should().Be("Una nota sencilla");
         ex118.As<Note>().NameMap.First()["zh-Hans"].Should().Be("一段简单的笔记");
     }
+
+    [Fact]
+    /// <remarks>Example 119 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-duration</remarks>
+    public void Example_119()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Video",
+              "name": "Birds Flying",
+              "url": "http://example.org/video.mkv",
+              "duration": "PT2H"
+            }
+            """;
+
+        // Act
+        var ex119 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex119.Should().BeAssignableTo<Video>();
+        ex119.As<Video>().Duration.Should().Be(new TimeSpan(2, 0, 0));
+    }
 }
 
