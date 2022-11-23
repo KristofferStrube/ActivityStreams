@@ -48,4 +48,11 @@ public class ObjectOrLink : IObjectOrLink
     /// </summary>
     [JsonPropertyName("mediaType")]
     public string? MediaType { get; set; }
+
+    /// <summary>
+    /// Identifies an entity that provides a preview of this object.
+    /// </summary>
+    [JsonPropertyName("preview")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? Preview { get; set; }
 }

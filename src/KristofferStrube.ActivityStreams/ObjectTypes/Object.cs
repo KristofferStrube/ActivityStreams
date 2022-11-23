@@ -95,13 +95,6 @@ public class Object : ObjectOrLink, IObject
     public IEnumerable<IObjectOrLink>? Location { get; set; }
 
     /// <summary>
-    /// Identifies an entity that provides a preview of this object.
-    /// </summary>
-    [JsonPropertyName("preview")]
-    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
-    public IEnumerable<IObjectOrLink>? Preview { get; set; }
-
-    /// <summary>
     /// Identifies a Collection containing objects considered to be responses to this object.
     /// </summary>
     [JsonPropertyName("replies")]

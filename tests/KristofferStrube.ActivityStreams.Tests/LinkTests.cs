@@ -3,6 +3,41 @@
 public class LinkTests
 {
     [Fact]
+    /// <remarks>Example 2 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-link</remarks>
+    public void Example_002()
+    {
+        // Arrange
+        // We have added a preview to the below example to test that.
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Link",
+              "href": "http://example.org/abc",
+              "hreflang": "en",
+              "mediaType": "text/html",
+              "name": "An example link",
+              "preview": {
+                "type": "Video",
+                "name": "Trailer",
+                "duration": "PT1M",
+                "url": {
+                  "href": "http://example.org/trailer.mkv",
+                  "mediaType": "video/mkv"
+                }
+              }
+            }
+            """;
+
+        // Act
+        var ex2 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex2.Should().BeAssignableTo<Link>();
+        ex2.As<Link>().Preview.Should().HaveCount(1);
+        ex2.As<Link>().Preview.First().As<Video>().Name.First().Should().Be("Trailer");
+    }
+
+    [Fact]
     /// <remarks>Example 120 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-height</remarks>
     public void Example_120()
     {
