@@ -3,6 +3,29 @@
 public class LinkTests
 {
     [Fact]
+    /// <remarks>Example 120 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-height</remarks>
+    public void Example_120()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Link",
+              "href": "http://example.org/image.png",
+              "height": 100,
+              "width": 100
+            }
+            """;
+
+        // Act
+        var ex120 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex120.Should().BeAssignableTo<Link>();
+        ex120.As<Link>().Height.Should().Be(100);
+    }
+
+    [Fact]
     /// <remarks>Example 121 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-href</remarks>
     public void Example_121()
     {
@@ -102,6 +125,29 @@ public class LinkTests
         // We also test if we can get the name with this example
         ex131.As<Link>().Name.Should().HaveCount(1);
         ex131.As<Link>().Name.First().Should().Be("Preview");
+    }
+
+    [Fact]
+    /// <remarks>Example 138 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-width</remarks>
+    public void Example_138()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Link",
+              "href": "http://example.org/image.png",
+              "height": 100,
+              "width": 100
+            }
+            """;
+
+        // Act
+        var ex138 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex138.Should().BeAssignableTo<Link>();
+        ex138.As<Link>().Width.Should().Be(100);
     }
 }
 

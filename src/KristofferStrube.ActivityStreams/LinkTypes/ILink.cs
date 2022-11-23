@@ -7,4 +7,7 @@ namespace KristofferStrube.ActivityStreams;
 public interface ILink : IImageOrLink
 {
     Uri? Href { get; set; }
+    string? Hreflang { get; set; }
+    IEnumerable<string>? Rel { get; set; }
+    uint? Height { get; set; }
 }

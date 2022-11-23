@@ -6,6 +6,12 @@ namespace KristofferStrube.ActivityStreams;
 public class Link : ObjectOrLink, ILink
 {
     /// <summary>
+    /// On a Link, specifies a hint as to the rendering height in device-independent pixels of the linked resource.
+    /// </summary>
+    [JsonPropertyName("height")]
+    public uint? Height { get; set; }
+
+    /// <summary>
     /// The target resource pointed to by a Link.
     /// </summary>
     [JsonPropertyName("href")]
@@ -24,4 +30,10 @@ public class Link : ObjectOrLink, ILink
     [JsonConverter(typeof(OneOrMultipleConverter<string>))]
     [JsonPropertyName("rel")]
     public IEnumerable<string>? Rel { get; set; }
+
+    /// <summary>
+    /// On a Link, specifies a hint as to the rendering width in device-independent pixels of the linked resource.
+    /// </summary>
+    [JsonPropertyName("width")]
+    public uint? Width { get; set; }
 }
