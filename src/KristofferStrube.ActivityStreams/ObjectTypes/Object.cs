@@ -181,6 +181,7 @@ public class Object : ObjectOrLink, IObject
     /// <summary>
     /// The date and time at which the object was published.
     /// </summary>
+    [JsonPropertyName("published")]
     public DateTime? Published { get; set; }
 
     /// <summary>

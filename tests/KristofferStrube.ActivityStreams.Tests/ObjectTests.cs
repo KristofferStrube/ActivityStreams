@@ -1053,8 +1053,30 @@ public class ObjectTests
 
         // Assert
         ex127.Should().BeAssignableTo<Event>();
-        // We add the 8 hours because the local time above is in the UTC -8 timezone.
         ex127.As<Event>().EndTime.Should().Be(DateTime.Parse("2015-01-01T06:00:00-08:00"));
+    }
+
+    [Fact]
+    /// <remarks>Example 128 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-published</remarks>
+    public void Example_128()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "A simple note",
+              "type": "Note",
+              "content": "Fish swim.",
+              "published": "2014-12-12T12:12:12Z"
+            }
+            """;
+
+        // Act
+        var ex128 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex128.Should().BeAssignableTo<Note>();
+        ex128.As<Note>().Published.Should().Be(DateTime.Parse("2014-12-12T12:12:12Z", styles: System.Globalization.DateTimeStyles.AdjustToUniversal));
     }
 }
 
