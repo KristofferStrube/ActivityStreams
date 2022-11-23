@@ -4,7 +4,7 @@ public class ObjectTests
 {
     [Fact]
     /// <remarks>Example 1 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-object</remarks>
-    public void Example_1()
+    public void Example_001()
     {
         // Arrange
         var input = """
@@ -28,7 +28,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 61 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-id</remarks>
-    public void Example_61()
+    public void Example_061()
     {
         // Arrange
         var input = """
@@ -49,7 +49,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 62 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-type</remarks>
-    public void Example_62()
+    public void Example_062()
     {
         // Arrange
         var input = """
@@ -69,7 +69,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 66 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attachment</remarks>
-    public void Example_66()
+    public void Example_066()
     {
         // Arrange
         var input = """
@@ -99,7 +99,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 67 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attributedto</remarks>
-    public void Example_67()
+    public void Example_067()
     {
         // Arrange
         var input = """
@@ -129,7 +129,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 68 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attributedto</remarks>
-    public void Example_68()
+    public void Example_068()
     {
         // Arrange
         var input = """
@@ -162,7 +162,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 69 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-audience</remarks>
-    public void Example_69()
+    public void Example_069()
     {
         // Arrange
         var input = """
@@ -189,7 +189,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 70 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-bcc</remarks>
-    public void Example_70()
+    public void Example_070()
     {
         // Arrange
         var input = """
@@ -216,7 +216,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 71 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-bto</remarks>
-    public void Example_71()
+    public void Example_071()
     {
         // Arrange
         var input = """
@@ -243,7 +243,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 72 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-cc</remarks>
-    public void Example_72()
+    public void Example_072()
     {
         // Arrange
         var input = """
@@ -270,7 +270,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 73 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-context</remarks>
-    public void Example_73()
+    public void Example_073()
     {
         // Arrange
         var input = """
@@ -307,7 +307,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 78 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-generator</remarks>
-    public void Example_78()
+    public void Example_078()
     {
         // Arrange
         var input = """
@@ -335,7 +335,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 79 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-icon</remarks>
-    public void Example_79()
+    public void Example_079()
     {
         // Arrange
         var input = """
@@ -366,7 +366,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 80 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-icon</remarks>
-    public void Example_80()
+    public void Example_080()
     {
         // Arrange
         var input = """
@@ -407,7 +407,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 81 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-image</remarks>
-    public void Example_81()
+    public void Example_081()
     {
         // Arrange
         var input = """
@@ -436,7 +436,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 82 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-image</remarks>
-    public void Example_82()
+    public void Example_082()
     {
         // Arrange
         // We changed the second element in the below image list to be a url to validate that that is possible.
@@ -478,7 +478,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 83 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-inreplyto</remarks>
-    public void Example_83()
+    public void Example_083()
     {
         // Arrange
         var input = """
@@ -506,7 +506,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 84 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-inreplyto</remarks>
-    public void Example_84()
+    public void Example_084()
     {
         // Arrange
         var input = """
@@ -530,7 +530,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 88 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-location</remarks>
-    public void Example_88()
+    public void Example_088()
     {
         // Arrange
         var input = """
@@ -560,7 +560,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 89 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-items</remarks>
-    public void Example_89()
+    public void Example_089()
     {
         // Arrange
         var input = """
@@ -594,7 +594,7 @@ public class ObjectTests
 
     [Fact]
     /// <remarks>Example 90 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-items</remarks>
-    public void Example_90()
+    public void Example_090()
     {
         // Arrange
         var input = """
@@ -624,6 +624,38 @@ public class ObjectTests
         ex90.As<OrderedCollection>().OrderedItems.Should().HaveCount(2);
         ex90.As<OrderedCollection>().OrderedItems.First().As<Note>().Name.First().Should().Be("Meeting 2016-11-17");
         ex90.As<OrderedCollection>().OrderedItems.Last().As<Note>().Name.First().Should().Be("Reminder for Going-Away Party");
+    }
+
+    [Fact]
+    /// <remarks>Example 102 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-preview</remarks>
+    public void Example_102()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Video",
+              "name": "Cool New Movie",
+              "duration": "PT2H30M",
+              "preview": {
+                "type": "Video",
+                "name": "Trailer",
+                "duration": "PT1M",
+                "url": {
+                  "href": "http://example.org/trailer.mkv",
+                  "mediaType": "video/mkv"
+                }
+              }
+            }
+            """;
+
+        // Act
+        var ex102 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex102.Should().BeAssignableTo<Video>();
+        ex102.As<Video>().Preview.Should().HaveCount(1);
+        ex102.As<Video>().Preview.First().As<Video>().Name.First().Should().Be("Trailer");
     }
 }
 

@@ -121,6 +121,8 @@ public class Object : IObject
     /// <summary>
     /// Identifies an entity that provides a preview of this object.
     /// </summary>
+    [JsonPropertyName("preview")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
     public IEnumerable<IObjectOrLink>? Preview { get; set; }
 
     /// <summary>
