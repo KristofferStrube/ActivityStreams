@@ -1154,5 +1154,28 @@ public class ObjectTests
         ex134.As<Note>().SummaryMap.First()["es"].Should().Be("Una <em>nota</em> sencilla");
         ex134.As<Note>().SummaryMap.First()["zh-Hans"].Should().Be("一段<em>简单的</em>笔记");
     }
+
+    [Fact]
+    /// <remarks>Example 137 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-updated</remarks>
+    public void Example_137()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "name": "Cranberry Sauce Idea",
+              "type": "Note",
+              "content": "Mush it up so it does not have the same shape as the can.",
+              "updated": "2014-12-12T12:12:12Z"
+            }
+            """;
+
+        // Act
+        var ex137 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex137.Should().BeAssignableTo<Note>();
+        ex137.As<Note>().Updated.Should().Be(DateTime.Parse("2014-12-12T12:12:12Z", styles: System.Globalization.DateTimeStyles.AdjustToUniversal));
+    }
 }
 

@@ -207,5 +207,6 @@ public class Object : ObjectOrLink, IObject
     /// <summary>
     /// 	The date and time at which the object was updated.
     /// </summary>
+    [JsonPropertyName("updated")]
     public DateTime? Updated { get; set; }
 }
