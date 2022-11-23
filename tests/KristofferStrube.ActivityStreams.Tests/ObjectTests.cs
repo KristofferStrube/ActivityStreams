@@ -1,4 +1,4 @@
-namespace KristofferStrube.ActivityStreams.Tests;
+﻿namespace KristofferStrube.ActivityStreams.Tests;
 
 public class ObjectTests
 {
@@ -856,6 +856,83 @@ public class ObjectTests
         // Assert
         ex113.Should().BeAssignableTo<Place>();
         ex113.As<Place>().Altitude.Should().Be(15);
+    }
+
+    [Fact]
+    /// <remarks>Example 114 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-content</remarks>
+    public void Example_114()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "A simple note",
+              "type": "Note",
+              "content": "A <em>simple</em> note"
+            }
+            """;
+
+        // Act
+        var ex114 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex114.Should().BeAssignableTo<Note>();
+        ex114.As<Note>().Content.Should().HaveCount(1);
+        ex114.As<Note>().Content.First().Should().Be("A <em>simple</em> note");
+    }
+
+    [Fact]
+    /// <remarks>Example 115 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-content</remarks>
+    public void Example_115()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "A simple note",
+              "type": "Note",
+              "contentMap": {
+                "en": "A <em>simple</em> note",
+                "es": "Una nota <em>sencilla</em>",
+                "zh-Hans": "一段<em>简单的</em>笔记"
+              }
+            }
+            """;
+
+        // Act
+        var ex115 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex115.Should().BeAssignableTo<Note>();
+        ex115.As<Note>().ContentMap.Should().HaveCount(1);
+        ex115.As<Note>().ContentMap.First().Keys.Should().HaveCount(3);
+        ex115.As<Note>().ContentMap.First()["en"].Should().Be("A <em>simple</em> note");
+        ex115.As<Note>().ContentMap.First()["es"].Should().Be("Una nota <em>sencilla</em>");
+        ex115.As<Note>().ContentMap.First()["zh-Hans"].Should().Be("一段<em>简单的</em>笔记");
+    }
+
+    [Fact]
+    /// <remarks>Example 116 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-content</remarks>
+    public void Example_116()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "A simple note",
+              "type": "Note",
+              "mediaType": "text/markdown",
+              "content": "## A simple note\nA simple markdown `note`"
+            }
+            """;
+
+        // Act
+        var ex116 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex116.Should().BeAssignableTo<Note>();
+        ex116.As<Note>().Content.Should().HaveCount(1);
+        ex116.As<Note>().Content.First().Should().Be("## A simple note\nA simple markdown `note`");
     }
 }
 
