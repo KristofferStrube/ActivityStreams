@@ -10,7 +10,7 @@ These types are famously used in the [ActivityPub](https://www.w3.org/TR/activit
 ## Goals
 - [ ] Add classes for Core Types.
   - [x] Add class for Object
-  - [ ] Add class for Link
+  - [x] Add class for Link
   - [ ] Add class for Activity
   - [ ] Add class for IntransitiveActivity
   - [ ] Add class for Collection
