@@ -141,6 +141,8 @@ public class Object : IObject
     /// <summary>
     /// Identifies an entity considered to be part of the public primary audience of an Object.
     /// </summary>
+    [JsonPropertyName("to")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
     public IEnumerable<IObjectOrLink>? To { get; set; }
 
     /// <summary>

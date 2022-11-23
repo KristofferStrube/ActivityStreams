@@ -722,5 +722,31 @@ public class ObjectTests
         ex105.As<Image>().Tag.Should().HaveCount(1);
         ex105.As<Image>().Tag.First().As<Person>().Name.First().Should().Be("Sally");
     }
+
+    [Fact]
+    /// <remarks>Example 108 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-to</remarks>
+    public void Example_108()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Sally offered the post to John",
+              "type": "Offer",
+              "actor": "http://sally.example.org",
+              "object": "http://example.org/posts/1",
+              "target": "http://john.example.org",
+              "to": [ "http://joe.example.org" ]
+            }
+            """;
+
+        // Act
+        var ex108 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex108.Should().BeAssignableTo<Offer>();
+        ex108.As<Offer>().To.Should().HaveCount(1);
+        ex108.As<Offer>().To.First().As<Link>().Href.Should().Be("http://joe.example.org");
+    }
 }
 
