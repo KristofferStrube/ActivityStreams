@@ -26,6 +26,30 @@ public class LinkTests
     }
 
     [Fact]
+    /// <remarks>Example 126 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-mediatype</remarks>
+    public void Example_126()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Link",
+              "href": "http://example.org/abc",
+              "hreflang": "en",
+              "mediaType": "text/html",
+              "name": "Next"
+            }
+            """;
+
+        // Act
+        var ex126 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex126.Should().BeAssignableTo<Link>();
+        ex126.As<Link>().MediaType.Should().Be("text/html");
+    }
+
+    [Fact]
     /// <remarks>Example 131 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-rel</remarks>
     public void Example_131()
     {
