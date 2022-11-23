@@ -155,6 +155,7 @@ public class Object : IObject
     /// <summary>
     /// Indicates the altitude of a place. The measurement units is indicated using the units property. If units is not specified, the default is assumed to be "m" indicating meters.
     /// </summary>
+    [JsonPropertyName("altitude")]
     public float? Altitude { get; set; }
 
     /// <summary>

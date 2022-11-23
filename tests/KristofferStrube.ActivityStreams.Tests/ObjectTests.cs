@@ -832,5 +832,30 @@ public class ObjectTests
         ex111.As<Document>().Url.First().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.pdf");
         ex111.As<Document>().Url.Last().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.html");
     }
+
+    [Fact]
+    /// <remarks>Example 113 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-altitude</remarks>
+    public void Example_113()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Place",
+              "name": "Fresno Area",
+              "altitude": 15.0,
+              "latitude": 36.75,
+              "longitude": 119.7667,
+              "units": "miles"
+            }
+            """;
+
+        // Act
+        var ex113 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex113.Should().BeAssignableTo<Place>();
+        ex113.As<Place>().Altitude.Should().Be(15);
+    }
 }
 
