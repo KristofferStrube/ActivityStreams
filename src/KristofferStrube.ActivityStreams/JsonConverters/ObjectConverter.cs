@@ -23,6 +23,7 @@ internal class ObjectConverter : JsonConverter<IObject?>
                     "Video" => doc.Deserialize<Video>(options),
                     "Note" => doc.Deserialize<Note>(options),
                     "Place" => doc.Deserialize<Place>(options),
+                    "Event" => doc.Deserialize<Event>(options),
                     // Actors
                     "Application" => doc.Deserialize<Application>(options),
                     "Organísation" => doc.Deserialize<Organisation>(options),

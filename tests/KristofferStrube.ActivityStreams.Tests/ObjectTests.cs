@@ -1032,5 +1032,29 @@ public class ObjectTests
         ex126.Should().BeAssignableTo<Link>();
         ex126.As<Link>().MediaType.Should().Be("text/html");
     }
+
+    [Fact]
+    /// <remarks>Example 127 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-endtime</remarks>
+    public void Example_127()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Event",
+              "name": "Going-Away Party for Jim",
+              "startTime": "2014-12-31T23:00:00-08:00",
+              "endTime": "2015-01-01T06:00:00-08:00"
+            }
+            """;
+
+        // Act
+        var ex127 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex127.Should().BeAssignableTo<Event>();
+        // We add the 8 hours because the local time above is in the UTC -8 timezone.
+        ex127.As<Event>().EndTime.Should().Be(DateTime.Parse("2015-01-01T06:00:00-08:00"));
+    }
 }
 
