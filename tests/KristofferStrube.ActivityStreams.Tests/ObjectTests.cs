@@ -1078,5 +1078,28 @@ public class ObjectTests
         ex128.Should().BeAssignableTo<Note>();
         ex128.As<Note>().Published.Should().Be(DateTime.Parse("2014-12-12T12:12:12Z", styles: System.Globalization.DateTimeStyles.AdjustToUniversal));
     }
+
+    [Fact]
+    /// <remarks>Example 129 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-starttime</remarks>
+    public void Example_129()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Event",
+              "name": "Going-Away Party for Jim",
+              "startTime": "2014-12-31T23:00:00-08:00",
+              "endTime": "2015-01-01T06:00:00-08:00"
+            }
+            """;
+
+        // Act
+        var ex129 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex129.Should().BeAssignableTo<Event>();
+        ex129.As<Event>().StartTime.Should().Be(DateTime.Parse("2014-12-31T23:00:00-08:00"));
+    }
 }
 

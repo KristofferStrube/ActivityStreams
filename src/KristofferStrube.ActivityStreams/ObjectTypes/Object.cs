@@ -187,6 +187,7 @@ public class Object : ObjectOrLink, IObject
     /// <summary>
     /// The date and time describing the actual or expected starting time of the object. When used with an Activity object, for instance, the startTime property specifies the moment the activity began or is scheduled to begin.
     /// </summary>
+    [JsonPropertyName("startTime")]
     public DateTime? StartTime { get; set; }
 
     /// <summary>
