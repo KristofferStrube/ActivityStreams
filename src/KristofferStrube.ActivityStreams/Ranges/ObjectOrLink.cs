@@ -34,4 +34,10 @@ public class ObjectOrLink : IObjectOrLink
     /// </summary>
     [JsonIgnore]
     public Uri? TypeAsUri => Type is null || JsonLDContext is null ? null : Uri.TryCreate(Type, UriKind.Absolute, out var type) ? type : new Uri($"{JsonLDContext}/{Type}");
+
+    /// <summary>
+    /// A simple, human-readable, plain-text name for the object. HTML markup must not be included. The name may be expressed using multiple language-tagged values.
+    /// </summary>
+    [JsonPropertyName("mediaType")]
+    public string? MediaType { get; set; }
 }

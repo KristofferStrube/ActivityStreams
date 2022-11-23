@@ -1008,5 +1008,29 @@ public class ObjectTests
         ex119.Should().BeAssignableTo<Video>();
         ex119.As<Video>().Duration.Should().Be(new TimeSpan(2, 0, 0));
     }
+
+    [Fact]
+    /// <remarks>Example 126 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-mediatype</remarks>
+    public void Example_126()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Link",
+              "href": "http://example.org/abc",
+              "hreflang": "en",
+              "mediaType": "text/html",
+              "name": "Next"
+            }
+            """;
+
+        // Act
+        var ex126 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex126.Should().BeAssignableTo<Link>();
+        ex126.As<Link>().MediaType.Should().Be("text/html");
+    }
 }
 

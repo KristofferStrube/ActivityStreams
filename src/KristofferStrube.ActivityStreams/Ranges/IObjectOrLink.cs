@@ -11,4 +11,5 @@ public interface IObjectOrLink
     Uri? JsonLDContext { get; set; }
     string? Type { get; set; }
     Uri? TypeAsUri { get; }
+    string? MediaType { get; set; }
 }
