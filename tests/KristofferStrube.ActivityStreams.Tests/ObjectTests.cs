@@ -475,5 +475,33 @@ public class ObjectTests
         ex82.As<Note>().Image.ElementAt(2).Should().BeAssignableTo<ILink>();
         ex82.As<Note>().Image.ElementAt(2).As<ILink>().Href.Should().Be(new Uri("http://example.org/cat3.png"));
     }
+
+    [Fact]
+    /// <remarks>Example 83 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-inreplyto</remarks>
+    public void Example_83()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "A simple note",
+              "type": "Note",
+              "content": "This is all there is.",
+              "inReplyTo": {
+                "summary": "Previous note",
+                "type": "Note",
+                "content": "What else is there?"
+              }
+            }
+            """;
+
+        // Act
+        var ex83 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex83.Should().BeAssignableTo<Note>();
+        ex83.As<Note>().InReplyTo.Should().HaveCount(1);
+        ex83.As<Note>().InReplyTo.First().As<Note>().Content.First().Should().Be("What else is there?");
+    }
 }
 

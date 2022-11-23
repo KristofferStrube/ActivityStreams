@@ -107,6 +107,8 @@ public class Object : IObject
     /// <summary>
     /// Indicates one or more entities for which this object is considered a response.
     /// </summary>
+    [JsonPropertyName("inReplyTo")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
     public IEnumerable<IObjectOrLink>? InReplyTo { get; set; }
 
     /// <summary>
