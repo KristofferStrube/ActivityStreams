@@ -12,4 +12,5 @@ public interface IObjectOrLink
     string? Type { get; set; }
     Uri? TypeAsUri { get; }
     string? MediaType { get; set; }
+    IEnumerable<string>? Name { get; set; }
 }

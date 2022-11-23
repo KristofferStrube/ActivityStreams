@@ -26,6 +26,30 @@ public class LinkTests
     }
 
     [Fact]
+    /// <remarks>Example 122 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-hreflang</remarks>
+    public void Example_122()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Link",
+              "href": "http://example.org/abc",
+              "hreflang": "en",
+              "mediaType": "text/html",
+              "name": "Previous"
+            }
+            """;
+
+        // Act
+        var ex122 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex122.Should().BeAssignableTo<Link>();
+        ex122.As<Link>().Hreflang.Should().Be("en");
+    }
+
+    [Fact]
     /// <remarks>Example 126 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-mediatype</remarks>
     public void Example_126()
     {
@@ -74,6 +98,10 @@ public class LinkTests
         ex131.As<Link>().Rel.Should().HaveCount(2);
         ex131.As<Link>().Rel.First().Should().Be("canonical");
         ex131.As<Link>().Rel.Last().Should().Be("preview");
+
+        // We also test if we can get the name with this example
+        ex131.As<Link>().Name.Should().HaveCount(1);
+        ex131.As<Link>().Name.First().Should().Be("Preview");
     }
 }
 
