@@ -771,5 +771,66 @@ public class ObjectTests
         ex109.As<Document>().Url.Should().HaveCount(1);
         ex109.As<Document>().Url.First().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.pdf");
     }
+
+    [Fact]
+    /// <remarks>Example 110 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-url</remarks>
+    public void Example_110()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Document",
+              "name": "4Q Sales Forecast",
+              "url": {
+                "type": "Link",
+                "href": "http://example.org/4q-sales-forecast.pdf"
+              }
+            }
+            """;
+
+        // Act
+        var ex110 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex110.Should().BeAssignableTo<Document>();
+        ex110.As<Document>().Url.Should().HaveCount(1);
+        ex110.As<Document>().Url.First().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.pdf");
+    }
+
+    [Fact]
+    /// <remarks>Example 111 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-url</remarks>
+    public void Example_111()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Document",
+              "name": "4Q Sales Forecast",
+              "url": [
+                {
+                  "type": "Link",
+                  "href": "http://example.org/4q-sales-forecast.pdf",
+                  "mediaType": "application/pdf"
+                },
+                {
+                  "type": "Link",
+                  "href": "http://example.org/4q-sales-forecast.html",
+                  "mediaType": "text/html"
+                }
+              ]
+            }
+            """;
+
+        // Act
+        var ex111 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex111.Should().BeAssignableTo<Document>();
+        ex111.As<Document>().Url.Should().HaveCount(2);
+        ex111.As<Document>().Url.First().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.pdf");
+        ex111.As<Document>().Url.Last().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.html");
+    }
 }
 
