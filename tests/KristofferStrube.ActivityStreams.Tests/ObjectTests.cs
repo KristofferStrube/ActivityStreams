@@ -1101,5 +1101,58 @@ public class ObjectTests
         ex129.Should().BeAssignableTo<Event>();
         ex129.As<Event>().StartTime.Should().Be(DateTime.Parse("2014-12-31T23:00:00-08:00"));
     }
+
+    [Fact]
+    /// <remarks>Example 133 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-summary</remarks>
+    public void Example_133()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "name": "Cane Sugar Processing",
+              "type": "Note",
+              "summary": "A simple <em>note</em>"
+            }
+            """;
+
+        // Act
+        var ex133 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex133.Should().BeAssignableTo<Note>();
+        ex133.As<Note>().Summary.Should().HaveCount(1);
+        ex133.As<Note>().Summary.First().Should().Be("A simple <em>note</em>");
+    }
+
+    [Fact]
+    /// <remarks>Example 134 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-summary</remarks>
+    public void Example_134()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "name": "Cane Sugar Processing",
+              "type": "Note",
+              "summaryMap": {
+                "en": "A simple <em>note</em>",
+                "es": "Una <em>nota</em> sencilla",
+                "zh-Hans": "一段<em>简单的</em>笔记"
+              }
+            }
+            """;
+
+        // Act
+        var ex134 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex134.Should().BeAssignableTo<Note>();
+        ex134.As<Note>().SummaryMap.Should().HaveCount(1);
+        ex134.As<Note>().SummaryMap.First().Keys.Should().HaveCount(3);
+        ex134.As<Note>().SummaryMap.First()["en"].Should().Be("A simple <em>note</em>");
+        ex134.As<Note>().SummaryMap.First()["es"].Should().Be("Una <em>nota</em> sencilla");
+        ex134.As<Note>().SummaryMap.First()["zh-Hans"].Should().Be("一段<em>简单的</em>笔记");
+    }
 }
 

@@ -193,10 +193,16 @@ public class Object : ObjectOrLink, IObject
     /// <summary>
     /// A natural language summarization of the object encoded as HTML. Multiple language tagged summaries may be provided.
     /// </summary>
-    /// <remarks>We haven't implimented support for the <c>rdf:langString</c> type.</remarks>
     [JsonConverter(typeof(OneOrMultipleConverter<string>))]
     [JsonPropertyName("summary")]
     public IEnumerable<string>? Summary { get; set; }
+
+    /// <summary>
+    /// A natural language summarization of the object encoded as HTML. Multiple language tagged summaries may be provided.
+    /// </summary>
+    [JsonConverter(typeof(OneOrMultipleConverter<IDictionary<string, string>>))]
+    [JsonPropertyName("summaryMap")]
+    public IEnumerable<IDictionary<string, string>>? SummaryMap { get; set; }
 
     /// <summary>
     /// 	The date and time at which the object was updated.
