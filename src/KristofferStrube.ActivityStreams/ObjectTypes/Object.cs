@@ -148,9 +148,9 @@ public class Object : IObject
     /// <summary>
     /// Identifies one or more links to representations of the object.
     /// </summary>
-    [JsonConverter(typeof(OneOrMultipleConverter<UriOrLink>))]
+    [JsonConverter(typeof(OneOrMultipleConverter<ILink>))]
     [JsonPropertyName("url")]
-    public IEnumerable<UriOrLink>? Url { get; set; }
+    public IEnumerable<ILink>? Url { get; set; }
 
     /// <summary>
     /// Indicates the altitude of a place. The measurement units is indicated using the units property. If units is not specified, the default is assumed to be "m" indicating meters.

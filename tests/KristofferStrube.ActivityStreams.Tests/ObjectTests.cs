@@ -748,5 +748,28 @@ public class ObjectTests
         ex108.As<Offer>().To.Should().HaveCount(1);
         ex108.As<Offer>().To.First().As<Link>().Href.Should().Be("http://joe.example.org");
     }
+
+    [Fact]
+    /// <remarks>Example 109 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-url</remarks>
+    public void Example_109()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Document",
+              "name": "4Q Sales Forecast",
+              "url": "http://example.org/4q-sales-forecast.pdf"
+            }
+            """;
+
+        // Act
+        var ex109 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex109.Should().BeAssignableTo<Document>();
+        ex109.As<Document>().Url.Should().HaveCount(1);
+        ex109.As<Document>().Url.First().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.pdf");
+    }
 }
 
