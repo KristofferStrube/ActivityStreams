@@ -153,10 +153,16 @@ public class Object : ObjectOrLink, IObject
     /// <summary>
     /// A simple, human-readable, plain-text name for the object. HTML markup must not be included. The name may be expressed using multiple language-tagged values.
     /// </summary>
-    /// <remarks>We haven't implimented support for the <c>rdf:langString</c> type.</remarks>
     [JsonConverter(typeof(OneOrMultipleConverter<string>))]
     [JsonPropertyName("name")]
     public IEnumerable<string>? Name { get; set; }
+
+    /// <summary>
+    /// A simple, human-readable, plain-text name for the object. HTML markup must not be included. The name may be expressed using multiple language-tagged values.
+    /// </summary>
+    [JsonConverter(typeof(OneOrMultipleConverter<IDictionary<string, string>>))]
+    [JsonPropertyName("nameMap")]
+    public IEnumerable<IDictionary<string, string>>? NameMap { get; set; }
 
     /// <summary>
     /// When the object describes a time-bound resource, such as an audio or video, a meeting, etc, the duration property indicates the object's approximate duration. The value must be expressed as an xsd:duration as defined by [ xmlschema11-2], section 3.3.6 (e.g. a period of 5 seconds is represented as "PT5S").

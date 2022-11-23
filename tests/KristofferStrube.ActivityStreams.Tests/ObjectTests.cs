@@ -934,5 +934,56 @@ public class ObjectTests
         ex116.As<Note>().Content.Should().HaveCount(1);
         ex116.As<Note>().Content.First().Should().Be("## A simple note\nA simple markdown `note`");
     }
+
+    [Fact]
+    /// <remarks>Example 117 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-name</remarks>
+    public void Example_117()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Note",
+              "name": "A simple note"
+            }
+            """;
+
+        // Act
+        var ex117 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex117.Should().BeAssignableTo<Note>();
+        ex117.As<Note>().Name.Should().HaveCount(1);
+        ex117.As<Note>().Name.First().Should().Be("A simple note");
+    }
+
+    [Fact]
+    /// <remarks>Example 118 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-name</remarks>
+    public void Example_118()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Note",
+              "nameMap": {
+                "en": "A simple note",
+                "es": "Una nota sencilla",
+                "zh-Hans": "一段简单的笔记"
+              }
+            }
+            """;
+
+        // Act
+        var ex118 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex118.Should().BeAssignableTo<Note>();
+        ex118.As<Note>().NameMap.Should().HaveCount(1);
+        ex118.As<Note>().NameMap.First().Keys.Should().HaveCount(3);
+        ex118.As<Note>().NameMap.First()["en"].Should().Be("A simple note");
+        ex118.As<Note>().NameMap.First()["es"].Should().Be("Una nota sencilla");
+        ex118.As<Note>().NameMap.First()["zh-Hans"].Should().Be("一段简单的笔记");
+    }
 }
 
