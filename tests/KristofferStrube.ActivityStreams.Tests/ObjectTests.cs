@@ -527,5 +527,103 @@ public class ObjectTests
         ex84.As<Note>().InReplyTo.Should().HaveCount(1);
         ex84.As<Note>().InReplyTo.First().As<Link>().Href.Should().Be("http://example.org/posts/1");
     }
+
+    [Fact]
+    /// <remarks>Example 88 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-location</remarks>
+    public void Example_88()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "type": "Person",
+              "name": "Sally",
+              "location": {
+                "name": "Over the Arabian Sea, east of Socotra Island Nature Sanctuary",
+                "type": "Place",
+                "longitude": 12.34,
+                "latitude": 56.78,
+                "altitude": 90,
+                "units": "m"
+              }
+            }
+            """;
+
+        // Act
+        var ex88 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex88.Should().BeAssignableTo<Person>();
+        ex88.As<Person>().Location.Should().HaveCount(1);
+        ex88.As<Person>().Location.First().As<Place>().Name.First().Should().Be("Over the Arabian Sea, east of Socotra Island Nature Sanctuary");
+    }
+
+    [Fact]
+    /// <remarks>Example 89 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-items</remarks>
+    public void Example_89()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Sally's notes",
+              "type": "Collection",
+              "totalItems": 2,
+              "items": [
+                {
+                  "type": "Note",
+                  "name": "Reminder for Going-Away Party"
+                },
+                {
+                  "type": "Note",
+                  "name": "Meeting 2016-11-17"
+                }
+              ]
+            }
+            """;
+
+        // Act
+        var ex89 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex89.Should().BeAssignableTo<Collection>();
+        ex89.As<Collection>().Items.Should().HaveCount(2);
+        ex89.As<Collection>().Items.First().As<Note>().Name.First().Should().Be("Reminder for Going-Away Party");
+        ex89.As<Collection>().Items.Last().As<Note>().Name.First().Should().Be("Meeting 2016-11-17");
+    }
+
+    [Fact]
+    /// <remarks>Example 90 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-items</remarks>
+    public void Example_90()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Sally's notes",
+              "type": "OrderedCollection",
+              "totalItems": 2,
+              "orderedItems": [
+                {
+                  "type": "Note",
+                  "name": "Meeting 2016-11-17"
+                },
+                {
+                  "type": "Note",
+                  "name": "Reminder for Going-Away Party"
+                }
+              ]
+            }
+            """;
+
+        // Act
+        var ex90 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex90.Should().BeAssignableTo<OrderedCollection>();
+        ex90.As<OrderedCollection>().OrderedItems.Should().HaveCount(2);
+        ex90.As<OrderedCollection>().OrderedItems.First().As<Note>().Name.First().Should().Be("Meeting 2016-11-17");
+        ex90.As<OrderedCollection>().OrderedItems.Last().As<Note>().Name.First().Should().Be("Reminder for Going-Away Party");
+    }
 }
 

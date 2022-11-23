@@ -114,6 +114,8 @@ public class Object : IObject
     /// <summary>
     /// Indicates one or more physical or logical locations associated with the object.
     /// </summary>
+    [JsonPropertyName("location")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
     public IEnumerable<IObjectOrLink>? Location { get; set; }
 
     /// <summary>

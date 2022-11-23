@@ -17,9 +17,11 @@ internal class ObjectConverter : JsonConverter<IObject?>
                     // Objects
                     "Object" => doc.Deserialize<Object>(options),
                     "Collection" => doc.Deserialize<Collection>(options),
+                    "OrderedCollection" => doc.Deserialize<OrderedCollection>(options),
                     "Document" => doc.Deserialize<Document>(options),
                     "Image" => doc.Deserialize<Image>(options),
                     "Note" => doc.Deserialize<Note>(options),
+                    "Place" => doc.Deserialize<Place>(options),
                     // Actors
                     "Application" => doc.Deserialize<Application>(options),
                     "Organísation" => doc.Deserialize<Organisation>(options),
