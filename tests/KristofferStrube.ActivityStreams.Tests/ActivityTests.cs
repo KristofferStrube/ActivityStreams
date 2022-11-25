@@ -197,5 +197,86 @@ public class ActivityTests
         ex99.As<Like>().Object.First().As<Link>().Href.Should().Be("http://example.org/posts/1");
         ex99.As<Like>().Object.Last().As<Note>().Content.First().Should().Be("That is a tree.");
     }
+
+    [Fact]
+    /// <remarks>Example 103 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-result</remarks>
+    public void Example_103()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Sally checked that her flight was on time",
+              "type": ["Activity", "http://www.verbs.example/Check"],
+              "actor": "http://sally.example.org",
+              "object": "http://example.org/flights/1",
+              "result": {
+                "type": "http://www.types.example/flightstatus",
+                "name": "On Time"
+              }
+            }
+            """;
+
+        // Act
+        var ex103 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex103.Should().BeAssignableTo<Offer>();
+        ex103.As<Offer>().Target.Should().HaveCount(1);
+        ex103.As<Offer>().Target.First().As<Person>().Name.First().Should().Be("John");
+    }
+
+    [Fact]
+    /// <remarks>Example 106 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-target</remarks>
+    public void Example_106()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Sally offered the post to John",
+              "type": "Offer",
+              "actor": "http://sally.example.org",
+              "object": "http://example.org/posts/1",
+              "target": "http://john.example.org"
+            }
+            """;
+
+        // Act
+        var ex106 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex106.Should().BeAssignableTo<Offer>();
+        ex106.As<Offer>().Target.Should().HaveCount(1);
+        ex106.As<Offer>().Target.First().As<Link>().Href.Should().Be("http://john.example.org");
+    }
+
+    [Fact]
+    /// <remarks>Example 107 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-target</remarks>
+    public void Example_107()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Sally offered the post to John",
+              "type": "Offer",
+              "actor": "http://sally.example.org",
+              "object": "http://example.org/posts/1",
+              "target": {
+                "type": "Person",
+                "name": "John"
+              }
+            }
+            """;
+
+        // Act
+        var ex107 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex107.Should().BeAssignableTo<Offer>();
+        ex107.As<Offer>().Target.Should().HaveCount(1);
+        ex107.As<Offer>().Target.First().As<Person>().Name.First().Should().Be("John");
+    }
 }
 
