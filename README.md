@@ -8,7 +8,7 @@ These types are famously used in the [ActivityPub](https://www.w3.org/TR/activit
 **This implementation is still being developed, so progress is still very limited.**
 
 ## Goals
-- [ ] Add classes for Core Types.
+- [x] Add classes for Core Types.
   - [x] Add class for Object
   - [x] Add class for Link
   - [x] Add class for Activity
@@ -16,7 +16,7 @@ These types are famously used in the [ActivityPub](https://www.w3.org/TR/activit
   - [x] Add class for Collection
   - [x] Add class for OrderedCollection
   - [x] Add class for CollectionPage
-  - [ ] Add class for OrderedCollectionPage
+  - [x] Add class for OrderedCollectionPage
 - [ ] Add extended classes for Activity Types.
 - [ ] Add extended classes for Actor Types.
 - [ ] Add extended classes for Object and Link Types.
