@@ -29,7 +29,7 @@ internal class ObjectConverter : JsonConverter<IObject?>
                 {
                     return null;
                 }
-                else if (ObjectTypes.Types.TryGetValue(matchingType!, out Type value))
+                else if (ObjectTypes.Types.TryGetValue(matchingType!, out Type? value))
                 {
                     obj = (IObject?)doc.Deserialize(value, options);
                 }

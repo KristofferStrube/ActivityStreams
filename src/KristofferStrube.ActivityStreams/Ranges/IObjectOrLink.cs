@@ -1,4 +1,5 @@
 ﻿using KristofferStrube.ActivityStreams.JsonConverters;
+using KristofferStrube.ActivityStreams.JsonLD;
 using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
@@ -7,7 +8,7 @@ namespace KristofferStrube.ActivityStreams;
 public interface IObjectOrLink
 {
     string? Id { get; set; }
-    Uri? JsonLDContext { get; set; }
+    IEnumerable<ITermDefinition>? JsonLDContext { get; set; }
     IEnumerable<string>? Type { get; set; }
     string? MediaType { get; set; }
     IEnumerable<string>? Name { get; set; }

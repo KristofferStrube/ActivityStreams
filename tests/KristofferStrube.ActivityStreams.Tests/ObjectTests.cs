@@ -1,4 +1,6 @@
-﻿namespace KristofferStrube.ActivityStreams.Tests;
+﻿using KristofferStrube.ActivityStreams.JsonLD;
+
+namespace KristofferStrube.ActivityStreams.Tests;
 
 public class ObjectTests
 {
@@ -23,7 +25,7 @@ public class ObjectTests
 
         // Assert
         ex1.Should().BeAssignableTo<Object>();
-        ex1.As<Object>().JsonLDContext.Should().Be(new Uri("https://www.w3.org/ns/activitystreams"));
+        ex1.As<Object>().JsonLDContext.First().As<ReferenceTermDefinition>().Should().Be(new Uri("https://www.w3.org/ns/activitystreams"));
         ex1.As<Object>().Id.Should().Be("http://www.test.example/object/1");
         ex1.As<Object>().Name.First().Should().Be("A Simple, non-specific object");
     }
