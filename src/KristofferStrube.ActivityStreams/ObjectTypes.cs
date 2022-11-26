@@ -20,6 +20,7 @@ internal static class ObjectTypes
         { "Service", typeof(Service)},
         // Activities
         { "Activity", typeof(Activity)},
+        { "IntransitiveActiviy", typeof(IntransitiveActiviy)},
         { "Move", typeof(Move)},
         { "Listen", typeof(Listen)},
         { "Offer", typeof(Offer)},
