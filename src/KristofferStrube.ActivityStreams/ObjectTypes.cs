@@ -15,6 +15,7 @@ internal static class ObjectTypes
         { "Note", typeof(Note) },
         { "Place", typeof(Place) },
         { "Event", typeof(Event) },
+        { "Relationship", typeof(Relationship) },
         // Actors
         { "Application", typeof(Application) },
         { "Group", typeof(Group) },
