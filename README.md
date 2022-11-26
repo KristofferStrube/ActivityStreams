@@ -15,7 +15,7 @@ These types are famously used in the [ActivityPub](https://www.w3.org/TR/activit
   - [x] Add class for IntransitiveActivity
   - [x] Add class for Collection
   - [x] Add class for OrderedCollection
-  - [ ] Add class for CollectionPage
+  - [x] Add class for CollectionPage
   - [ ] Add class for OrderedCollectionPage
 - [ ] Add extended classes for Activity Types.
 - [ ] Add extended classes for Actor Types.
