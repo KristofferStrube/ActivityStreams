@@ -1,6 +1,4 @@
-﻿using KristofferStrube.ActivityStreams;
-using System.Diagnostics;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using static System.Text.Json.JsonSerializer;
 
@@ -10,9 +8,9 @@ internal class ObjectConverter : JsonConverter<IObject?>
 {
     public override IObject? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (JsonDocument.TryParseValue(ref reader, out var doc))
+        if (JsonDocument.TryParseValue(ref reader, out JsonDocument? doc))
         {
-            if (doc.RootElement.TryGetProperty("type", out var type))
+            if (doc.RootElement.TryGetProperty("type", out JsonElement type))
             {
                 string? matchingType;
                 IEnumerable<string> allTypes = new List<string>();
@@ -27,7 +25,10 @@ internal class ObjectConverter : JsonConverter<IObject?>
                     allTypes = new List<string>() { matchingType! };
                 }
                 IObject? obj = null;
-                if (matchingType is null) return null;
+                if (matchingType is null)
+                {
+                    return null;
+                }
                 else if (ObjectTypes.Types.TryGetValue(matchingType!, out Type value))
                 {
                     obj = (IObject?)doc.Deserialize(value, options);
@@ -36,7 +37,11 @@ internal class ObjectConverter : JsonConverter<IObject?>
                 {
                     obj = doc.Deserialize<Object?>(options);
                 }
-                if (obj is null) return null;
+                if (obj is null)
+                {
+                    return null;
+                }
+
                 obj.Type = allTypes;
                 return obj;
             }

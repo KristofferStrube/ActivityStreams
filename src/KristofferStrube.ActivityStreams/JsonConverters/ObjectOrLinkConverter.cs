@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using static System.Text.Json.JsonSerializer;
 
@@ -9,20 +8,23 @@ internal class ObjectOrLinkConverter : JsonConverter<IObjectOrLink?>
 {
     public override IObjectOrLink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (JsonDocument.TryParseValue(ref reader, out var doc))
+        if (JsonDocument.TryParseValue(ref reader, out JsonDocument? doc))
         {
             if (doc.RootElement.ValueKind == JsonValueKind.String)
             {
                 return doc.Deserialize<ILink>(options);
             }
-            else if (doc.RootElement.TryGetProperty("type", out var type))
+            else if (doc.RootElement.TryGetProperty("type", out JsonElement type))
             {
                 string? matchingType = null;
                 if (type.ValueKind is JsonValueKind.Array)
                 {
-                    var typeEnumerator = type.EnumerateArray().Select(t => t.GetString()!);
+                    IEnumerable<string> typeEnumerator = type.EnumerateArray().Select(t => t.GetString()!);
                     matchingType = typeEnumerator.FirstOrDefault(t => t == "Link" || ObjectTypes.Types.ContainsKey(t!), null);
-                    if (matchingType is null) return null;
+                    if (matchingType is null)
+                    {
+                        return null;
+                    }
                 }
                 else
                 {

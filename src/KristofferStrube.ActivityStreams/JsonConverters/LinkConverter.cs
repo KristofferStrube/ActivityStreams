@@ -8,13 +8,13 @@ internal class LinkConverter : JsonConverter<ILink?>
 {
     public override ILink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (JsonDocument.TryParseValue(ref reader, out var doc))
+        if (JsonDocument.TryParseValue(ref reader, out JsonDocument? doc))
         {
             if (doc.RootElement.ValueKind == JsonValueKind.String)
             {
                 return new Link { Href = doc.Deserialize<Uri>(options) };
             }
-            else if (doc.RootElement.TryGetProperty("type", out var type))
+            else if (doc.RootElement.TryGetProperty("type", out JsonElement type))
             {
                 return type.GetString() switch
                 {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Diagnostics;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using static System.Text.Json.JsonSerializer;
 
@@ -10,13 +8,13 @@ internal class CollectionPageOrLinkConverter : JsonConverter<ICollectionPageOrLi
 {
     public override ICollectionPageOrLink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
-        if (JsonDocument.TryParseValue(ref reader, out var doc))
+        if (JsonDocument.TryParseValue(ref reader, out JsonDocument? doc))
         {
             if (doc.RootElement.ValueKind == JsonValueKind.String)
             {
                 return doc.Deserialize<ILink>(options);
             }
-            else if (doc.RootElement.TryGetProperty("type", out var type))
+            else if (doc.RootElement.TryGetProperty("type", out JsonElement type))
             {
                 return type.GetString() switch
                 {

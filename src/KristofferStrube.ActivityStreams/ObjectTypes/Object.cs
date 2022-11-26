@@ -1,5 +1,4 @@
 ﻿using KristofferStrube.ActivityStreams.JsonConverters;
-using System.Diagnostics;
 using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
