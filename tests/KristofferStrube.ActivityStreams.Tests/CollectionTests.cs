@@ -31,8 +31,9 @@ public class CollectionTests
         ex74.Should().BeAssignableTo<Collection>();
         ex74.As<Collection>().Current.As<Link>().Href.Should().Be(new Uri("http://example.org/collection"));
     }
+
     /// <summary>
-    /// Example 74 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-current
+    /// Example 75 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-current
     /// </summary>
     [Fact]
     public void Example_075()
@@ -63,6 +64,114 @@ public class CollectionTests
         // Assert
         ex75.Should().BeAssignableTo<Collection>();
         ex75.As<Collection>().Current.As<Link>().Href.Should().Be(new Uri("http://example.org/collection"));
+    }
+
+    /// <summary>
+    /// Example 76 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-first
+    /// </summary>
+    [Fact]
+    public void Example_076()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Sally's blog posts",
+              "type": "Collection",
+              "totalItems": 3,
+              "first": "http://example.org/collection?page=0"
+            }
+            """;
+
+        // Act
+        var ex76 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex76.Should().BeAssignableTo<Collection>();
+        ex76.As<Collection>().First.As<Link>().Href.Should().Be(new Uri("http://example.org/collection?page=0"));
+    }
+
+    /// <summary>
+    /// Example 77 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-first
+    /// </summary>
+    [Fact]
+    public void Example_077()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Sally's blog posts",
+              "type": "Collection",
+              "totalItems": 3,
+              "first": {
+                "type": "Link",
+                "summary": "First Page",
+                "href": "http://example.org/collection?page=0"
+              }
+            }
+            """;
+
+        // Act
+        var ex77 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex77.Should().BeAssignableTo<Collection>();
+        ex77.As<Collection>().First.As<Link>().Href.Should().Be(new Uri("http://example.org/collection?page=0"));
+    }
+
+    /// <summary>
+    /// Example 86 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-last
+    /// </summary>
+    [Fact]
+    public void Example_086()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "A collection",
+              "type": "Collection",
+              "totalItems": 3,
+              "last": "http://example.org/collection?page=1"
+            }
+            """;
+
+        // Act
+        var ex86 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex86.Should().BeAssignableTo<Collection>();
+        ex86.As<Collection>().Last.As<Link>().Href.Should().Be(new Uri("http://example.org/collection?page=1"));
+    }
+
+    /// <summary>
+    /// Example 87 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-last
+    /// </summary>
+    [Fact]
+    public void Example_087()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "A collection",
+              "type": "Collection",
+              "totalItems": 5,
+              "last": {
+                "type": "Link",
+                "summary": "Last Page",
+                "href": "http://example.org/collection?page=1"
+              }
+            }
+            """;
+
+        // Act
+        var ex87 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex87.Should().BeAssignableTo<Collection>();
+        ex87.As<Collection>().Last.As<Link>().Href.Should().Be(new Uri("http://example.org/collection?page=1"));
     }
 
     /// <summary>

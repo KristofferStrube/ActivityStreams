@@ -30,4 +30,16 @@ public class Collection : Object
     /// </summary>
     [JsonPropertyName("current")]
     public ICollectionPageOrLink? Current { get; set; }
+
+    /// <summary>
+    /// In a paged Collection, indicates the furthest preceeding page of items in the collection.
+    /// </summary>
+    [JsonPropertyName("first")]
+    public ICollectionPageOrLink? First { get; set; }
+
+    /// <summary>
+    /// In a paged Collection, indicates the furthest proceeding page of the collection.
+    /// </summary>
+    [JsonPropertyName("last")]
+    public ICollectionPageOrLink? Last { get; set; }
 }
