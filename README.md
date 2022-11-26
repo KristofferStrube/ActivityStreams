@@ -18,7 +18,7 @@ These types are famously used in the [ActivityPub](https://www.w3.org/TR/activit
   - [x] Add class for CollectionPage
   - [x] Add class for OrderedCollectionPage
 - [x] Add extended classes for Activity Types.
-- [ ] Add extended classes for Actor Types.
+- [x] Add extended classes for Actor Types.
 - [ ] Add extended classes for Object and Link Types.
 - [ ] Add support for retrieving @context JSON-LD defintions.
 - [ ] Add support for serializing
