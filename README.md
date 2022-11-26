@@ -11,7 +11,7 @@ These types are famously used in the [ActivityPub](https://www.w3.org/TR/activit
 - [ ] Add classes for Core Types.
   - [x] Add class for Object
   - [x] Add class for Link
-  - [ ] Add class for Activity
+  - [x] Add class for Activity
   - [ ] Add class for IntransitiveActivity
   - [ ] Add class for Collection
   - [ ] Add class for OrderedCollection
