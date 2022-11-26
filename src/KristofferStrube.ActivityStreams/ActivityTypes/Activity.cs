@@ -26,5 +26,10 @@ public class Activity : Object
     [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
     public IEnumerable<IObjectOrLink>? Target { get; set; }
 
-
+    /// <summary>
+    /// Describes the result of the activity. For instance, if a particular action results in the creation of a new resource, the result property can be used to describe that new resource.
+    /// </summary>
+    [JsonPropertyName("result")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? Result { get; set; }
 }

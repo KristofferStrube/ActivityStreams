@@ -22,8 +22,7 @@ public class ContextTests
         // Assert
         ex1.Should().BeAssignableTo<Object>();
         ex1.As<Object>().JsonLDContext.Should().Be(new Uri("https://www.w3.org/ns/activitystreams"));
-        ex1.As<Object>().Type.Should().Be("Note");
-        ex1.As<Object>().TypeAsUri.Should().Be("https://www.w3.org/ns/activitystreams/Note");
+        ex1.As<Object>().Type.Should().Contain("Note");
     }
 }
 

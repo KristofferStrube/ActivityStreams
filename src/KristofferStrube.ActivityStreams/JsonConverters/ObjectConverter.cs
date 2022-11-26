@@ -1,4 +1,5 @@
-﻿using System.Diagnostics;
+﻿using KristofferStrube.ActivityStreams;
+using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 using static System.Text.Json.JsonSerializer;
@@ -13,27 +14,33 @@ internal class ObjectConverter : JsonConverter<IObject?>
         {
             if (doc.RootElement.TryGetProperty("type", out var type))
             {
-                return type.GetString() switch {
-                    // Objects
-                    "Object" => doc.Deserialize<Object>(options),
-                    "Collection" => doc.Deserialize<Collection>(options),
-                    "OrderedCollection" => doc.Deserialize<OrderedCollection>(options),
-                    "Document" => doc.Deserialize<Document>(options),
-                    "Image" => doc.Deserialize<Image>(options),
-                    "Video" => doc.Deserialize<Video>(options),
-                    "Note" => doc.Deserialize<Note>(options),
-                    "Place" => doc.Deserialize<Place>(options),
-                    "Event" => doc.Deserialize<Event>(options),
-                    // Actors
-                    "Application" => doc.Deserialize<Application>(options),
-                    "Organísation" => doc.Deserialize<Organisation>(options),
-                    "Person" => doc.Deserialize<Person>(options),
-                    // Activities
-                    "Activity" => doc.Deserialize<Activity>(options),
-                    "Offer" => doc.Deserialize<Offer>(options),
-                    "Like" => doc.Deserialize<Like>(options),
-                    var value => DeserializeGenericType(doc, value, options),
-                };
+                string? matchingType;
+                IEnumerable<string> allTypes = new List<string>();
+                if (type.ValueKind == JsonValueKind.Array)
+                {
+                    allTypes = type.EnumerateArray().Select(t => t.GetString()!);
+                    matchingType = allTypes.FirstOrDefault(t => ObjectTypes.Types.ContainsKey(t!), null);
+                }
+                else
+                {
+                    matchingType = type.GetString();
+                    allTypes = new List<string>() { matchingType! };
+                }
+                IObject? obj;
+                if (matchingType is null)
+                {
+                    return null;
+                }
+                else if (ObjectTypes.Types.ContainsKey(matchingType))
+                {
+                    obj = (IObject?)doc.Deserialize(ObjectTypes.Types[matchingType], options);
+                }
+                else
+                {
+                    obj = doc.Deserialize<Object?>(options);
+                }
+                obj.Type = allTypes;
+                return obj;
             }
             else
             {
@@ -41,13 +48,6 @@ internal class ObjectConverter : JsonConverter<IObject?>
             }
         }
         throw new JsonException("Could not be parsed as a JsonDocument.");
-    }
-
-    private IObject DeserializeGenericType(JsonDocument doc, string type, JsonSerializerOptions options)
-    {
-        IObject obj = doc.Deserialize<Object>(options)!;
-        obj.Type = type;
-        return obj;
     }
 
     public override void Write(Utf8JsonWriter writer, IObject? value, JsonSerializerOptions options)

@@ -221,9 +221,9 @@ public class ActivityTests
         var ex103 = Deserialize<IObjectOrLink>(input);
 
         // Assert
-        ex103.Should().BeAssignableTo<Offer>();
-        ex103.As<Offer>().Target.Should().HaveCount(1);
-        ex103.As<Offer>().Target.First().As<Person>().Name.First().Should().Be("John");
+        ex103.Should().BeAssignableTo<Activity>();
+        ex103.As<Activity>().Result.Should().HaveCount(1);
+        ex103.As<Activity>().Result.First().Name.First().Should().Be("On Time");
     }
 
     [Fact]

@@ -17,7 +17,19 @@ internal class ObjectOrLinkConverter : JsonConverter<IObjectOrLink?>
             }
             else if (doc.RootElement.TryGetProperty("type", out var type))
             {
-                return type.GetString() switch {
+                string? matchingType = null;
+                if (type.ValueKind is JsonValueKind.Array)
+                {
+                    var typeEnumerator = type.EnumerateArray().Select(t => t.GetString()!);
+                    matchingType = typeEnumerator.FirstOrDefault(t => t == "Link" || ObjectTypes.Types.ContainsKey(t!), null);
+                    if (matchingType is null) return null;
+                }
+                else
+                {
+                    matchingType = type.GetString();
+                }
+                return matchingType switch
+                {
                     "Link" => doc.Deserialize<ILink>(options),
                     _ => doc.Deserialize<IObject>(options),
                 };

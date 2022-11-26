@@ -44,7 +44,6 @@ public class ObjectTests
 
         // Assert
         ex61.Id.Should().Be("http://example.org/foo");
-        ex61.IdAsUri.Should().Be(new Uri("http://example.org/foo"));
     }
 
     [Fact]
@@ -64,7 +63,7 @@ public class ObjectTests
         var ex62 = Deserialize<IObjectOrLink>(input);
 
         // Assert
-        ex62.Type.Should().Be("http://example.org/Foo");
+        ex62.Type.Should().Contain("http://example.org/Foo");
     }
 
     [Fact]
@@ -184,7 +183,7 @@ public class ObjectTests
         // Assert
         ex69.Should().BeAssignableTo<Note>();
         ex69.As<Note>().Audience.Should().HaveCount(1);
-        ex69.As<Note>().Audience.First().Type.Should().Be("http://example.org/Organization");
+        ex69.As<Note>().Audience.First().Type.Should().Contain("http://example.org/Organization");
     }
 
     [Fact]

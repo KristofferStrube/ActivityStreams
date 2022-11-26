@@ -7,10 +7,8 @@ namespace KristofferStrube.ActivityStreams;
 public interface IObjectOrLink
 {
     string? Id { get; set; }
-    Uri? IdAsUri { get; }
     Uri? JsonLDContext { get; set; }
-    string? Type { get; set; }
-    Uri? TypeAsUri { get; }
+    IEnumerable<string>? Type { get; set; }
     string? MediaType { get; set; }
     IEnumerable<string>? Name { get; set; }
     IEnumerable<IObjectOrLink>? Preview { get; set; }
