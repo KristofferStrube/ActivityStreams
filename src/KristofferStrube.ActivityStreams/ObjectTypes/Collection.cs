@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using KristofferStrube.ActivityStreams.JsonConverters;
+using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
@@ -8,11 +9,25 @@ public class Collection : Object
     /// Identifies the items contained in a collection. The items might be ordered or unordered.
     /// </summary>
     [JsonPropertyName("items")]
-    public IEnumerable<IObjectOrLink> Items { get; set; }
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? Items { get; set; }
 
     /// <summary>
     /// Identifies the items contained in a collection. The items might be ordered or unordered.
     /// </summary>
     [JsonPropertyName("orderedItems")]
-    public IEnumerable<IObjectOrLink> OrderedItems { get; set; }
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? OrderedItems { get; set; }
+
+    /// <summary>
+    /// A non-negative integer specifying the total number of objects contained by the logical view of the collection. This number might not reflect the actual number of items serialized within the Collection object instance.
+    /// </summary>
+    [JsonPropertyName("totalItems")]
+    public uint? TotalItems { get; set; }
+
+    /// <summary>
+    /// In a paged Collection, indicates the page that contains the most recently updated member items.
+    /// </summary>
+    [JsonPropertyName("current")]
+    public ICollectionPageOrLink? Current { get; set; }
 }

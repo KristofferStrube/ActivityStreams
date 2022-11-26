@@ -26,19 +26,17 @@ internal class ObjectConverter : JsonConverter<IObject?>
                     matchingType = type.GetString();
                     allTypes = new List<string>() { matchingType! };
                 }
-                IObject? obj;
-                if (matchingType is null)
+                IObject? obj = null;
+                if (matchingType is null) return null;
+                else if (ObjectTypes.Types.TryGetValue(matchingType!, out Type value))
                 {
-                    return null;
+                    obj = (IObject?)doc.Deserialize(value, options);
                 }
-                else if (ObjectTypes.Types.ContainsKey(matchingType))
-                {
-                    obj = (IObject?)doc.Deserialize(ObjectTypes.Types[matchingType], options);
-                }
-                else
+                else if (matchingType is not null)
                 {
                     obj = doc.Deserialize<Object?>(options);
                 }
+                if (obj is null) return null;
                 obj.Type = allTypes;
                 return obj;
             }
