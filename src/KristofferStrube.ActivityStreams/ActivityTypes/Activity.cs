@@ -39,4 +39,11 @@ public class Activity : Object
     [JsonPropertyName("origin")]
     [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
     public IEnumerable<IObjectOrLink>? Origin { get; set; }
+
+    /// <summary>
+    /// Identifies one or more objects used (or to be used) in the completion of an Activity.
+    /// </summary>
+    [JsonPropertyName("instrument")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? Instrument { get; set; }
 }

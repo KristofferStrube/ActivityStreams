@@ -17,9 +17,11 @@ internal static class ObjectTypes
         { "Application", typeof(Application)},
         { "Organísation", typeof(Organisation)},
         { "Person", typeof(Person)},
+        { "Service", typeof(Service)},
         // Activities
         { "Activity", typeof(Activity)},
         { "Move", typeof(Move)},
+        { "Listen", typeof(Listen)},
         { "Offer", typeof(Offer)},
         { "Like", typeof(Like)}
     };

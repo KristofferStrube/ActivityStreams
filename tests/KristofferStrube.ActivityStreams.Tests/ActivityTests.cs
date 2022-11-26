@@ -1,4 +1,6 @@
-﻿namespace KristofferStrube.ActivityStreams.Tests;
+﻿using System.Collections.Generic;
+
+namespace KristofferStrube.ActivityStreams.Tests;
 
 public class ActivityTests
 {
@@ -125,7 +127,40 @@ public class ActivityTests
     }
 
     /// <summary>
-    /// Example 94 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-object-term
+    /// Example 85 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-instrument
+    /// </summary>
+    [Fact]
+    public void Example_085()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": "https://www.w3.org/ns/activitystreams",
+              "summary": "Sally listened to a piece of music on the Acme Music Service",
+              "type": "Listen",
+              "actor": {
+                "type": "Person",
+                "name": "Sally"
+              },
+              "object": "http://example.org/foo.mp3",
+              "instrument": {
+                "type": "Service",
+                "name": "Acme Music Service"
+              }
+            }
+            """;
+
+        // Act
+        var ex85 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex85.Should().BeAssignableTo<Listen>();
+        ex85.As<Listen>().Instrument.Should().HaveCount(1);
+        ex85.As<Listen>().Instrument.First().As<Service>().Name.First().Should().Be("Acme Music Service");
+    }
+
+    /// <summary>
+    /// Example 94 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-origin
     /// </summary>
     [Fact]
     public void Example_094()
