@@ -11,11 +11,11 @@ internal class TermDefinitionConverter : JsonConverter<ITermDefinition?>
     {
         if (JsonDocument.TryParseValue(ref reader, out JsonDocument? doc))
         {
-            if (doc.RootElement.ValueKind == JsonValueKind.String)
+            if (doc.RootElement.ValueKind is JsonValueKind.String)
             {
                 return new ReferenceTermDefinition(doc.Deserialize<Uri>(options)!);
             }
-            else if (doc.RootElement.ValueKind == JsonValueKind.Object)
+            else if (doc.RootElement.ValueKind is JsonValueKind.Object)
             {
                 return doc.Deserialize<ExpandedTermDefinition>(options);
             }

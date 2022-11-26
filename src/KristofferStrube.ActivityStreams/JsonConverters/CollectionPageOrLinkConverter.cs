@@ -10,7 +10,7 @@ internal class CollectionPageOrLinkConverter : JsonConverter<ICollectionPageOrLi
     {
         if (JsonDocument.TryParseValue(ref reader, out JsonDocument? doc))
         {
-            if (doc.RootElement.ValueKind == JsonValueKind.String)
+            if (doc.RootElement.ValueKind is JsonValueKind.String)
             {
                 return doc.Deserialize<ILink>(options);
             }

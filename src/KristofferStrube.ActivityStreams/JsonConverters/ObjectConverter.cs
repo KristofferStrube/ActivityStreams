@@ -14,7 +14,7 @@ internal class ObjectConverter : JsonConverter<IObject?>
             {
                 string? matchingType;
                 IEnumerable<string> allTypes = new List<string>();
-                if (type.ValueKind == JsonValueKind.Array)
+                if (type.ValueKind is JsonValueKind.Array)
                 {
                     allTypes = type.EnumerateArray().Select(t => t.GetString()!);
                     matchingType = allTypes.FirstOrDefault(t => ObjectTypes.Types.ContainsKey(t!), null);
