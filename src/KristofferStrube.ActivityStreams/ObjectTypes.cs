@@ -17,6 +17,7 @@ internal static class ObjectTypes
         { "Event", typeof(Event) },
         // Actors
         { "Application", typeof(Application) },
+        { "Group", typeof(Group) },
         { "Organísation", typeof(Organisation) },
         { "Person", typeof(Person) },
         { "Service", typeof(Service) },
