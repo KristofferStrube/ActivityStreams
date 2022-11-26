@@ -3,8 +3,8 @@ using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
-[JsonConverter(typeof(CollectionPageOrLinkConverter))]
-public interface ICollectionPageOrLink : ICollectionOrLink
+[JsonConverter(typeof(CollectionOrLinkConverter))]
+public interface ICollectionOrLink : IObjectOrLink
 {
 
 }

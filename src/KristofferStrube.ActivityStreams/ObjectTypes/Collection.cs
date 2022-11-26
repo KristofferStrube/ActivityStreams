@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
-public class Collection : Object
+public class Collection : Object, ICollectionOrLink
 {
     /// <summary>
     /// Identifies the items contained in a collection. The items might be ordered or unordered.
