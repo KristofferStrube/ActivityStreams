@@ -32,4 +32,11 @@ public class Activity : Object
     [JsonPropertyName("result")]
     [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
     public IEnumerable<IObjectOrLink>? Result { get; set; }
+
+    /// <summary>
+    /// Describes an indirect object of the activity from which the activity is directed. The precise meaning of the origin is the object of the English preposition "from". For instance, in the activity "John moved an item to List B from List A", the origin of the activity is "List A".
+    /// </summary>
+    [JsonPropertyName("origin")]
+    [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
+    public IEnumerable<IObjectOrLink>? Origin { get; set; }
 }

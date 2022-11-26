@@ -2,8 +2,10 @@
 
 public class LinkTests
 {
+    /// <summary>
+    /// Example 2 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-link
+    /// </summary>
     [Fact]
-    /// <remarks>Example 2 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-link</remarks>
     public void Example_002()
     {
         // Arrange
@@ -37,8 +39,10 @@ public class LinkTests
         ex2.As<Link>().Preview.First().As<Video>().Name.First().Should().Be("Trailer");
     }
 
+    /// <summary>
+    /// Example 120 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-height
+    /// </summary>
     [Fact]
-    /// <remarks>Example 120 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-height</remarks>
     public void Example_120()
     {
         // Arrange
@@ -60,8 +64,10 @@ public class LinkTests
         ex120.As<Link>().Height.Should().Be(100);
     }
 
+    /// <summary>
+    /// Example 121 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-href
+    /// </summary>
     [Fact]
-    /// <remarks>Example 121 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-href</remarks>
     public void Example_121()
     {
         // Arrange
@@ -83,8 +89,10 @@ public class LinkTests
         ex121.As<Link>().Href.Should().Be(new Uri("http://example.org/abc"));
     }
 
+    /// <summary>
+    /// Example 122 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-hreflang
+    /// </summary>
     [Fact]
-    /// <remarks>Example 122 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-hreflang</remarks>
     public void Example_122()
     {
         // Arrange
@@ -107,8 +115,10 @@ public class LinkTests
         ex122.As<Link>().Hreflang.Should().Be("en");
     }
 
+    /// <summary>
+    /// Example 126 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-mediatype
+    /// </summary>
     [Fact]
-    /// <remarks>Example 126 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-mediatype</remarks>
     public void Example_126()
     {
         // Arrange
@@ -131,8 +141,10 @@ public class LinkTests
         ex126.As<Link>().MediaType.Should().Be("text/html");
     }
 
+    /// <summary>
+    /// Example 131 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-rel
+    /// </summary>
     [Fact]
-    /// <remarks>Example 131 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-rel</remarks>
     public void Example_131()
     {
         // Arrange
@@ -162,8 +174,10 @@ public class LinkTests
         ex131.As<Link>().Name.First().Should().Be("Preview");
     }
 
+    /// <summary>
+    /// Example 138 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-width
+    /// </summary>
     [Fact]
-    /// <remarks>Example 138 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-width</remarks>
     public void Example_138()
     {
         // Arrange

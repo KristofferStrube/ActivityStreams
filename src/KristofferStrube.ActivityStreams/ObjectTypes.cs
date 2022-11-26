@@ -19,6 +19,7 @@ internal static class ObjectTypes
         { "Person", typeof(Person)},
         // Activities
         { "Activity", typeof(Activity)},
+        { "Move", typeof(Move)},
         { "Offer", typeof(Offer)},
         { "Like", typeof(Like)}
     };

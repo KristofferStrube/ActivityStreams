@@ -2,8 +2,10 @@
 
 public class ObjectTests
 {
+    /// <summary>
+    /// Example 1 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-object
+    /// </summary>
     [Fact]
-    /// <remarks>Example 1 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-object</remarks>
     public void Example_001()
     {
         // Arrange
@@ -26,8 +28,10 @@ public class ObjectTests
         ex1.As<Object>().Name.First().Should().Be("A Simple, non-specific object");
     }
 
+    /// <summary>
+    /// Example 61 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-id
+    /// </summary>
     [Fact]
-    /// <remarks>Example 61 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-id</remarks>
     public void Example_061()
     {
         // Arrange
@@ -46,8 +50,10 @@ public class ObjectTests
         ex61.Id.Should().Be("http://example.org/foo");
     }
 
+    /// <summary>
+    /// Example 62 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-type
+    /// </summary>
     [Fact]
-    /// <remarks>Example 62 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-type</remarks>
     public void Example_062()
     {
         // Arrange
@@ -66,8 +72,10 @@ public class ObjectTests
         ex62.Type.Should().Contain("http://example.org/Foo");
     }
 
+    /// <summary>
+    /// Example 66 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attachment
+    /// </summary>
     [Fact]
-    /// <remarks>Example 66 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attachment</remarks>
     public void Example_066()
     {
         // Arrange
@@ -96,8 +104,10 @@ public class ObjectTests
         ex66.As<Note>().Attachment.First().As<Image>().Content.First().Should().Be("This is what he looks like.");
     }
 
+    /// <summary>
+    /// Example 67 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attributedto
+    /// </summary>
     [Fact]
-    /// <remarks>Example 67 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attributedto</remarks>
     public void Example_067()
     {
         // Arrange
@@ -126,8 +136,10 @@ public class ObjectTests
         ex67.As<Image>().AttributedTo.First().As<Person>().Name.First().Should().Be("Sally");
     }
 
+    /// <summary>
+    /// Example 68 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attributedto
+    /// </summary>
     [Fact]
-    /// <remarks>Example 68 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-attributedto</remarks>
     public void Example_068()
     {
         // Arrange
@@ -159,8 +171,10 @@ public class ObjectTests
         ex68.As<Image>().AttributedTo.ElementAt(1).As<Object>().Name.First().Should().Be("Sally");
     }
 
+    /// <summary>
+    /// Example 69 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-audience
+    /// </summary>
     [Fact]
-    /// <remarks>Example 69 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-audience</remarks>
     public void Example_069()
     {
         // Arrange
@@ -186,8 +200,10 @@ public class ObjectTests
         ex69.As<Note>().Audience.First().Type.Should().Contain("http://example.org/Organization");
     }
 
+    /// <summary>
+    /// Example 70 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-bcc
+    /// </summary>
     [Fact]
-    /// <remarks>Example 70 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-bcc</remarks>
     public void Example_070()
     {
         // Arrange
@@ -213,8 +229,10 @@ public class ObjectTests
         ex70.As<Offer>().Bcc.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
     }
 
+    /// <summary>
+    /// Example 71 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-bto
+    /// </summary>
     [Fact]
-    /// <remarks>Example 71 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-bto</remarks>
     public void Example_071()
     {
         // Arrange
@@ -240,8 +258,10 @@ public class ObjectTests
         ex71.As<Offer>().Bto.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
     }
 
+    /// <summary>
+    /// Example 72 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-cc
+    /// </summary>
     [Fact]
-    /// <remarks>Example 72 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-cc</remarks>
     public void Example_072()
     {
         // Arrange
@@ -267,8 +287,10 @@ public class ObjectTests
         ex72.As<Offer>().Cc.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
     }
 
+    /// <summary>
+    /// Example 73 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-context
+    /// </summary>
     [Fact]
-    /// <remarks>Example 73 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-context</remarks>
     public void Example_073()
     {
         // Arrange
@@ -304,8 +326,10 @@ public class ObjectTests
         ex73.As<Collection>().Items.Last().As<Like>().Context.First().As<Link>().Href.Should().Be("http://example.org/contexts/1");
     }
 
+    /// <summary>
+    /// Example 78 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-generator
+    /// </summary>
     [Fact]
-    /// <remarks>Example 78 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-generator</remarks>
     public void Example_078()
     {
         // Arrange
@@ -332,8 +356,10 @@ public class ObjectTests
         ex78.As<Note>().Generator.First().As<Application>().Name.First().Should().Be("Exampletron 3000");
     }
 
+    /// <summary>
+    /// Example 79 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-icon
+    /// </summary>
     [Fact]
-    /// <remarks>Example 79 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-icon</remarks>
     public void Example_079()
     {
         // Arrange
@@ -363,8 +389,10 @@ public class ObjectTests
         ex79.As<Note>().Icon.First().As<Image>().Name.First().Should().Be("Note icon");
     }
 
+    /// <summary>
+    /// Example 80 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-icon
+    /// </summary>
     [Fact]
-    /// <remarks>Example 80 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-icon</remarks>
     public void Example_080()
     {
         // Arrange
@@ -404,8 +432,10 @@ public class ObjectTests
         ex80.As<Note>().Icon.Last().As<Image>().Summary.First().Should().Be("Note (32x32)");
     }
 
+    /// <summary>
+    /// Example 81 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-image
+    /// </summary>
     [Fact]
-    /// <remarks>Example 81 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-image</remarks>
     public void Example_081()
     {
         // Arrange
@@ -433,8 +463,10 @@ public class ObjectTests
         ex81.As<Note>().Image.First().As<Image>().Name.First().Should().Be("A Cat");
     }
 
+    /// <summary>
+    /// Example 82 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-image
+    /// </summary>
     [Fact]
-    /// <remarks>Example 82 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-image</remarks>
     public void Example_082()
     {
         // Arrange
@@ -475,8 +507,10 @@ public class ObjectTests
         ex82.As<Note>().Image.ElementAt(2).As<ILink>().Href.Should().Be(new Uri("http://example.org/cat3.png"));
     }
 
+    /// <summary>
+    /// Example 83 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-inreplyto
+    /// </summary>
     [Fact]
-    /// <remarks>Example 83 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-inreplyto</remarks>
     public void Example_083()
     {
         // Arrange
@@ -503,8 +537,10 @@ public class ObjectTests
         ex83.As<Note>().InReplyTo.First().As<Note>().Content.First().Should().Be("What else is there?");
     }
 
+    /// <summary>
+    /// Example 84 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-inreplyto
+    /// </summary>
     [Fact]
-    /// <remarks>Example 84 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-inreplyto</remarks>
     public void Example_084()
     {
         // Arrange
@@ -527,8 +563,10 @@ public class ObjectTests
         ex84.As<Note>().InReplyTo.First().As<Link>().Href.Should().Be("http://example.org/posts/1");
     }
 
+    /// <summary>
+    /// Example 88 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-location
+    /// </summary>
     [Fact]
-    /// <remarks>Example 88 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-location</remarks>
     public void Example_088()
     {
         // Arrange
@@ -557,8 +595,10 @@ public class ObjectTests
         ex88.As<Person>().Location.First().As<Place>().Name.First().Should().Be("Over the Arabian Sea, east of Socotra Island Nature Sanctuary");
     }
 
+    /// <summary>
+    /// Example 89 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-items
+    /// </summary>
     [Fact]
-    /// <remarks>Example 89 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-items</remarks>
     public void Example_089()
     {
         // Arrange
@@ -591,8 +631,10 @@ public class ObjectTests
         ex89.As<Collection>().Items.Last().As<Note>().Name.First().Should().Be("Meeting 2016-11-17");
     }
 
+    /// <summary>
+    /// Example 90 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-items
+    /// </summary>
     [Fact]
-    /// <remarks>Example 90 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-items</remarks>
     public void Example_090()
     {
         // Arrange
@@ -625,8 +667,10 @@ public class ObjectTests
         ex90.As<OrderedCollection>().OrderedItems.Last().As<Note>().Name.First().Should().Be("Reminder for Going-Away Party");
     }
 
+    /// <summary>
+    /// Example 102 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-preview
+    /// </summary>
     [Fact]
-    /// <remarks>Example 102 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-preview</remarks>
     public void Example_102()
     {
         // Arrange
@@ -657,8 +701,10 @@ public class ObjectTests
         ex102.As<Video>().Preview.First().As<Video>().Name.First().Should().Be("Trailer");
     }
 
+    /// <summary>
+    /// Example 104 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-replies
+    /// </summary>
     [Fact]
-    /// <remarks>Example 104 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-replies</remarks>
     public void Example_104()
     {
         // Arrange
@@ -692,8 +738,10 @@ public class ObjectTests
         ex104.As<Note>().Replies.As<Collection>().Items.First().As<Note>().Content.First().Should().Be("I am glad to hear it.");
     }
 
+    /// <summary>
+    /// Example 105 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-tag
+    /// </summary>
     [Fact]
-    /// <remarks>Example 105 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-tag</remarks>
     public void Example_105()
     {
         // Arrange
@@ -722,8 +770,10 @@ public class ObjectTests
         ex105.As<Image>().Tag.First().As<Person>().Name.First().Should().Be("Sally");
     }
 
+    /// <summary>
+    /// Example 108 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-to
+    /// </summary>
     [Fact]
-    /// <remarks>Example 108 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-to</remarks>
     public void Example_108()
     {
         // Arrange
@@ -748,8 +798,10 @@ public class ObjectTests
         ex108.As<Offer>().To.First().As<Link>().Href.Should().Be("http://joe.example.org");
     }
 
+    /// <summary>
+    /// Example 109 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-url
+    /// </summary>
     [Fact]
-    /// <remarks>Example 109 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-url</remarks>
     public void Example_109()
     {
         // Arrange
@@ -771,8 +823,10 @@ public class ObjectTests
         ex109.As<Document>().Url.First().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.pdf");
     }
 
+    /// <summary>
+    /// Example 110 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-url
+    /// </summary>
     [Fact]
-    /// <remarks>Example 110 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-url</remarks>
     public void Example_110()
     {
         // Arrange
@@ -797,8 +851,10 @@ public class ObjectTests
         ex110.As<Document>().Url.First().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.pdf");
     }
 
+    /// <summary>
+    /// Example 111 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-url
+    /// </summary>
     [Fact]
-    /// <remarks>Example 111 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-url</remarks>
     public void Example_111()
     {
         // Arrange
@@ -832,8 +888,10 @@ public class ObjectTests
         ex111.As<Document>().Url.Last().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.html");
     }
 
+    /// <summary>
+    /// Example 113 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-altitude
+    /// </summary>
     [Fact]
-    /// <remarks>Example 113 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-altitude</remarks>
     public void Example_113()
     {
         // Arrange
@@ -857,8 +915,10 @@ public class ObjectTests
         ex113.As<Place>().Altitude.Should().Be(15);
     }
 
+    /// <summary>
+    /// Example 114 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-content
+    /// </summary>
     [Fact]
-    /// <remarks>Example 114 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-content</remarks>
     public void Example_114()
     {
         // Arrange
@@ -880,8 +940,10 @@ public class ObjectTests
         ex114.As<Note>().Content.First().Should().Be("A <em>simple</em> note");
     }
 
+    /// <summary>
+    /// Example 115 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-content
+    /// </summary>
     [Fact]
-    /// <remarks>Example 115 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-content</remarks>
     public void Example_115()
     {
         // Arrange
@@ -910,8 +972,10 @@ public class ObjectTests
         ex115.As<Note>().ContentMap.First()["zh-Hans"].Should().Be("一段<em>简单的</em>笔记");
     }
 
+    /// <summary>
+    /// Example 116 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-content
+    /// </summary>
     [Fact]
-    /// <remarks>Example 116 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-content</remarks>
     public void Example_116()
     {
         // Arrange
@@ -934,8 +998,10 @@ public class ObjectTests
         ex116.As<Note>().Content.First().Should().Be("## A simple note\nA simple markdown `note`");
     }
 
+    /// <summary>
+    /// Example 117 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-name
+    /// </summary>
     [Fact]
-    /// <remarks>Example 117 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-name</remarks>
     public void Example_117()
     {
         // Arrange
@@ -956,8 +1022,10 @@ public class ObjectTests
         ex117.As<Note>().Name.First().Should().Be("A simple note");
     }
 
+    /// <summary>
+    /// Example 118 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-name
+    /// </summary>
     [Fact]
-    /// <remarks>Example 118 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-name</remarks>
     public void Example_118()
     {
         // Arrange
@@ -985,8 +1053,10 @@ public class ObjectTests
         ex118.As<Note>().NameMap.First()["zh-Hans"].Should().Be("一段简单的笔记");
     }
 
+    /// <summary>
+    /// Example 119 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-duration
+    /// </summary>
     [Fact]
-    /// <remarks>Example 119 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-duration</remarks>
     public void Example_119()
     {
         // Arrange
@@ -1008,8 +1078,10 @@ public class ObjectTests
         ex119.As<Video>().Duration.Should().Be(new TimeSpan(2, 0, 0));
     }
 
+    /// <summary>
+    /// Example 126 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-mediatype
+    /// </summary>
     [Fact]
-    /// <remarks>Example 126 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-mediatype</remarks>
     public void Example_126()
     {
         // Arrange
@@ -1032,8 +1104,10 @@ public class ObjectTests
         ex126.As<Link>().MediaType.Should().Be("text/html");
     }
 
+    /// <summary>
+    /// Example 127 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-endtime
+    /// </summary>
     [Fact]
-    /// <remarks>Example 127 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-endtime</remarks>
     public void Example_127()
     {
         // Arrange
@@ -1055,8 +1129,10 @@ public class ObjectTests
         ex127.As<Event>().EndTime.Should().Be(DateTime.Parse("2015-01-01T06:00:00-08:00"));
     }
 
+    /// <summary>
+    /// Example 128 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-published
+    /// </summary>
     [Fact]
-    /// <remarks>Example 128 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-published</remarks>
     public void Example_128()
     {
         // Arrange
@@ -1078,8 +1154,10 @@ public class ObjectTests
         ex128.As<Note>().Published.Should().Be(DateTime.Parse("2014-12-12T12:12:12Z", styles: System.Globalization.DateTimeStyles.AdjustToUniversal));
     }
 
+    /// <summary>
+    /// Example 129 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-starttime
+    /// </summary>
     [Fact]
-    /// <remarks>Example 129 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-starttime</remarks>
     public void Example_129()
     {
         // Arrange
@@ -1101,8 +1179,10 @@ public class ObjectTests
         ex129.As<Event>().StartTime.Should().Be(DateTime.Parse("2014-12-31T23:00:00-08:00"));
     }
 
+    /// <summary>
+    /// Example 133 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-summary
+    /// </summary>
     [Fact]
-    /// <remarks>Example 133 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-summary</remarks>
     public void Example_133()
     {
         // Arrange
@@ -1124,8 +1204,10 @@ public class ObjectTests
         ex133.As<Note>().Summary.First().Should().Be("A simple <em>note</em>");
     }
 
+    /// <summary>
+    /// Example 134 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-summary
+    /// </summary>
     [Fact]
-    /// <remarks>Example 134 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-summary</remarks>
     public void Example_134()
     {
         // Arrange
@@ -1154,8 +1236,10 @@ public class ObjectTests
         ex134.As<Note>().SummaryMap.First()["zh-Hans"].Should().Be("一段<em>简单的</em>笔记");
     }
 
+    /// <summary>
+    /// Example 137 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-updated
+    /// </summary>
     [Fact]
-    /// <remarks>Example 137 taken from https://www.w3.org/TR/activitystreams-vocabulary/#dfn-updated</remarks>
     public void Example_137()
     {
         // Arrange

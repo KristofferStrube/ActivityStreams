@@ -2,8 +2,10 @@
 
 public class ContextTests
 {
+    /// <summary>
+    /// Example 1 taken from https://www.w3.org/TR/activitystreams-core/#jsonld
+    /// </summary>
     [Fact]
-    /// <remarks>Example 1 taken from https://www.w3.org/TR/activitystreams-core/#jsonld</remarks>
     public void Example_001()
     {
         // Arrange
