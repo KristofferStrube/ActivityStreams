@@ -1,0 +1,12 @@
+﻿using System.Text.Json.Serialization;
+
+namespace KristofferStrube.ActivityStreams;
+
+public class OrderedCollectionPage : CollectionPage
+{
+    /// <summary>
+    /// A non-negative integer value identifying the relative position within the logical view of a strictly ordered collection.
+    /// </summary>
+    [JsonPropertyName("startIndex")]
+    public uint? StartIndex { get; set; }
+}

@@ -8,6 +8,7 @@ internal static class ObjectTypes
         { "Collection", typeof(Collection) },
         { "CollectionPage", typeof(CollectionPage) },
         { "OrderedCollection", typeof(OrderedCollection) },
+        { "OrderedCollectionPage", typeof(OrderedCollectionPage) },
         { "Document", typeof(Document) },
         { "Image", typeof(Image) },
         { "Video", typeof(Video) },
