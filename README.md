@@ -13,7 +13,7 @@ These types are famously used in the [ActivityPub](https://www.w3.org/TR/activit
   - [x] Add class for Link
   - [x] Add class for Activity
   - [x] Add class for IntransitiveActivity
-  - [ ] Add class for Collection
+  - [x] Add class for Collection
   - [ ] Add class for OrderedCollection
   - [ ] Add class for CollectionPage
   - [ ] Add class for OrderedCollectionPage
