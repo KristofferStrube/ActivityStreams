@@ -66,10 +66,11 @@ public class ActivityPubIntegrationTests
 
         // Assert
         ex9.Should().BeAssignableTo<Person>();
-        ex9.As<Person>().GetOutbox().Href.Should().Be("https://kenzoishii.example.com/feed.json");
-        ex9.As<Person>().GetInbox().Href.Should().Be("https://kenzoishii.example.com/inbox.json");
-        ex9.As<Person>().GetFollowers().Href.Should().Be("https://kenzoishii.example.com/followers.json");
         ex9.As<Person>().GetFollowing().Href.Should().Be("https://kenzoishii.example.com/following.json");
+        ex9.As<Person>().GetFollowers().Href.Should().Be("https://kenzoishii.example.com/followers.json");
+        ex9.As<Person>().GetLiked().Href.Should().Be("https://kenzoishii.example.com/liked.json");
+        ex9.As<Person>().GetInbox().Href.Should().Be("https://kenzoishii.example.com/inbox.json");
+        ex9.As<Person>().GetOutbox().Href.Should().Be("https://kenzoishii.example.com/feed.json");
     }
 }
 

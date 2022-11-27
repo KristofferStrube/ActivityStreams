@@ -87,6 +87,21 @@ public static class ActorExtensions
     {
         obj.Body.following = SerializeToElement(link);
     }
+
+    /// <summary>
+    /// This is a list of every object from all of the actor's Like activities, added as a side effect. The liked collection MUST be either an OrderedCollection or a Collection and MAY be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
+    /// </summary>
+    public static ILink GetLiked<T>(this T obj) where T : Object, IActor
+    {
+        return ((JsonElement)obj.Body.liked).Deserialize<ILink>();
+    }
+    /// <summary>
+    /// This is a list of every object from all of the actor's Like activities, added as a side effect. The liked collection MUST be either an OrderedCollection or a Collection and MAY be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
+    /// </summary>
+    public static void SetLiked<T>(this T obj, ILink link) where T : Object, IActor
+    {
+        obj.Body.liked = SerializeToElement(link);
+    }
 }
 
 public class Source
