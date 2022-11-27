@@ -19,7 +19,7 @@ These types are famously used in the [ActivityPub](https://www.w3.org/TR/activit
   - [x] Add class for OrderedCollectionPage
 - [x] Add extended classes for Activity Types.
 - [x] Add extended classes for Actor Types.
-- [ ] Add extended classes for Object and Link Types.
+- [x] Add extended classes for Object and Link Types.
 - [ ] Add support for retrieving @context JSON-LD defintions.
 - [ ] Add support for serializing
 - [ ] Look into the [Implementation Notes](https://www.w3.org/TR/activitystreams-vocabulary/#notes) that hint at Ease-Of-Use-Scenarios.
