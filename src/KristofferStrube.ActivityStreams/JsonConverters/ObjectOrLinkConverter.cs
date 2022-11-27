@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Dynamic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using static System.Text.Json.JsonSerializer;
 
@@ -38,7 +39,13 @@ internal class ObjectOrLinkConverter : JsonConverter<IObjectOrLink?>
             }
             else
             {
-                return doc.Deserialize<ObjectOrLink>(options);
+                var anonymousObject = doc.Deserialize<ObjectOrLink>(options);
+                if (anonymousObject is null)
+                {
+                    return null;
+                }
+                anonymousObject.Body = doc.Deserialize<ExpandoObject>(options);
+                return anonymousObject;
             }
         }
         throw new JsonException("Could not be parsed as a JsonDocument.");
@@ -46,6 +53,6 @@ internal class ObjectOrLinkConverter : JsonConverter<IObjectOrLink?>
 
     public override void Write(Utf8JsonWriter writer, IObjectOrLink? value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        writer.WriteRawValue(SerializeToUtf8Bytes(value!.Body, options));
     }
 }

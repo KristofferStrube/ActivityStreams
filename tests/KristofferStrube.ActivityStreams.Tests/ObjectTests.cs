@@ -28,6 +28,9 @@ public class ObjectTests
         ex1.As<IObject>().JsonLDContext.First().As<ReferenceTermDefinition>().Href.Should().Be(new Uri("https://www.w3.org/ns/activitystreams"));
         ex1.As<IObject>().Id.Should().Be("http://www.test.example/object/1");
         ex1.As<IObject>().Name.First().Should().Be("A Simple, non-specific object");
+
+        // Serialize and check for intactness
+        Serialize(ex1.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -46,10 +49,13 @@ public class ObjectTests
             """;
 
         // Act
-        var ex61 = Deserialize<ObjectOrLink>(input);
+        var ex61 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex61.Id.Should().Be("http://example.org/foo");
+
+        // Serialize and check for intactness
+        Serialize(ex61, options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -72,6 +78,9 @@ public class ObjectTests
 
         // Assert
         ex62.Type.Should().Contain("http://example.org/Foo");
+
+        // Serialize and check for intactness
+        Serialize(ex62.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -104,6 +113,9 @@ public class ObjectTests
         ex66.As<Note>().Attachment.Should().HaveCount(1);
         ex66.As<Note>().Attachment.First().Should().BeAssignableTo<Image>();
         ex66.As<Note>().Attachment.First().As<Image>().Content.First().Should().Be("This is what he looks like.");
+
+        // Serialize and check for intactness
+        Serialize(ex66.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -136,6 +148,9 @@ public class ObjectTests
         ex67.As<Image>().AttributedTo.Should().HaveCount(1);
         ex67.As<Image>().AttributedTo.First().Should().BeAssignableTo<Person>();
         ex67.As<Image>().AttributedTo.First().As<Person>().Name.First().Should().Be("Sally");
+
+        // Serialize and check for intactness
+        Serialize(ex67.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -171,6 +186,9 @@ public class ObjectTests
         ex68.As<Image>().AttributedTo.ElementAt(0).As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
         ex68.As<Image>().AttributedTo.ElementAt(1).Should().BeAssignableTo<Object>();
         ex68.As<Image>().AttributedTo.ElementAt(1).As<IObject>().Name.First().Should().Be("Sally");
+
+        // Serialize and check for intactness
+        Serialize(ex68.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -200,6 +218,9 @@ public class ObjectTests
         ex69.Should().BeAssignableTo<Note>();
         ex69.As<Note>().Audience.Should().HaveCount(1);
         ex69.As<Note>().Audience.First().Type.Should().Contain("http://example.org/Organization");
+
+        // Serialize and check for intactness
+        Serialize(ex69.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -217,7 +238,9 @@ public class ObjectTests
               "actor": "http://sally.example.org",
               "object": "http://example.org/posts/1",
               "target": "http://john.example.org",
-              "bcc": [ "http://joe.example.org" ]
+              "bcc": [
+                "http://joe.example.org"
+              ]
             }
             """;
 
@@ -229,6 +252,9 @@ public class ObjectTests
         ex70.As<Offer>().Bcc.Should().HaveCount(1);
         ex70.As<Offer>().Bcc.First().Should().BeAssignableTo<Link>();
         ex70.As<Offer>().Bcc.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
+
+        // Serialize and check for intactness
+        Serialize(ex70.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -246,7 +272,9 @@ public class ObjectTests
               "actor": "http://sally.example.org",
               "object": "http://example.org/posts/1",
               "target": "http://john.example.org",
-              "bto": [ "http://joe.example.org" ]
+              "bto": [
+                "http://joe.example.org"
+              ]
             }
             """;
 
@@ -258,6 +286,9 @@ public class ObjectTests
         ex71.As<Offer>().Bto.Should().HaveCount(1);
         ex71.As<Offer>().Bto.First().Should().BeAssignableTo<Link>();
         ex71.As<Offer>().Bto.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
+
+        // Serialize and check for intactness
+        Serialize(ex71.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -275,7 +306,9 @@ public class ObjectTests
               "actor": "http://sally.example.org",
               "object": "http://example.org/posts/1",
               "target": "http://john.example.org",
-              "cc": [ "http://joe.example.org" ]
+              "cc": [
+                "http://joe.example.org"
+              ]
             }
             """;
 
@@ -287,6 +320,9 @@ public class ObjectTests
         ex72.As<Offer>().Cc.Should().HaveCount(1);
         ex72.As<Offer>().Cc.First().Should().BeAssignableTo<Link>();
         ex72.As<Offer>().Cc.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
+
+        // Serialize and check for intactness
+        Serialize(ex72.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -326,6 +362,9 @@ public class ObjectTests
         ex73.Should().BeAssignableTo<Collection>();
         ex73.As<Collection>().Items.First().As<Offer>().Context.First().As<Link>().Href.Should().Be("http://example.org/contexts/1");
         ex73.As<Collection>().Items.Last().As<Like>().Context.First().As<Link>().Href.Should().Be("http://example.org/contexts/1");
+
+        // Serialize and check for intactness
+        Serialize(ex73.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -356,6 +395,9 @@ public class ObjectTests
         ex78.As<Note>().Generator.Should().HaveCount(1);
         ex78.As<Note>().Generator.First().Should().BeAssignableTo<Application>();
         ex78.As<Note>().Generator.First().As<Application>().Name.First().Should().Be("Exampletron 3000");
+
+        // Serialize and check for intactness
+        Serialize(ex78.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -389,6 +431,9 @@ public class ObjectTests
         ex79.As<Note>().Icon.Should().HaveCount(1);
         ex79.As<Note>().Icon.First().Should().BeAssignableTo<Image>();
         ex79.As<Note>().Icon.First().As<Image>().Name.First().Should().Be("Note icon");
+
+        // Serialize and check for intactness
+        Serialize(ex79.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -432,6 +477,9 @@ public class ObjectTests
         ex80.As<Note>().Icon.First().Should().BeAssignableTo<Image>();
         ex80.As<Note>().Icon.First().As<Image>().Summary.First().Should().Be("Note (16x16)");
         ex80.As<Note>().Icon.Last().As<Image>().Summary.First().Should().Be("Note (32x32)");
+
+        // Serialize and check for intactness
+        Serialize(ex80.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -463,6 +511,9 @@ public class ObjectTests
         ex81.As<Note>().Image.Should().HaveCount(1);
         ex81.As<Note>().Image.First().Should().BeAssignableTo<Image>();
         ex81.As<Note>().Image.First().As<Image>().Name.First().Should().Be("A Cat");
+
+        // Serialize and check for intactness
+        Serialize(ex81.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -507,6 +558,9 @@ public class ObjectTests
         ex82.As<Note>().Image.ElementAt(1).As<ILink>().Href.Should().Be(new Uri("http://example.org/cat2.png"));
         ex82.As<Note>().Image.ElementAt(2).Should().BeAssignableTo<ILink>();
         ex82.As<Note>().Image.ElementAt(2).As<ILink>().Href.Should().Be(new Uri("http://example.org/cat3.png"));
+
+        // Serialize and check for intactness
+        Serialize(ex82.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -537,6 +591,9 @@ public class ObjectTests
         ex83.Should().BeAssignableTo<Note>();
         ex83.As<Note>().InReplyTo.Should().HaveCount(1);
         ex83.As<Note>().InReplyTo.First().As<Note>().Content.First().Should().Be("What else is there?");
+
+        // Serialize and check for intactness
+        Serialize(ex83.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>
@@ -563,6 +620,9 @@ public class ObjectTests
         ex84.Should().BeAssignableTo<Note>();
         ex84.As<Note>().InReplyTo.Should().HaveCount(1);
         ex84.As<Note>().InReplyTo.First().As<Link>().Href.Should().Be("http://example.org/posts/1");
+
+        // Serialize and check for intactness
+        Serialize(ex84.As<IObject>(), options: new() { WriteIndented = true }).Should().Be(input);
     }
 
     /// <summary>

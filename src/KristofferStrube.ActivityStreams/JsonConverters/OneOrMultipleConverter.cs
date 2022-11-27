@@ -21,6 +21,13 @@ public class OneOrMultipleConverter<T> : JsonConverter<IEnumerable<T>?>
 
     public override void Write(Utf8JsonWriter writer, IEnumerable<T>? value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        if (value?.Count() is 1)
+        {
+            writer.WriteRawValue(Serialize(value.First(), options));
+        }
+        else if (value is not null)
+        {
+            writer.WriteRawValue(Serialize(value, options));
+        }
     }
 }

@@ -26,6 +26,14 @@ internal class TermDefinitionConverter : JsonConverter<ITermDefinition?>
 
     public override void Write(Utf8JsonWriter writer, ITermDefinition? value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        switch (value)
+        {
+            case ReferenceTermDefinition reference:
+                writer.WriteRawValue(SerializeToUtf8Bytes(reference.Href, typeof(Uri), options));
+                break;
+            case ExpandedTermDefinition:
+                writer.WriteRawValue(SerializeToUtf8Bytes(value, typeof(ExpandedTermDefinition), options));
+                break;
+        };
     }
 }

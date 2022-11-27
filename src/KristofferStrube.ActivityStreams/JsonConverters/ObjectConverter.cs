@@ -48,6 +48,6 @@ internal class ObjectConverter : JsonConverter<IObject?>
 
     public override void Write(Utf8JsonWriter writer, IObject? value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        writer.WriteRawValue(SerializeToUtf8Bytes(value!.Body, options));
     }
 }
