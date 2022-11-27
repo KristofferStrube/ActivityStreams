@@ -27,17 +27,66 @@ public static class ObjectExtensions
 
 public static class ActorExtensions
 {
-    public static ILink GetOutbox<T>(this T obj) where T : Object, IActor => ((JsonElement)obj.Body.outbox).Deserialize<ILink>();
-    public static void SetOutbox<T>(this T obj, ILink link) where T : Object, IActor => obj.Body.outbox = SerializeToElement(link);
+    /// <summary>
+    /// The outbox stream contains activities the user has published, subject to the ability of the requestor to retrieve the activity (that is, the contents of the outbox are filtered by the permissions of the person reading it). If a user submits a request without Authorization the server should respond with all of the Public posts. This could potentially be all relevant objects published by the user, though the number of available items is left to the discretion of those implementing and deploying the server.
+    /// </summary>
+    /// <returns></returns>
+    public static ILink GetOutbox<T>(this T obj) where T : Object, IActor
+    {
+        return ((JsonElement)obj.Body.outbox).Deserialize<ILink>();
+    }
+    /// <summary>
+    /// The outbox stream contains activities the user has published, subject to the ability of the requestor to retrieve the activity (that is, the contents of the outbox are filtered by the permissions of the person reading it). If a user submits a request without Authorization the server should respond with all of the Public posts. This could potentially be all relevant objects published by the user, though the number of available items is left to the discretion of those implementing and deploying the server.
+    /// </summary>
+    public static void SetOutbox<T>(this T obj, ILink link) where T : Object, IActor
+    {
+        obj.Body.outbox = SerializeToElement(link);
+    }
 
-    public static ILink GetInbox<T>(this T obj) where T : Object, IActor => ((JsonElement)obj.Body.inbox).Deserialize<ILink>();
-    public static void SetInbox<T>(this T obj, ILink link) where T : Object, IActor => obj.Body.inbox = SerializeToElement(link);
+    /// <summary>
+    /// The inbox stream contains all activities received by the actor. The server SHOULD filter content according to the requester's permission. In general, the owner of an inbox is likely to be able to access all of their inbox contents. Depending on access control, some other content may be public, whereas other content may require authentication for non-owner users, if they can access the inbox at all.
+    /// </summary>
+    public static ILink GetInbox<T>(this T obj) where T : Object, IActor
+    {
+        return ((JsonElement)obj.Body.inbox).Deserialize<ILink>();
+    }
+    /// <summary>
+    /// The inbox stream contains all activities received by the actor. The server SHOULD filter content according to the requester's permission. In general, the owner of an inbox is likely to be able to access all of their inbox contents. Depending on access control, some other content may be public, whereas other content may require authentication for non-owner users, if they can access the inbox at all.
+    /// </summary>
+    public static void SetInbox<T>(this T obj, ILink link) where T : Object, IActor
+    {
+        obj.Body.inbox = SerializeToElement(link);
+    }
 
-    public static ILink GetFollowers<T>(this T obj) where T : Object, IActor => ((JsonElement)obj.Body.followers).Deserialize<ILink>();
-    public static void SetFollowers<T>(this T obj, ILink link) where T : Object, IActor => obj.Body.followers = SerializeToElement(link);
+    /// <summary>
+    /// This is a list of everyone who has sent a Follow activity for the actor, added as a side effect. This is where one would find a list of all the actors that are following the actor. The followers collection MUST be either an OrderedCollection or a Collection and MAY be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
+    /// </summary>
+    public static ILink GetFollowers<T>(this T obj) where T : Object, IActor
+    {
+        return ((JsonElement)obj.Body.followers).Deserialize<ILink>();
+    }
+    /// <summary>
+    /// This is a list of everyone who has sent a Follow activity for the actor, added as a side effect. This is where one would find a list of all the actors that are following the actor. The followers collection MUST be either an OrderedCollection or a Collection and MAY be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
+    /// </summary>
+    public static void SetFollowers<T>(this T obj, ILink link) where T : Object, IActor
+    {
+        obj.Body.followers = SerializeToElement(link);
+    }
 
-    public static ILink GetFollowing<T>(this T obj) where T : Object, IActor => ((JsonElement)obj.Body.following).Deserialize<ILink>();
-    public static void SetFollowing<T>(this T obj, ILink link) where T : Object, IActor => obj.Body.following = SerializeToElement(link);
+    /// <summary>
+    /// This is a list of everybody that the actor has followed, added as a side effect. The following collection MUST be either an OrderedCollection or a Collection and MAY be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
+    /// </summary>
+    public static ILink GetFollowing<T>(this T obj) where T : Object, IActor
+    {
+        return ((JsonElement)obj.Body.following).Deserialize<ILink>();
+    }
+    /// <summary>
+    /// This is a list of everybody that the actor has followed, added as a side effect. The following collection MUST be either an OrderedCollection or a Collection and MAY be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
+    /// </summary>
+    public static void SetFollowing<T>(this T obj, ILink link) where T : Object, IActor
+    {
+        obj.Body.following = SerializeToElement(link);
+    }
 }
 
 public class Source
