@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Dynamic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using static System.Text.Json.JsonSerializer;
 
@@ -16,12 +17,18 @@ internal class LinkConverter : JsonConverter<ILink?>
             }
             else if (doc.RootElement.TryGetProperty("type", out JsonElement type))
             {
-                return type.GetString() switch
+                var link = type.GetString() switch
                 {
                     "Link" => doc.Deserialize<Link>(),
                     "Mention" => doc.Deserialize<Mention>(),
                     _ => throw new JsonException("JSON element was not a Link or a Mention."),
                 };
+                if (link is null)
+                {
+                    return null;
+                }
+                link.Body = doc.Deserialize<ExpandoObject>(options);
+                return link;
             }
             throw new JsonException("JSON element did not have a type property nor was it a string.");
         }

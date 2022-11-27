@@ -4,7 +4,7 @@ using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams.JsonConverters;
 
-internal class OneOrMultipleConverter<T> : JsonConverter<IEnumerable<T>?>
+public class OneOrMultipleConverter<T> : JsonConverter<IEnumerable<T>?>
 {
     public override IEnumerable<T>? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

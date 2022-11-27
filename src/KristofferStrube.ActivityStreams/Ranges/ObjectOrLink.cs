@@ -1,11 +1,18 @@
 ﻿using KristofferStrube.ActivityStreams.JsonConverters;
 using KristofferStrube.ActivityStreams.JsonLD;
+using System.Dynamic;
 using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
 public class ObjectOrLink : IObjectOrLink
 {
+    /// <summary>
+    /// Used to fetch and set extended fields.
+    /// </summary>
+    [JsonIgnore]
+    public dynamic? Body { get; set; }
+
     /// <summary>
     /// The context of the JSON-LD object.
     /// </summary>

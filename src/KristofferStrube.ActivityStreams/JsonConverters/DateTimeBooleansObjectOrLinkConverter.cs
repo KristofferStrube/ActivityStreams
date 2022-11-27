@@ -10,41 +10,36 @@ internal class DateTimeBooleanObjectOrLinkConverter : JsonConverter<DateTimeBool
     {
         if (JsonDocument.TryParseValue(ref reader, out JsonDocument? doc))
         {
-            if (doc.RootElement.ValueKind is JsonValueKind.True)
+            switch (doc.RootElement.ValueKind)
             {
-                return new() { Value = true };
-            }
-            else if (doc.RootElement.ValueKind is JsonValueKind.False)
-            {
-                return new() { Value = false };
-            }
-            else if (doc.RootElement.ValueKind is JsonValueKind.Number)
-            {
-                return new() { Value = doc.RootElement.GetDecimal() != 0 };
-            }
-            else if (doc.RootElement.ValueKind is JsonValueKind.String)
-            {
-                if (doc.RootElement.TryGetDateTime(out DateTime datetime))
-                {
-                    return new() { Value = datetime };
-                }
-                else if ((new object[] { "true", "false", "1", "0" }).Contains(doc.Deserialize<string>(options)))
-                {
-                    return new() { Value = doc.Deserialize<string>(options) is "true" or "1" };
-                }
-                return new() { Value = doc.Deserialize<ILink>(options)! };
-            }
-            else if (doc.RootElement.TryGetProperty("type", out JsonElement type))
-            {
-                return type.GetString() switch
-                {
-                    "Link" => new() { Value = doc.Deserialize<ILink>(options)! },
-                    _ => new() { Value = doc.Deserialize<IObject>(options)! }
-                };
-            }
-            else
-            {
-                return new() { Value = doc.Deserialize<ObjectOrLink>(options)! };
+                case JsonValueKind.True:
+                    return new() { Value = true };
+                case JsonValueKind.False:
+                    return new() { Value = false };
+                case JsonValueKind.Number:
+                    return new() { Value = doc.RootElement.GetDecimal() != 0 };
+                case JsonValueKind.String:
+                    if (doc.RootElement.TryGetDateTime(out DateTime datetime))
+                    {
+                        return new() { Value = datetime };
+                    }
+                    else if ((new object[] { "true", "false", "1", "0" }).Contains(doc.Deserialize<string>(options)))
+                    {
+                        return new() { Value = doc.Deserialize<string>(options) is "true" or "1" };
+                    }
+                    return new() { Value = doc.Deserialize<ILink>(options)! };
+                case JsonValueKind.Object:
+                    if (doc.RootElement.TryGetProperty("type", out JsonElement type))
+                    {
+                        return type.GetString() switch
+                        {
+                            "Link" => new() { Value = doc.Deserialize<ILink>(options)! },
+                            _ => new() { Value = doc.Deserialize<IObject>(options)! }
+                        };
+                    }
+                    throw new JsonException("JSON element did not have a type property.");
+                default:
+                    return new() { Value = doc.Deserialize<IObjectOrLink>(options)! };
             }
         }
         throw new JsonException("Could not be parsed as a JsonDocument.");

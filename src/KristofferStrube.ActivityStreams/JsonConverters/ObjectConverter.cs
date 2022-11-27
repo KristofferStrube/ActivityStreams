@@ -1,4 +1,5 @@
-﻿using System.Text.Json;
+﻿using System.Dynamic;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 using static System.Text.Json.JsonSerializer;
 
@@ -13,37 +14,29 @@ internal class ObjectConverter : JsonConverter<IObject?>
             if (doc.RootElement.TryGetProperty("type", out JsonElement type))
             {
                 string? matchingType;
-                IEnumerable<string> allTypes = new List<string>();
                 if (type.ValueKind is JsonValueKind.Array)
                 {
-                    allTypes = type.EnumerateArray().Select(t => t.GetString()!);
-                    matchingType = allTypes.FirstOrDefault(t => ObjectTypes.Types.ContainsKey(t!), null);
+                    matchingType = type.EnumerateArray().Select(t => t.GetString()!).FirstOrDefault(t => ObjectTypes.Types.ContainsKey(t!), null);
                 }
                 else
                 {
                     matchingType = type.GetString();
-                    allTypes = new List<string>() { matchingType! };
                 }
-                IObject? obj = null;
-                if (matchingType is null)
+                IObject? result = null;
+                if (matchingType is not null && ObjectTypes.Types.TryGetValue(matchingType!, out Type? value))
                 {
-                    return null;
-                }
-                else if (ObjectTypes.Types.TryGetValue(matchingType!, out Type? value))
-                {
-                    obj = (IObject?)doc.Deserialize(value, options);
+                    result = (IObject?)doc.Deserialize(value, options);
                 }
                 else if (matchingType is not null)
                 {
-                    obj = doc.Deserialize<Object?>(options);
+                    result = doc.Deserialize<Object?>(options);
                 }
-                if (obj is null)
+                if (result is not null)
                 {
-                    return null;
+                    result.Body = doc.Deserialize<ExpandoObject>(options);
+                    return result;
                 }
-
-                obj.Type = allTypes;
-                return obj;
+                return null;
             }
             else
             {

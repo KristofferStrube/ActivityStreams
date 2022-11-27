@@ -1,5 +1,5 @@
 ﻿namespace KristofferStrube.ActivityStreams;
 
-public class Group : Object
+public class Group : Object, IActor
 {
 }
