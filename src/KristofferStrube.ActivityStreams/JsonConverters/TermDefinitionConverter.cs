@@ -29,10 +29,10 @@ internal class TermDefinitionConverter : JsonConverter<ITermDefinition?>
         switch (value)
         {
             case ReferenceTermDefinition reference:
-                writer.WriteRawValue(SerializeToUtf8Bytes(reference.Href, typeof(Uri), options));
+                writer.WriteRawValue(Serialize(reference.Href, typeof(Uri), options));
                 break;
             case ExpandedTermDefinition:
-                writer.WriteRawValue(SerializeToUtf8Bytes(value, typeof(ExpandedTermDefinition), options));
+                writer.WriteRawValue(Serialize(value, typeof(ExpandedTermDefinition), options));
                 break;
         };
     }

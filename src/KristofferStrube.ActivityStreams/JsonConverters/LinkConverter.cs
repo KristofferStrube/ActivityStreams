@@ -37,6 +37,6 @@ internal class LinkConverter : JsonConverter<ILink?>
 
     public override void Write(Utf8JsonWriter writer, ILink? value, JsonSerializerOptions options)
     {
-        writer.WriteRawValue(SerializeToUtf8Bytes(value!.Body, options));
+        writer.WriteRawValue(Serialize(value!.Body, options));
     }
 }
