@@ -19,7 +19,8 @@ internal class LinkConverter : JsonConverter<ILink?>
                 return type.GetString() switch
                 {
                     "Link" => doc.Deserialize<Link>(),
-                    _ => throw new JsonException("JSON element was not a Link."),
+                    "Mention" => doc.Deserialize<Mention>(),
+                    _ => throw new JsonException("JSON element was not a Link or a Mention."),
                 };
             }
             throw new JsonException("JSON element did not have a type property nor was it a string.");

@@ -32,7 +32,7 @@ internal class ObjectOrLinkConverter : JsonConverter<IObjectOrLink?>
                 }
                 return matchingType switch
                 {
-                    "Link" => doc.Deserialize<ILink>(options),
+                    "Link" or "Mention" => doc.Deserialize<ILink>(options),
                     _ => doc.Deserialize<IObject>(options),
                 };
             }
