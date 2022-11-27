@@ -121,12 +121,6 @@ public class Object : ObjectOrLink, IObject
     public IEnumerable<ILink>? Url { get; set; }
 
     /// <summary>
-    /// Indicates the altitude of a place. The measurement units is indicated using the units property. If units is not specified, the default is assumed to be "m" indicating meters.
-    /// </summary>
-    [JsonPropertyName("altitude")]
-    public float? Altitude { get; set; }
-
-    /// <summary>
     /// The content or textual representation of the Object encoded as a JSON string. By default, the value of content is HTML. The mediaType property can be used in the object to indicate a different content type.
     /// The content may be expressed using multiple language-tagged values.
     /// </summary>
