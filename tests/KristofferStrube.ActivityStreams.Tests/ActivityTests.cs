@@ -34,6 +34,12 @@ public class ActivityTests
         ex3.Should().BeAssignableTo<Activity>();
         ex3.As<Activity>().Actor.Should().HaveCount(1);
         ex3.As<Activity>().Actor.First().As<Person>().Name.First().Should().Be("Sally");
+
+        // Serialize and check for intactness
+        ex3 = Deserialize<IObjectOrLink>(Serialize(ex3));
+        ex3.Should().BeAssignableTo<Activity>();
+        ex3.As<Activity>().Actor.Should().HaveCount(1);
+        ex3.As<Activity>().Actor.First().As<Person>().Name.First().Should().Be("Sally");
     }
 
     /// <summary>

@@ -215,7 +215,6 @@ public class Object : ObjectOrLink, IObject
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public DateTime? Updated { get; set; }
 
-
     /// <summary>
     /// In addition to all the properties defined by the [Activity-Vocabulary], ActivityPub extends the Object by supplying the source property. The source property is intended to convey some sort of source from which the content markup was derived, as a form of provenance, or to support future editing by clients. In general, clients do the conversion from source to content, not the other way around.
     /// </summary>
@@ -223,4 +222,20 @@ public class Object : ObjectOrLink, IObject
     [JsonPropertyName("source")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public Source? Source { get; set; }
+
+    /// <summary>
+    /// This is a list of all Like activities with this object as the object property, added as a side effect. The likes collection MUST be either an OrderedCollection or a Collection and MAY be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
+    /// </summary>
+    /// <remarks>This is only available as a part of ActivityPub.</remarks>
+    [JsonPropertyName("likes")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public Collection? Likes { get; set; }
+
+    /// <summary>
+    /// This is a list of all Announce activities with this object as the object property, added as a side effect. The shares collection MUST be either an OrderedCollection or a Collection and MAY be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
+    /// </summary>
+    /// <remarks>This is only available as a part of ActivityPub.</remarks>
+    [JsonPropertyName("shares")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public Collection? Shares { get; set; }
 }

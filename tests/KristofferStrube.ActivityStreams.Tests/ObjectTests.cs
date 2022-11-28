@@ -1193,7 +1193,9 @@ public class ObjectTests
         ex119.As<Video>().Duration.Should().Be(new TimeSpan(2, 0, 0));
 
         // Serialize and check for intactness
-        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
+        ex119 = Deserialize<IObjectOrLink>(Serialize(ex119));
+        ex119.Should().BeAssignableTo<Video>();
+        ex119.As<Video>().Duration.Should().Be(new TimeSpan(2, 0, 0));
     }
 
     /// <summary>
@@ -1222,7 +1224,9 @@ public class ObjectTests
         ex126.As<Link>().MediaType.Should().Be("text/html");
 
         // Serialize and check for intactness
-        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
+        ex126 = Deserialize<IObjectOrLink>(Serialize(ex126));
+        ex126.Should().BeAssignableTo<Link>();
+        ex126.As<Link>().MediaType.Should().Be("text/html");
     }
 
     /// <summary>
@@ -1250,7 +1254,8 @@ public class ObjectTests
         ex127.As<Event>().EndTime.Should().Be(DateTime.Parse("2015-01-01T06:00:00-08:00"));
 
         // Serialize and check for intactness
-        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
+        ex127 = Deserialize<IObjectOrLink>(Serialize(ex127));
+        ex127.As<Event>().EndTime.Should().Be(DateTime.Parse("2015-01-01T06:00:00-08:00"));
     }
 
     /// <summary>
@@ -1278,7 +1283,8 @@ public class ObjectTests
         ex128.As<Note>().Published.Should().Be(DateTime.Parse("2014-12-12T12:12:12Z", styles: System.Globalization.DateTimeStyles.AdjustToUniversal));
 
         // Serialize and check for intactness
-        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
+        ex128 = Deserialize<IObjectOrLink>(Serialize(ex128));
+        ex128.As<Note>().Published.Should().Be(DateTime.Parse("2014-12-12T12:12:12Z", styles: System.Globalization.DateTimeStyles.AdjustToUniversal));
     }
 
     /// <summary>

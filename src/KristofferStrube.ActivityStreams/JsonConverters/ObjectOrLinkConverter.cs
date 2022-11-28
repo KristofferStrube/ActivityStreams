@@ -53,21 +53,17 @@ internal class ObjectOrLinkConverter : JsonConverter<IObjectOrLink?>
     public override void Write(Utf8JsonWriter writer, IObjectOrLink? value, JsonSerializerOptions options)
     {
         if (value is null) return;
-        var matchingType = value.Type?.FirstOrDefault(t => t == "Link" || t == "Mention" || ObjectTypes.Types.ContainsKey(t!), null);
-        if (matchingType is null)
+        else if (value is ILink)
         {
-            writer.WriteRawValue(Serialize(value, typeof(ObjectOrLink), options));
+            writer.WriteRawValue(Serialize(value, typeof(ILink), options));
+        }
+        else if (value is IObject)
+        {
+            writer.WriteRawValue(Serialize(value, typeof(IObject), options));
         }
         else
         {
-            if (matchingType == "Link" || matchingType == "Mention")
-            {
-                writer.WriteRawValue(Serialize(value, typeof(ILink), options));
-            }
-            else
-            {
-                writer.WriteRawValue(Serialize(value, typeof(IObject), options));
-            }
+            writer.WriteRawValue(Serialize(value, typeof(ObjectOrLink), options));
         }
     }
 }

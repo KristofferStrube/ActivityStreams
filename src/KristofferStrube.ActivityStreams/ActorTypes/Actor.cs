@@ -43,4 +43,20 @@ public class Actor : Object
     [JsonPropertyName("liked")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public ILink? Liked { get; set; }
+
+    /// <summary>
+    /// A short username which may be used to refer to the actor, with no uniqueness guarantees.
+    /// </summary>
+    /// <remarks>This is only available as a part of ActivityPub.</remarks>
+    [JsonPropertyName("preferredUsername")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public string? PreferredUsername { get; set; }
+
+    /// <summary>
+    /// A json object which maps additional (typically server/domain-wide) endpoints which may be useful either for this actor or someone referencing this actor. This mapping may be nested inside the actor document as the value or may be a link to a JSON-LD document with these properties.
+    /// </summary>
+    /// <remarks>This is only available as a part of ActivityPub.</remarks>
+    [JsonPropertyName("endpoints")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public IEndpointsOrLink? Endpoints { get; set; }
 }

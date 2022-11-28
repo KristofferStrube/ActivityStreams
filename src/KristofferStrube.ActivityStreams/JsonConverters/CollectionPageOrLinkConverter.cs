@@ -19,7 +19,7 @@ internal class CollectionPageOrLinkConverter : JsonConverter<ICollectionPageOrLi
                 return type.GetString() switch
                 {
                     "Link" => doc.Deserialize<ILink>(options),
-                    "CollectionPage" => (CollectionPage)doc.Deserialize<IObject>(options)!,
+                    "CollectionPage" => (CollectionPage)doc.Deserialize<IObject>(options),
                     _ => throw new JsonException("JSON element was not an CollectionPage or a Link."),
                 };
             }

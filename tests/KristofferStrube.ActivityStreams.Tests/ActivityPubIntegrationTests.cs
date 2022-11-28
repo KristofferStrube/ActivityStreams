@@ -1,4 +1,6 @@
-﻿namespace KristofferStrube.ActivityStreams.Tests;
+﻿using KristofferStrube.ActivityStreams.JsonLD;
+
+namespace KristofferStrube.ActivityStreams.Tests;
 
 public class ActivityPubIntegrationTests
 {
@@ -71,6 +73,67 @@ public class ActivityPubIntegrationTests
         ex9.As<Person>().Liked.Href.Should().Be("https://kenzoishii.example.com/liked.json");
         ex9.As<Person>().Inbox.Href.Should().Be("https://kenzoishii.example.com/inbox.json");
         ex9.As<Person>().Outbox.Href.Should().Be("https://kenzoishii.example.com/feed.json");
+        ex9.As<Person>().PreferredUsername.Should().Be("kenzoishii");
+        ex9.As<Person>().Name.First().Should().Be("石井健蔵");
+        ex9.As<Person>().Summary.First().Should().Be("この方はただの例です");
+        ex9.As<Person>().Icon.First().As<ILink>().Href.Should().Be("https://kenzoishii.example.com/image/165987aklre4");
+    }
+
+    /// <summary>
+    /// Example 11 taken from https://www.w3.org/TR/activitypub/#client-to-server-interactions
+    /// </summary>
+    [Fact]
+    public void Example_011()
+    {
+        // Arrange
+        var input = """
+            {
+              "@context": ["https://www.w3.org/ns/activitystreams",
+                           {"@language": "en"}],
+              "type": "Like",
+              "actor": "https://dustycloud.org/chris/",
+              "name": "Chris liked 'Minimal ActivityPub update client'",
+              "object": "https://rhiaro.co.uk/2016/05/minimal-activitypub",
+              "to": ["https://rhiaro.co.uk/#amy",
+                     "https://dustycloud.org/followers",
+                     "https://rhiaro.co.uk/followers/"],
+              "cc": "https://e14n.com/evan"
+            }
+            """;
+
+        // Act
+        var ex11 = Deserialize<IObjectOrLink>(input);
+
+        // Assert
+        ex11.Should().BeAssignableTo<Like>();
+        ex11.As<Like>().Actor.First().As<ILink>().Href.Should().Be("https://dustycloud.org/chris/");
+        ex11.As<Like>().Name.First().Should().Be("Chris liked 'Minimal ActivityPub update client'");
+        ex11.As<Like>().Object.First().As<ILink>().Href.Should().Be("https://rhiaro.co.uk/2016/05/minimal-activitypub");
+        ex11.As<Like>().To.Should().HaveCount(3);
+        ex11.As<Like>().To.ElementAt(0).As<ILink>().Href.Should().Be("https://rhiaro.co.uk/#amy");
+        ex11.As<Like>().To.ElementAt(1).As<ILink>().Href.Should().Be("https://dustycloud.org/followers");
+        ex11.As<Like>().To.ElementAt(2).As<ILink>().Href.Should().Be("https://rhiaro.co.uk/followers/");
+        ex11.As<Like>().Cc.First().As<ILink>().Href.Should().Be("https://e14n.com/evan");
+    }
+
+    [Fact]
+    public void Example_Payload_Follow()
+    {
+        // Arrange
+        var followActivity = new Follow()
+        {
+            Type = new List<string>() { "Follow" },
+            JsonLDContext = new List<ReferenceTermDefinition>() { new(new("https://www.w3.org/ns/activitystreams")) },
+            Actor = new List<Link>() { new() { Href = new Uri("https://kristoffer-strube.dk/API/AcitivtyPub/Bot") } },
+            Target = new List<Link>() { new() { Href = new Uri("https://hachyderm.io/@KristofferStrube") } }
+        };
+
+        // Act
+        var payload = Deserialize<IObjectOrLink>(Serialize(followActivity));
+
+        // Assert
+        payload.Should().BeAssignableTo<Follow>();
+        payload.As<Follow>().Actor.First().As<ILink>().Href.Should().Be("https://kristoffer-strube.dk/API/AcitivtyPub/Bot");
     }
 }
 

@@ -4,7 +4,7 @@ using System.Text.Json.Serialization;
 namespace KristofferStrube.ActivityStreams;
 
 [JsonConverter(typeof(LinkConverter))]
-public interface ILink : IImageOrLink, ICollectionPageOrLink
+public interface ILink : IImageOrLink, ICollectionPageOrLink, IEndpointsOrLink
 {
     Uri? Href { get; set; }
     string? Hreflang { get; set; }

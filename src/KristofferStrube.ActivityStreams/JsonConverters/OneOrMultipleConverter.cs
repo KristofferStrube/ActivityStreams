@@ -23,14 +23,14 @@ public class OneOrMultipleConverter<T> : JsonConverter<IEnumerable<T>?>
     {
         if (value?.Count() is 1)
         {
-            writer.WriteRawValue(Serialize(value.First(), typeof(T), options));
+            writer.WriteRawValue(Serialize(value.First(), options));
         }
         else if (value is not null)
         {
             writer.WriteStartArray();
-            foreach(T element in value)
+            foreach (T element in value)
             {
-                writer.WriteRawValue(Serialize(element, typeof(T), options));
+                writer.WriteRawValue(Serialize(element, options));
             }
             writer.WriteEndArray();
         }
