@@ -44,7 +44,6 @@ internal class ObjectOrLinkConverter : JsonConverter<IObjectOrLink?>
                 {
                     return null;
                 }
-                anonymousObject.Body = doc.Deserialize<ExpandoObject>(options);
                 return anonymousObject;
             }
         }
@@ -53,6 +52,22 @@ internal class ObjectOrLinkConverter : JsonConverter<IObjectOrLink?>
 
     public override void Write(Utf8JsonWriter writer, IObjectOrLink? value, JsonSerializerOptions options)
     {
-        writer.WriteRawValue(Serialize(value!.Body, options));
+        if (value is null) return;
+        var matchingType = value.Type?.FirstOrDefault(t => t == "Link" || t == "Mention" || ObjectTypes.Types.ContainsKey(t!), null);
+        if (matchingType is null)
+        {
+            writer.WriteRawValue(Serialize(value, typeof(ObjectOrLink), options));
+        }
+        else
+        {
+            if (matchingType == "Link" || matchingType == "Mention")
+            {
+                writer.WriteRawValue(Serialize(value, typeof(ILink), options));
+            }
+            else
+            {
+                writer.WriteRawValue(Serialize(value, typeof(IObject), options));
+            }
+        }
     }
 }

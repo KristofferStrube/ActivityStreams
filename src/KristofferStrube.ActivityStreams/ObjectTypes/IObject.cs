@@ -32,4 +32,5 @@ public interface IObject : IObjectOrLink
     IEnumerable<string>? Summary { get; set; }
     IEnumerable<IDictionary<string, string>>? SummaryMap { get; set; }
     DateTime? Updated { get; set; }
+    Source? Source { get; set; }
 }

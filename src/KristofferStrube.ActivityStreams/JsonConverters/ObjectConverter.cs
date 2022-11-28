@@ -33,7 +33,6 @@ internal class ObjectConverter : JsonConverter<IObject?>
                 }
                 if (result is not null)
                 {
-                    result.Body = doc.Deserialize<ExpandoObject>(options);
                     return result;
                 }
                 return null;
@@ -48,6 +47,15 @@ internal class ObjectConverter : JsonConverter<IObject?>
 
     public override void Write(Utf8JsonWriter writer, IObject? value, JsonSerializerOptions options)
     {
-        writer.WriteRawValue(Serialize(value!.Body, options));
+        if (value is null) return;
+        var matchingType = value.Type?.FirstOrDefault(t => ObjectTypes.Types.ContainsKey(t!), null);
+        if (matchingType is null)
+        {
+            writer.WriteRawValue(Serialize(value, typeof(object), options));
+        }
+        else
+        {
+            writer.WriteRawValue(Serialize(value, ObjectTypes.Types[matchingType], options));
+        }
     }
 }

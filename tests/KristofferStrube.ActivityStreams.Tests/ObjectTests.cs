@@ -1,5 +1,6 @@
 ﻿using KristofferStrube.ActivityStreams.JsonLD;
 using System.Text;
+using System.Text.Json;
 
 namespace KristofferStrube.ActivityStreams.Tests;
 
@@ -31,7 +32,7 @@ public class ObjectTests
         ex1.As<IObject>().Name.First().Should().Be("A Simple, non-specific object");
 
         // Serialize and check for intactness
-        Serialize(ex1, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -56,7 +57,7 @@ public class ObjectTests
         ex61.Id.Should().Be("http://example.org/foo");
 
         // Serialize and check for intactness
-        Serialize(ex61, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -81,7 +82,7 @@ public class ObjectTests
         ex62.Type.Should().Contain("http://example.org/Foo");
 
         // Serialize and check for intactness
-        Serialize(ex62, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -116,7 +117,7 @@ public class ObjectTests
         ex66.As<Note>().Attachment.First().As<Image>().Content.First().Should().Be("This is what he looks like.");
 
         // Serialize and check for intactness
-        Serialize(ex66, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -151,7 +152,7 @@ public class ObjectTests
         ex67.As<Image>().AttributedTo.First().As<Person>().Name.First().Should().Be("Sally");
 
         // Serialize and check for intactness
-        Serialize(ex67, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -189,7 +190,7 @@ public class ObjectTests
         ex68.As<Image>().AttributedTo.ElementAt(1).As<IObject>().Name.First().Should().Be("Sally");
 
         // Serialize and check for intactness
-        Serialize(ex68, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -221,7 +222,7 @@ public class ObjectTests
         ex69.As<Note>().Audience.First().Type.Should().Contain("http://example.org/Organization");
 
         // Serialize and check for intactness
-        Serialize(ex69, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -255,7 +256,7 @@ public class ObjectTests
         ex70.As<Offer>().Bcc.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
 
         // Serialize and check for intactness
-        Serialize(ex70, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -289,7 +290,7 @@ public class ObjectTests
         ex71.As<Offer>().Bto.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
 
         // Serialize and check for intactness
-        Serialize(ex71, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -323,7 +324,7 @@ public class ObjectTests
         ex72.As<Offer>().Cc.First().As<Link>().Href.Should().Be(new Uri("http://joe.example.org"));
 
         // Serialize and check for intactness
-        Serialize(ex72, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -365,7 +366,7 @@ public class ObjectTests
         ex73.As<Collection>().Items.Last().As<Like>().Context.First().As<Link>().Href.Should().Be("http://example.org/contexts/1");
 
         // Serialize and check for intactness
-        Serialize(ex73, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -398,7 +399,7 @@ public class ObjectTests
         ex78.As<Note>().Generator.First().As<Application>().Name.First().Should().Be("Exampletron 3000");
 
         // Serialize and check for intactness
-        Serialize(ex78, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -434,7 +435,7 @@ public class ObjectTests
         ex79.As<Note>().Icon.First().As<Image>().Name.First().Should().Be("Note icon");
 
         // Serialize and check for intactness
-        Serialize(ex79, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -480,7 +481,7 @@ public class ObjectTests
         ex80.As<Note>().Icon.Last().As<Image>().Summary.First().Should().Be("Note (32x32)");
 
         // Serialize and check for intactness
-        Serialize(ex80, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -514,7 +515,7 @@ public class ObjectTests
         ex81.As<Note>().Image.First().As<Image>().Name.First().Should().Be("A Cat");
 
         // Serialize and check for intactness
-        Serialize(ex81, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -561,7 +562,7 @@ public class ObjectTests
         ex82.As<Note>().Image.ElementAt(2).As<ILink>().Href.Should().Be(new Uri("http://example.org/cat3.png"));
 
         // Serialize and check for intactness
-        Serialize(ex82, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -594,7 +595,7 @@ public class ObjectTests
         ex83.As<Note>().InReplyTo.First().As<Note>().Content.First().Should().Be("What else is there?");
 
         // Serialize and check for intactness
-        Serialize(ex83, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -623,7 +624,7 @@ public class ObjectTests
         ex84.As<Note>().InReplyTo.First().As<Link>().Href.Should().Be("http://example.org/posts/1");
 
         // Serialize and check for intactness
-        Serialize(ex84, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -658,7 +659,7 @@ public class ObjectTests
         ex88.As<Person>().Location.First().As<Place>().Name.First().Should().Be("Over the Arabian Sea, east of Socotra Island Nature Sanctuary");
 
         // Serialize and check for intactness
-        Serialize(ex88, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -697,7 +698,7 @@ public class ObjectTests
         ex89.As<Collection>().Items.Last().As<Note>().Name.First().Should().Be("Meeting 2016-11-17");
 
         // Serialize and check for intactness
-        Serialize(ex89, options: new() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -736,7 +737,7 @@ public class ObjectTests
         ex90.As<OrderedCollection>().OrderedItems.Last().As<Note>().Name.First().Should().Be("Reminder for Going-Away Party");
 
         // Serialize and check for intactness
-        Serialize(ex90, options: new() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -773,7 +774,7 @@ public class ObjectTests
         ex102.As<Video>().Preview.First().As<Video>().Name.First().Should().Be("Trailer");
 
         // Serialize and check for intactness
-        Serialize(ex102, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -813,7 +814,7 @@ public class ObjectTests
         ex104.As<Note>().Replies.As<Collection>().Items.First().As<Note>().Content.First().Should().Be("I am glad to hear it.");
 
         // Serialize and check for intactness
-        Serialize(ex104, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -848,7 +849,7 @@ public class ObjectTests
         ex105.As<Image>().Tag.First().As<Person>().Name.First().Should().Be("Sally");
 
         // Serialize and check for intactness
-        Serialize(ex105, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -881,7 +882,7 @@ public class ObjectTests
         ex108.As<Offer>().To.First().As<Link>().Href.Should().Be("http://joe.example.org");
 
         // Serialize and check for intactness
-        Serialize(ex108, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -909,7 +910,7 @@ public class ObjectTests
         ex109.As<Document>().Url.First().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.pdf");
 
         // Serialize and check for intactness
-        Serialize(ex109, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -940,7 +941,7 @@ public class ObjectTests
         ex110.As<Document>().Url.First().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.pdf");
 
         // Serialize and check for intactness
-        Serialize(ex110, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -980,7 +981,7 @@ public class ObjectTests
         ex111.As<Document>().Url.Last().As<Link>().Href.Should().Be("http://example.org/4q-sales-forecast.html");
 
         // Serialize and check for intactness
-        Serialize(ex111, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1010,7 +1011,7 @@ public class ObjectTests
         ex113.As<Place>().Altitude.Should().Be(15);
 
         // Serialize and check for intactness
-        Serialize(ex113, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1038,7 +1039,7 @@ public class ObjectTests
         ex114.As<Note>().Content.First().Should().Be("A <em>simple</em> note");
 
         // Serialize and check for intactness
-        Serialize(ex114, options: new() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1073,7 +1074,8 @@ public class ObjectTests
         ex115.As<Note>().ContentMap.First()["zh-Hans"].Should().Be("一段<em>简单的</em>笔记");
 
         // Serialize and check for intactness
-        Serialize(ex115, options: new() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }).Should().Be(input);
+
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1102,7 +1104,7 @@ public class ObjectTests
         ex116.As<Note>().Content.First().Should().Be("## A simple note\nA simple markdown `note`");
 
         // Serialize and check for intactness
-        Serialize(ex116, options: new() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1129,7 +1131,7 @@ public class ObjectTests
         ex117.As<Note>().Name.First().Should().Be("A simple note");
 
         // Serialize and check for intactness
-        Serialize(ex117, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1163,7 +1165,7 @@ public class ObjectTests
         ex118.As<Note>().NameMap.First()["zh-Hans"].Should().Be("一段简单的笔记");
 
         // Serialize and check for intactness
-        Serialize(ex118, options: new() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1191,7 +1193,7 @@ public class ObjectTests
         ex119.As<Video>().Duration.Should().Be(new TimeSpan(2, 0, 0));
 
         // Serialize and check for intactness
-        Serialize(ex119, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1220,7 +1222,7 @@ public class ObjectTests
         ex126.As<Link>().MediaType.Should().Be("text/html");
 
         // Serialize and check for intactness
-        Serialize(ex126, options: new() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1248,7 +1250,7 @@ public class ObjectTests
         ex127.As<Event>().EndTime.Should().Be(DateTime.Parse("2015-01-01T06:00:00-08:00"));
 
         // Serialize and check for intactness
-        Serialize(ex127, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1276,7 +1278,7 @@ public class ObjectTests
         ex128.As<Note>().Published.Should().Be(DateTime.Parse("2014-12-12T12:12:12Z", styles: System.Globalization.DateTimeStyles.AdjustToUniversal));
 
         // Serialize and check for intactness
-        Serialize(ex128, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1304,7 +1306,7 @@ public class ObjectTests
         ex129.As<Event>().StartTime.Should().Be(DateTime.Parse("2014-12-31T23:00:00-08:00"));
 
         // Serialize and check for intactness
-        Serialize(ex129, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1332,7 +1334,7 @@ public class ObjectTests
         ex133.As<Note>().Summary.First().Should().Be("A simple <em>note</em>");
 
         // Serialize and check for intactness
-        Serialize(ex133, options: new() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1367,7 +1369,7 @@ public class ObjectTests
         ex134.As<Note>().SummaryMap.First()["zh-Hans"].Should().Be("一段<em>简单的</em>笔记");
 
         // Serialize and check for intactness
-        Serialize(ex134, options: new() { WriteIndented = true, Encoder = System.Text.Encodings.Web.JavaScriptEncoder.UnsafeRelaxedJsonEscaping }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 
     /// <summary>
@@ -1395,7 +1397,7 @@ public class ObjectTests
         ex137.As<Note>().Updated.Should().Be(DateTime.Parse("2014-12-12T12:12:12Z", styles: System.Globalization.DateTimeStyles.AdjustToUniversal));
 
         // Serialize and check for intactness
-        Serialize(ex137, options: new() { WriteIndented = true }).Should().Be(input);
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 }
 

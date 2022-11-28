@@ -30,6 +30,26 @@ internal class ImageOrLinkConverter : JsonConverter<IImageOrLink?>
 
     public override void Write(Utf8JsonWriter writer, IImageOrLink? value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        if (value is null) return;
+        var matchingType = value.Type?.FirstOrDefault(t => t == "Link" || t == "Image" || ObjectTypes.Types.ContainsKey(t!), null);
+        if (matchingType is null)
+        {
+            writer.WriteRawValue(Serialize(value, typeof(object), options));
+        }
+        else
+        {
+            if (matchingType == "Link")
+            {
+                writer.WriteRawValue(Serialize(value, typeof(ILink), options));
+            }
+            else if (matchingType == "Image")
+            {
+                writer.WriteRawValue(Serialize(value, typeof(Image), options));
+            }
+            else
+            {
+                writer.WriteRawValue(Serialize(value, ObjectTypes.Types[matchingType], options));
+            }
+        }
     }
 }

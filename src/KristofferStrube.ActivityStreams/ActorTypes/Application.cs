@@ -1,5 +1,5 @@
 ﻿namespace KristofferStrube.ActivityStreams;
 
-public class Application : Object, IActor
+public class Application : Actor
 {
 }

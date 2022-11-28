@@ -10,4 +10,5 @@ public interface ILink : IImageOrLink, ICollectionPageOrLink
     string? Hreflang { get; set; }
     IEnumerable<string>? Rel { get; set; }
     uint? Height { get; set; }
+    uint? Width { get; set; }
 }

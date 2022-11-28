@@ -30,8 +30,8 @@ public class ActivityPubIntegrationTests
         ex8.As<Note>().JsonLDContext.Should().HaveCount(2);
         ex8.As<Note>().Id.Should().Be("http://postparty.example/p/2415");
         ex8.As<Note>().Content.First().Should().Be("<p>I <em>really</em> like strawberries!</p>");
-        ex8.As<Note>().GetSource().Content.First().Should().Be("I *really* like strawberries!");
-        ex8.As<Note>().GetSource().MediaType.Should().Be("text/markdown");
+        ex8.As<Note>().Source.Content.First().Should().Be("I *really* like strawberries!");
+        ex8.As<Note>().Source.MediaType.Should().Be("text/markdown");
     }
 
     /// <summary>
@@ -66,11 +66,11 @@ public class ActivityPubIntegrationTests
 
         // Assert
         ex9.Should().BeAssignableTo<Person>();
-        ex9.As<Person>().GetFollowing().Href.Should().Be("https://kenzoishii.example.com/following.json");
-        ex9.As<Person>().GetFollowers().Href.Should().Be("https://kenzoishii.example.com/followers.json");
-        ex9.As<Person>().GetLiked().Href.Should().Be("https://kenzoishii.example.com/liked.json");
-        ex9.As<Person>().GetInbox().Href.Should().Be("https://kenzoishii.example.com/inbox.json");
-        ex9.As<Person>().GetOutbox().Href.Should().Be("https://kenzoishii.example.com/feed.json");
+        ex9.As<Person>().Following.Href.Should().Be("https://kenzoishii.example.com/following.json");
+        ex9.As<Person>().Followers.Href.Should().Be("https://kenzoishii.example.com/followers.json");
+        ex9.As<Person>().Liked.Href.Should().Be("https://kenzoishii.example.com/liked.json");
+        ex9.As<Person>().Inbox.Href.Should().Be("https://kenzoishii.example.com/inbox.json");
+        ex9.As<Person>().Outbox.Href.Should().Be("https://kenzoishii.example.com/feed.json");
     }
 }
 
