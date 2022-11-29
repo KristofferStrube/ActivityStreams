@@ -1,4 +1,6 @@
 ﻿using KristofferStrube.ActivityStreams.JsonConverters;
+using System.Net.Http.Json;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
@@ -238,4 +240,10 @@ public class Object : ObjectOrLink, IObject
     [JsonPropertyName("shares")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public Collection? Shares { get; set; }
+
+    /// <summary>
+    /// Additional Data that can be added dynamically to the object.
+    /// </summary>
+    [JsonExtensionData]
+    public Dictionary<string, JsonElement>? ExtensionData { get; set; }
 }

@@ -1,4 +1,5 @@
 ﻿using KristofferStrube.ActivityStreams.JsonConverters;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
@@ -33,4 +34,5 @@ public interface IObject : IObjectOrLink
     IEnumerable<IDictionary<string, string>>? SummaryMap { get; set; }
     DateTime? Updated { get; set; }
     Source? Source { get; set; }
+    public Dictionary<string, JsonElement>? ExtensionData { get; set; }
 }

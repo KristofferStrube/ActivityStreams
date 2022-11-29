@@ -1,4 +1,6 @@
 ﻿using KristofferStrube.ActivityStreams.JsonLD;
+using System.Collections.Generic;
+using System.Text.Json;
 
 namespace KristofferStrube.ActivityStreams.Tests;
 
@@ -124,7 +126,7 @@ public class ActivityPubIntegrationTests
         {
             Type = new List<string>() { "Follow" },
             JsonLDContext = new List<ReferenceTermDefinition>() { new(new("https://www.w3.org/ns/activitystreams")) },
-            Actor = new List<Link>() { new() { Href = new Uri("https://kristoffer-strube.dk/API/AcitivtyPub/Bot") } },
+            Actor = new List<Link>() { new() { Href = new Uri("https://kristoffer-strube.dk/API/AcitivtyPub/Users/Bot") } },
             Target = new List<Link>() { new() { Href = new Uri("https://hachyderm.io/@KristofferStrube") } }
         };
 
@@ -134,6 +136,39 @@ public class ActivityPubIntegrationTests
         // Assert
         payload.Should().BeAssignableTo<Follow>();
         payload.As<Follow>().Actor.First().As<ILink>().Href.Should().Be("https://kristoffer-strube.dk/API/AcitivtyPub/Bot");
+    }
+
+    [Fact]
+    public void Example_Payload_WellKnownUser()
+    {
+        // Arrange
+        var person = new Person()
+        {
+            JsonLDContext = new List<ReferenceTermDefinition>() { new(new("https://www.w3.org/ns/activitystreams")) },
+            Id = $"https://kristoffer-strube/API/ActivityPub/Users/Bot",
+            Type = new List<string>() { "Person" },
+            ExtensionData = new()
+            {
+                { "publicKey", SerializeToElement(
+                    new
+                    {
+                        id = $"https://kristoffer-strube/API/ActivityPub/Users/Bot#main-key",
+                        owner = $"https://kristoffer-strube/API/ActivityPub/Users/Bot",
+                        publicKeyPem = $"-----BEGIN PUBLIC KEY-----...-----END PUBLIC KEY-----"
+                    })
+                }
+            }
+        };
+
+        // Act
+        var payload = Deserialize<IObjectOrLink>(Serialize(person));
+
+        // Assert
+        payload.Should().BeAssignableTo<Person>();
+        payload.As<Person>().ExtensionData["publicKey"].Deserialize<Dictionary<string, string>>().Keys.Should().HaveCount(3);
+        payload.As<Person>().ExtensionData["publicKey"].Deserialize<Dictionary<string, string>>()["id"].Should().Be($"https://kristoffer-strube/API/ActivityPub/Users/Bot#main-key");
+        payload.As<Person>().ExtensionData["publicKey"].Deserialize<Dictionary<string, string>>()["owner"].Should().Be($"https://kristoffer-strube/API/ActivityPub/Users/Bot");
+        payload.As<Person>().ExtensionData["publicKey"].Deserialize<Dictionary<string, string>>()["publicKeyPem"].Should().Be($"-----BEGIN PUBLIC KEY-----...-----END PUBLIC KEY-----");
     }
 }
 
