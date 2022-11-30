@@ -8,5 +8,6 @@ public class OrderedCollectionPage : CollectionPage
     /// A non-negative integer value identifying the relative position within the logical view of a strictly ordered collection.
     /// </summary>
     [JsonPropertyName("startIndex")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public uint? StartIndex { get; set; }
 }
