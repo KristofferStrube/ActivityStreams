@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using static System.Text.Json.JsonSerializer;
 
@@ -17,7 +16,7 @@ internal class LinkConverter : JsonConverter<ILink?>
             }
             else if (doc.RootElement.TryGetProperty("type", out JsonElement type))
             {
-                var link = type.GetString() switch
+                Link? link = type.GetString() switch
                 {
                     "Link" => doc.Deserialize<Link>(options),
                     "Mention" => doc.Deserialize<Mention>(options),
@@ -29,7 +28,7 @@ internal class LinkConverter : JsonConverter<ILink?>
                 }
                 return link;
             }
-            else if(doc.Deserialize<Link?>(options) is Link link)
+            else if (doc.Deserialize<Link?>(options) is Link link)
             {
                 link.Type = new List<string>() { "Link" };
                 return link;
@@ -41,7 +40,11 @@ internal class LinkConverter : JsonConverter<ILink?>
 
     public override void Write(Utf8JsonWriter writer, ILink? value, JsonSerializerOptions options)
     {
-        if (value is null) return;
+        if (value is null)
+        {
+            return;
+        }
+
         if (value.JsonLDContext is null
             && value.Id is null
             && value.Name is null
@@ -57,6 +60,14 @@ internal class LinkConverter : JsonConverter<ILink?>
         }
         else
         {
+            if (value.Type is null)
+            {
+                value.Type = new List<string>() { "Link" };
+            }
+            else if (!value.Type.Contains("Link") && !value.Type.Contains("Mention"))
+            {
+                value.Type = value.Type.Append("Link");
+            }
             writer.WriteRawValue(Serialize(value, typeof(Link), options));
         }
     }

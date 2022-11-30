@@ -1,5 +1,4 @@
 ﻿using KristofferStrube.ActivityStreams.JsonConverters;
-using System.Net.Http.Json;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 

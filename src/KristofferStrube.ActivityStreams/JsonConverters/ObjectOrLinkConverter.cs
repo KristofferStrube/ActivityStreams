@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using static System.Text.Json.JsonSerializer;
 
@@ -39,7 +38,7 @@ internal class ObjectOrLinkConverter : JsonConverter<IObjectOrLink?>
             }
             else
             {
-                var anonymousObject = doc.Deserialize<ObjectOrLink>(options);
+                ObjectOrLink? anonymousObject = doc.Deserialize<ObjectOrLink>(options);
                 if (anonymousObject is null)
                 {
                     return null;
@@ -52,7 +51,10 @@ internal class ObjectOrLinkConverter : JsonConverter<IObjectOrLink?>
 
     public override void Write(Utf8JsonWriter writer, IObjectOrLink? value, JsonSerializerOptions options)
     {
-        if (value is null) return;
+        if (value is null)
+        {
+            return;
+        }
         else if (value is ILink)
         {
             writer.WriteRawValue(Serialize(value, typeof(ILink), options));

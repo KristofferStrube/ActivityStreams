@@ -135,7 +135,7 @@ public class ActivityPubIntegrationTests
 
         // Assert
         payload.Should().BeAssignableTo<Follow>();
-        payload.As<Follow>().Actor.First().As<ILink>().Href.Should().Be("https://kristoffer-strube.dk/API/AcitivtyPub/Bot");
+        payload.As<Follow>().Actor.First().As<ILink>().Href.Should().Be("https://kristoffer-strube.dk/API/AcitivtyPub/Users/Bot");
     }
 
     [Fact]
@@ -146,6 +146,8 @@ public class ActivityPubIntegrationTests
         {
             JsonLDContext = new List<ReferenceTermDefinition>() { new(new("https://www.w3.org/ns/activitystreams")) },
             Id = $"https://kristoffer-strube/API/ActivityPub/Users/Bot",
+            PreferredUsername = "Bot",
+            Inbox = new Link() { Href = new Uri($"https://kristoffer-strube.dk/API/ActivityPub/Users/Bot/inbox") },
             Type = new List<string>() { "Person" },
             ExtensionData = new()
             {
@@ -165,10 +167,31 @@ public class ActivityPubIntegrationTests
 
         // Assert
         payload.Should().BeAssignableTo<Person>();
+        payload.As<Person>().PreferredUsername.Should().Be("Bot");
+        payload.As<Person>().Inbox.Href.Should().Be("https://kristoffer-strube.dk/API/ActivityPub/Users/Bot/inbox");
         payload.As<Person>().ExtensionData["publicKey"].Deserialize<Dictionary<string, string>>().Keys.Should().HaveCount(3);
         payload.As<Person>().ExtensionData["publicKey"].Deserialize<Dictionary<string, string>>()["id"].Should().Be($"https://kristoffer-strube/API/ActivityPub/Users/Bot#main-key");
         payload.As<Person>().ExtensionData["publicKey"].Deserialize<Dictionary<string, string>>()["owner"].Should().Be($"https://kristoffer-strube/API/ActivityPub/Users/Bot");
         payload.As<Person>().ExtensionData["publicKey"].Deserialize<Dictionary<string, string>>()["publicKeyPem"].Should().Be($"-----BEGIN PUBLIC KEY-----...-----END PUBLIC KEY-----");
+    }
+
+    [Fact]
+    public void Example_Payload_Accept()
+    {
+        // Arrange
+        var accept = new Accept()
+        {
+            Id = $"https://kristoffer-strube.dk/API/ActivityPub/Activity/{Guid.NewGuid()}",
+            Object = new List<IObjectOrLink> { new Follow() }
+        };
+
+        // Act
+        var payload = Deserialize<IObjectOrLink>(Serialize<IObject>(accept));
+
+        // Assert
+        payload.Should().BeAssignableTo<Accept>();
+        payload.As<Accept>().Type.Should().Contain("Accept");
+        payload.As<Accept>().Object.First().As<Follow>().Type.Should().Contain("Follow");
     }
 }
 

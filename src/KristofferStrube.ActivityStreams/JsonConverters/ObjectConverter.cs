@@ -1,5 +1,4 @@
-﻿using System.Dynamic;
-using System.Text.Json;
+﻿using System.Text.Json;
 using System.Text.Json.Serialization;
 using static System.Text.Json.JsonSerializer;
 
@@ -47,14 +46,26 @@ internal class ObjectConverter : JsonConverter<IObject?>
 
     public override void Write(Utf8JsonWriter writer, IObject? value, JsonSerializerOptions options)
     {
-        if (value is null) return;
-        var matchingType = value.Type?.FirstOrDefault(t => ObjectTypes.Types.ContainsKey(t!), null);
+        if (value is null)
+        {
+            return;
+        }
+
+        string? matchingType = ObjectTypes.Types.Keys.FirstOrDefault(k => value.GetType().IsEquivalentTo(ObjectTypes.Types[k]), null);
         if (matchingType is null)
         {
             writer.WriteRawValue(Serialize(value, typeof(object), options));
         }
         else
         {
+            if (value.Type is null)
+            {
+                value.Type = new List<string>() { matchingType };
+            }
+            else if (!value.Type.Contains(matchingType))
+            {
+                value.Type = value.Type.Append(matchingType);
+            }
             writer.WriteRawValue(Serialize(value, ObjectTypes.Types[matchingType], options));
         }
     }

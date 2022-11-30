@@ -1,7 +1,5 @@
 ﻿using KristofferStrube.ActivityStreams.JsonConverters;
 using KristofferStrube.ActivityStreams.JsonLD;
-using System.Dynamic;
-using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;

@@ -19,7 +19,11 @@ internal class XMLTimeSpanConverter : JsonConverter<TimeSpan?>
 
     public override void Write(Utf8JsonWriter writer, TimeSpan? value, JsonSerializerOptions options)
     {
-        if (value is null) return;
+        if (value is null)
+        {
+            return;
+        }
+
         writer.WriteStringValue(XmlConvert.ToString(value.Value));
     }
 }
