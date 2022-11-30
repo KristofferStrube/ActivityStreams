@@ -193,5 +193,35 @@ public class ActivityPubIntegrationTests
         payload.As<Accept>().Type.Should().Contain("Accept");
         payload.As<Accept>().Object.First().As<Follow>().Type.Should().Contain("Follow");
     }
+
+    [Fact]
+    public void Example_Payload_User()
+    {
+        // Arrange
+        var person = new Person()
+        {
+            JsonLDContext = new List<ReferenceTermDefinition>() { new(new("https://www.w3.org/ns/activitystreams")) },
+            Id = $"https://kristoffer-strube.dk/API/ActivityPub/Users/bot",
+            Type = new List<string>() { "Person" },
+            Endpoints = new Endpoints()
+            {
+                SharedInbox = new Uri("https://https://hachyderm.io/inbox"),
+                ExtensionData = new()
+                {
+                    { "extraEndpoint", SerializeToElement("https://kristoffer-strube.dk/API/ActivityPub/RealEndpoint") },
+                    { "extraValue", SerializeToElement(1) }
+                }
+            }
+        };
+
+        // Act
+        var payload = Deserialize<IObjectOrLink>(Serialize<IObjectOrLink>(person));
+
+        // Assert
+        payload.Should().BeAssignableTo<Person>();
+        payload.As<Person>().Endpoints.As<Endpoints>().SharedInbox.Should().Be(new Uri("https://https://hachyderm.io/inbox"));
+        payload.As<Person>().Endpoints.As<Endpoints>().ExtensionUris.Keys.Should().HaveCount(1);
+        payload.As<Person>().Endpoints.As<Endpoints>().ExtensionUris["extraEndpoint"].Should().Be(new Uri("https://kristoffer-strube.dk/API/ActivityPub/RealEndpoint"));
+    }
 }
 

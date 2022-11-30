@@ -1,4 +1,7 @@
-﻿using System.Text.Json.Serialization;
+﻿using System.Linq;
+using System.Text.Json;
+using System.Text.Json.Serialization;
+using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams;
 
@@ -9,6 +12,7 @@ public class Endpoints : IEndpointsOrLink
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("proxyUrl")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public Uri? ProxyUrl { get; set; }
 
     /// <summary>
@@ -16,6 +20,7 @@ public class Endpoints : IEndpointsOrLink
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("oauthAuthorizationEndpoint")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public Uri? OauthAuthorizationEndpoint { get; set; }
 
     /// <summary>
@@ -23,6 +28,7 @@ public class Endpoints : IEndpointsOrLink
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("oauthTokenEndpoint")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public Uri? OauthTokenEndpoint { get; set; }
 
     /// <summary>
@@ -30,6 +36,7 @@ public class Endpoints : IEndpointsOrLink
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("provideClientKey")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public Uri? ProvideClientKey { get; set; }
 
     /// <summary>
@@ -37,6 +44,7 @@ public class Endpoints : IEndpointsOrLink
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("signClientKey")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public Uri? SignClientKey { get; set; }
 
     /// <summary>
@@ -44,6 +52,7 @@ public class Endpoints : IEndpointsOrLink
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("sharedInbox")]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public Uri? SharedInbox { get; set; }
 
     /// <summary>
@@ -51,5 +60,9 @@ public class Endpoints : IEndpointsOrLink
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonExtensionData]
-    public Dictionary<string, Uri>? ExtensionData { get; set; }
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public Dictionary<string, JsonElement>? ExtensionData { get; set; }
+
+    [JsonIgnore]
+    public Dictionary<string, Uri>? ExtensionUris => ExtensionData?.Where(kv => kv.Value.ValueKind is JsonValueKind.String  && Uri.TryCreate(kv.Value.Deserialize<string>(), new(), out var _)).Select(kv => (key: kv.Key, value: kv.Value.Deserialize<Uri>()!)).ToDictionary(kv => kv.key, kv => kv.value);
 }

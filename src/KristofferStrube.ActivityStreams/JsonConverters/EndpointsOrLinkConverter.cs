@@ -20,14 +20,21 @@ internal class EndpointsOrLinkConverter : JsonConverter<IEndpointsOrLink?>
             }
             else
             {
-                doc.Deserialize<Endpoints>(options);
+                return doc.Deserialize<Endpoints>(options);
             }
         }
-        throw new JsonException("Could not be parsed as a JsonDocument.");
+        throw new JsonException($"Could not be parsed as a JsonDocument.");
     }
 
     public override void Write(Utf8JsonWriter writer, IEndpointsOrLink? value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        if (value is Endpoints endpoints)
+        {
+            writer.WriteRawValue(Serialize(endpoints, options));
+        }
+        else if (value is ILink link)
+        {
+            writer.WriteRawValue(Serialize(link, options));
+        }
     }
 }
