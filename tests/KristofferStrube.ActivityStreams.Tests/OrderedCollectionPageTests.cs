@@ -35,6 +35,9 @@ public class OrderedCollectionPageTests
         // Assert
         ex132.Should().BeAssignableTo<OrderedCollectionPage>();
         ex132.As<OrderedCollectionPage>().StartIndex.Should().Be(1);
+
+        // Serialize and check for intactness
+        Serialize(Deserialize<IObjectOrLink>(Serialize(Deserialize<IObjectOrLink>(input)))).Should().Be(Serialize(Deserialize<IObjectOrLink>(input)));
     }
 }
 

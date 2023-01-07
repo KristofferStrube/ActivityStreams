@@ -30,6 +30,21 @@ internal class CollectionOrLinkConverter : JsonConverter<ICollectionOrLink?>
 
     public override void Write(Utf8JsonWriter writer, ICollectionOrLink? value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        if (value is null)
+        {
+            return;
+        }
+        else if (value is ILink)
+        {
+            writer.WriteRawValue(Serialize(value, typeof(ILink), options));
+        }
+        else if (value is CollectionPage)
+        {
+            writer.WriteRawValue(Serialize(value, typeof(CollectionPage), options));
+        }
+        else
+        {
+            writer.WriteRawValue(Serialize(value, typeof(ObjectOrLink), options));
+        }
     }
 }
