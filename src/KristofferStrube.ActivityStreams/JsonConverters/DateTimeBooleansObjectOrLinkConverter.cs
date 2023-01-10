@@ -47,6 +47,29 @@ internal class DateTimeBooleanObjectOrLinkConverter : JsonConverter<DateTimeBool
 
     public override void Write(Utf8JsonWriter writer, DateTimeBooleanObjectOrLink? value, JsonSerializerOptions options)
     {
-        throw new NotImplementedException();
+        if (value?.Value is null)
+        {
+            return;
+        }
+        else if (value.Value is DateTime)
+        {
+            writer.WriteRawValue(Serialize(value, typeof(DateTime), options));
+        }
+        else if (value.Value is bool)
+        {
+            writer.WriteRawValue(Serialize(value, typeof(bool), options));
+        }
+        else if (value.Value is IObject)
+        {
+            writer.WriteRawValue(Serialize(value, typeof(IObject), options));
+        }
+        else if (value.Value is ILink)
+        {
+            writer.WriteRawValue(Serialize(value, typeof(ILink), options));
+        }
+        else
+        {
+            writer.WriteRawValue(Serialize(value, typeof(ObjectOrLink), options));
+        }
     }
 }

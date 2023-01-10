@@ -1,5 +1,6 @@
 ﻿using KristofferStrube.ActivityStreams.JsonConverters;
 using KristofferStrube.ActivityStreams.JsonLD;
+using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
@@ -51,4 +52,11 @@ public class ObjectOrLink : IObjectOrLink
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]
     public IEnumerable<IObjectOrLink>? Preview { get; set; }
+
+    /// <summary>
+    /// Additional Properties are mapped to this property.
+    /// </summary>
+    [JsonExtensionData]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    public Dictionary<string, JsonElement>? ExtensionData { get; set; }
 }

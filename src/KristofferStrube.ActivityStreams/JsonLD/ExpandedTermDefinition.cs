@@ -12,7 +12,7 @@ public class ExpandedTermDefinition : ITermDefinition
     public Uri? Vocab { get; set; }
 
     /// <summary>
-    /// At times, it is important to annotate a string with its language. In JSON-LD this is possible in a variety of ways. First, it is possible to define a default language for a JSON-LD document by setting the @language key in the context
+    /// At times, it is important to annotate a string with its language. In JSON-LD this is possible in a variety of ways. First, it is possible to define a default language for a JSON-LD document by setting the @language key in the context.
     /// </summary>
     [JsonPropertyName("@language")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
