@@ -30,6 +30,6 @@ We have chosen that it should also implement the properties that are specific to
 - [x] Add extended classes for Actor Types.
 - [x] Add extended classes for Object and Link Types.
 - [x] Add properties specific to ActivityPub
-- [ ] Add support for retrieving @context JSON-LD defintions.
-- [ ] Add support for serializing
+- [x] Add support for retrieving @context JSON-LD defintions.
+- [x] Add support for serializing
 - [ ] Look into the [Implementation Notes](https://www.w3.org/TR/activitystreams-vocabulary/#notes) that hint at Ease-Of-Use-Scenarios.
