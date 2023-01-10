@@ -6,5 +6,5 @@ namespace KristofferStrube.ActivityStreams;
 [JsonConverter(typeof(DateTimeBooleanObjectOrLinkConverter))]
 public class DateTimeBooleanObjectOrLink
 {
-    public object Value;
+    public object? Value;
 }

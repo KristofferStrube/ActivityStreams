@@ -51,7 +51,7 @@ internal class ObjectConverter : JsonConverter<IObject?>
             return;
         }
 
-        string? matchingType = ObjectTypes.Types.Keys.FirstOrDefault(k => value.GetType().IsEquivalentTo(ObjectTypes.Types[k]), null);
+        string? matchingType = ObjectTypes.Types.Keys.FirstOrDefault(k => value.GetType().IsEquivalentTo(ObjectTypes.Types[k!]), null);
         if (matchingType is null)
         {
             writer.WriteRawValue(Serialize(value, typeof(object), options));
