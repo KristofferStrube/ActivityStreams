@@ -32,4 +32,4 @@ We have chosen that it should also implement the properties that are specific to
 - [x] Add properties specific to ActivityPub
 - [x] Add support for retrieving @context JSON-LD defintions.
 - [x] Add support for serializing
-- [ ] Look into the [Implementation Notes](https://www.w3.org/TR/activitystreams-vocabulary/#notes) that hint at Ease-Of-Use-Scenarios.
+- [x] Look into the [Implementation Notes](https://www.w3.org/TR/activitystreams-vocabulary/#notes) that hint at Ease-Of-Use-Scenarios.
