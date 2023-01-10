@@ -14,5 +14,4 @@ public interface IObjectOrLink
     string? MediaType { get; set; }
     IEnumerable<string>? Name { get; set; }
     IEnumerable<IObjectOrLink>? Preview { get; set; }
-    public Dictionary<string, JsonElement>? ExtensionData { get; set; }
 }
