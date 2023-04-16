@@ -3,6 +3,7 @@
 [![GitHub forks](https://img.shields.io/github/forks/KristofferStrube/ActivityStreams)](https://github.com/KristofferStrube/ActivityStreams/network/members)
 [![GitHub stars](https://img.shields.io/github/stars/KristofferStrube/ActivityStreams)](https://github.com/KristofferStrube/ActivityStreams/stargazers)
 [![NuGet Downloads (official NuGet)](https://img.shields.io/nuget/dt/KristofferStrube.ActivityStreams?label=NuGet%20Downloads)](https://www.nuget.org/packages/KristofferStrube.ActivityStreams/)  
+[![.NET](https://github.com/aluitink/ActivityStreams/actions/workflows/dotnet.yml/badge.svg)](https://github.com/aluitink/ActivityStreams/actions/workflows/dotnet.yml)
 # ActivityStreams
 A .NET implementation of the Activity Streams vocabulary in the form of classes that can be serialized using System.Text.Json
 
