@@ -31,6 +31,6 @@ jobs:
     - name: Build Release
       run: dotnet build --no-restore --configuration Release
     - name: Publish Nuget to GitHub registry
-      run: dotnet nuget push **/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/aluitink/index.json --skip-duplicate --no-symbols 
+      run: dotnet nuget push ./**/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/aluitink/index.json --skip-duplicate --no-symbols 
     env:
       GITHUB_TOKEN: ${{ secrets.PACKAGE_PUBLISH_TOKEN }}
