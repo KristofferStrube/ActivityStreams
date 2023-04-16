@@ -4,7 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <TargetFrameworks>net6.0;net7.0</TargetFrameworks>
     <ImplicitUsings>enable</ImplicitUsings>
-    <Nullable>disable</Nullable>
+    <Nullable>enable</Nullable>
     <Title>ActivityStreams</Title>
     <Description>A .NET implementation of the ActivityStreams+ActivityPub vocabulary in the form of classes that can be serialized using System.Text.Json</Description>
     <PackageId>KristofferStrube.ActivityStreams</PackageId>
