@@ -22,7 +22,6 @@ jobs:
         dotnet-version: |
           6.0.x
           7.0.x
-          source-url: https://nuget.pkg.github.com/aluitink/index.json
       env:
         GITHUB_TOKEN: ${{ secrets.PACKAGE_PUBLISH_TOKEN }}
     - name: Restore dependencies
