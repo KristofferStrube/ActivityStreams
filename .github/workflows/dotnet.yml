@@ -31,4 +31,4 @@ jobs:
     - name: Publish Nuget to GitHub registry
       run: dotnet nuget push ./src/KristofferStrube.ActivityStreams/bin/Release/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/aluitink/index.json --skip-duplicate --no-symbols 
     env:
-      GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      GITHUB_TOKEN: ${{ secrets.PACKAGE_PUBLISH_TOKEN }}
