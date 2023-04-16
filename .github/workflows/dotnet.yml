@@ -26,8 +26,12 @@ jobs:
         GITHUB_TOKEN: ${{ secrets.PACKAGE_PUBLISH_TOKEN }}
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build Release
-      run: dotnet build --no-restore --configuration Release
+    - name: Build net6.0
+      run: dotnet build --no-restore --configuration Release --framework net6.0
+    - name: Build net7.0
+      run: dotnet build --no-restore --configuration Release --framework net7.0
+    - name: Test Release 6.0
+      run: dotnet test --no-build --verbosity normal --configuration Release --framework net6.0
     - name: Test Release
       run: dotnet test --no-build --verbosity normal --configuration Release
     - name: Pack Release
