@@ -22,11 +22,13 @@ jobs:
         dotnet-version: 7.0.x
     - name: Restore dependencies
       run: dotnet restore
-    - name: Build
-      run: dotnet build --no-restore --configuration Release
+    - name: Build Debug
+      run: dotnet build --no-restore --configuration Debug
     - name: Test
       run: dotnet test --no-build --verbosity normal
+    - name: Build Release
+      run: dotnet build --no-restore --configuration Release
     - name: Publish Nuget to GitHub registry
-      run: dotnet nuget push ./KristofferStrube.ActivityStreams/bin/Release/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/aluitink/index.json --skip-duplicate --no-symbols 
+      run: dotnet nuget push ./KristofferStrube.ActivityStreams/bin/Release/net7.0/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/aluitink/index.json --skip-duplicate --no-symbols 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
