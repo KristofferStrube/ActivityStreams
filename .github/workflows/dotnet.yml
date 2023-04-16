@@ -24,15 +24,16 @@ jobs:
           7.0.x
       env:
         GITHUB_TOKEN: ${{ secrets.PACKAGE_PUBLISH_TOKEN }}
-
+    - name: Install dependencies
+      run: dotnet restore
     - name: Build net6.0
-      run: dotnet build --configuration Release --framework net6.0
+      run: dotnet build --no-restore --configuration Release --framework net6.0 src/KristofferStrube.ActivityStreams
     - name: Build net7.0
-      run: dotnet build --configuration Release --framework net7.0
+      run: dotnet build --no-restore --configuration Release --framework net7.0 src/KristofferStrube.ActivityStreams
     - name: Test Release
-      run: dotnet test --no-build --verbosity normal --configuration Release
+      run: dotnet test --no-restore --configuration Release --verbosity normal tests/KristofferStrube.ActivityStreams.Tests
     - name: Pack Release
-      run: dotnet pack --no-build --configuration Release
+      run: dotnet pack --no-build --configuration Release src/KristofferStrube.ActivityStreams
     - name: Publish Release to GitHub registry
-      run: dotnet nuget push ./**/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/aluitink/index.json --skip-duplicate --no-symbols 
+      run: dotnet nuget push src/KristofferStrube.ActivityStreams/bin/Release/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/aluitink/index.json --skip-duplicate --no-symbols 
     
