@@ -23,10 +23,10 @@ jobs:
     - name: Restore dependencies
       run: dotnet restore
     - name: Build
-      run: dotnet build --no-restore
+      run: dotnet build --no-restore --configuration Release
     - name: Test
       run: dotnet test --no-build --verbosity normal
     - name: Publish Nuget to GitHub registry
-      run: dotnet nuget push ./KristofferStrube.ActivityStreams/out/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/aluitink/index.json --skip-duplicate --no-symbols 
+      run: dotnet nuget push ./KristofferStrube.ActivityStreams/bin/Release/*.nupkg -k ${GITHUB_TOKEN} -s https://nuget.pkg.github.com/aluitink/index.json --skip-duplicate --no-symbols 
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
