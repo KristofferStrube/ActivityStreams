@@ -5,7 +5,12 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](/LICENSE.md)
 [![NuGet Downloads (official NuGet)](https://img.shields.io/nuget/dt/KristofferStrube.ActivityStreams?label=NuGet%20Downloads)](https://www.nuget.org/packages/KristofferStrube.ActivityStreams/)  
 
-# ActivityStreams
+# Rayven.ActivityStreams
+A custom implementation of KristofferStrube.ActivityStreams for use in a private project.
+
+I've added a .devcontainer, build action, package publishing.
+
+
 A .NET implementation of the Activity Streams vocabulary in the form of classes that can be serialized using System.Text.Json
 
 The specifications can be seen here: https://www.w3.org/TR/activitystreams-vocabulary/
