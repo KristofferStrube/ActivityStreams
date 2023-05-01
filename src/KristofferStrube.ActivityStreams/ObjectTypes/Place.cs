@@ -5,6 +5,8 @@ namespace KristofferStrube.ActivityStreams;
 
 public class Place : Object
 {
+    public Place() => Type = new List<string>() { "Place" };
+
     /// <summary>
     /// Indicates the accuracy of position coordinates on a Place objects. Expressed in properties of percentage. e.g. "94.0" means "94.0% accurate".
     /// </summary>

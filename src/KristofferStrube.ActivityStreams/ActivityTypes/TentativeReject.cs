@@ -2,4 +2,5 @@
 
 public class TentativeReject : Reject
 {
+    public TentativeReject() => Type = new List<string>() { "TentativeReject" };
 }
