@@ -4,6 +4,8 @@ namespace KristofferStrube.ActivityStreams;
 
 public class CollectionPage : Collection, ICollectionPageOrLink
 {
+    public CollectionPage() => Type = new List<string>() { "CollectionPage" };
+
     /// <summary>
     /// Identifies the Collection to which a CollectionPage objects items belong.
     /// </summary>

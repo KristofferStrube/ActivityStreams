@@ -5,6 +5,8 @@ namespace KristofferStrube.ActivityStreams;
 
 public class Relationship : Object
 {
+    public Relationship() => Type = new List<string>() { "Relationship" };
+
     /// <summary>
     /// The subject property identifies one of the connected individuals. For instance, for a Relationship object describing "John is related to Sally", subject would refer to John.
     /// </summary>
