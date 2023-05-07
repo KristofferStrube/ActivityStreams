@@ -6,6 +6,8 @@ namespace Rayven.ActivityStreams.Activities;
 
 public class Question : Activity
 {
+    public Question() => Type = new List<string>() { "Question" };
+
     /// <summary>
     /// Identifies an exclusive option for a Question. Use of oneOf implies that the Question can have only a single answer. To indicate that a Question can have multiple answers, use anyOf.
     /// </summary>

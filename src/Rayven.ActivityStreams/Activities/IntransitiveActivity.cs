@@ -7,6 +7,8 @@ namespace Rayven.ActivityStreams.Activities;
 
 public class IntransitiveActiviy : Objects.Object
 {
+    public IntransitiveActiviy() => Type = new List<string>() { "IntransitiveActiviy" };
+
     /// <summary>
     /// Describes one or more entities that either performed or are expected to perform the activity. Any single activity can have multiple actors. The actor may be specified using an indirect Link.
     /// </summary>

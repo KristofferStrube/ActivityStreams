@@ -12,13 +12,14 @@
     <RepositoryUrl>https://github.com/aluitink/ActivityStreams</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageVersion>0.2.0</PackageVersion>
+    <PackageVersion>0.2.1</PackageVersion>
     <Authors>Andrew Luitink; Kristoffer Strube</Authors>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>icon.png</PackageIcon>
     <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
     <Copyright>MIT</Copyright>
     <PackageProjectUrl>https://github.com/aluitink/ActivityStreams</PackageProjectUrl>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>

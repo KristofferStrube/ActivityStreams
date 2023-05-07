@@ -1,5 +1,7 @@
-﻿namespace Rayven.ActivityStreams.Activities;
+﻿using Rayven.ActivityStreams.Activities;
 
+namespace Rayven.ActivityStreams;
 public class Reject : Activity
 {
+    public Reject() => Type = new List<string>() { "Reject" };
 }

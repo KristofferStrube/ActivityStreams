@@ -6,6 +6,8 @@ namespace Rayven.ActivityStreams.Actors;
 
 public class Actor : Objects.Object
 {
+    public Actor() => Type = new List<string>() { "Actor" };
+
     /// <summary>
     /// The outbox stream contains activities the user has published, subject to the ability of the requestor to retrieve the activity (that is, the contents of the outbox are filtered by the permissions of the person reading it). If a user submits a request without Authorization the server should respond with all of the Public posts. This could potentially be all relevant objects published by the user, though the number of available items is left to the discretion of those implementing and deploying the server.
     /// </summary>

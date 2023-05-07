@@ -11,9 +11,9 @@ public class ObjectOrLink : IObjectOrLink
     /// The context of the JSON-LD object.
     /// </summary>
     [JsonPropertyName("@context")]
-    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+    [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonConverter(typeof(OneOrMultipleConverter<ITermDefinition>))]
-    public IEnumerable<ITermDefinition>? JsonLDContext { get; set; }
+    public IEnumerable<ITermDefinition>? JsonLDContext { get; set; } = new List<ITermDefinition>() { new ReferenceTermDefinition(new Uri("https://www.w3.org/ns/activitystreams")) };
 
     /// <summary>
     /// Provides the globally unique identifier for an Object or Link.
