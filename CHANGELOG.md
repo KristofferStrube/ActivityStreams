@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.1] - 2023-08-13
+## Fixed
+- Fixed that the converters from the library were internal, meaning they couldn't be used directly in outside projects.
+
 ## [0.2.0] - 2023-05-01
 ### Added
 - Added default initialization of `Type` parameters for types matching their type.
