@@ -4,7 +4,7 @@ using System.Xml;
 
 namespace KristofferStrube.ActivityStreams.JsonConverters;
 
-internal class XMLTimeSpanConverter : JsonConverter<TimeSpan?>
+public class XMLTimeSpanConverter : JsonConverter<TimeSpan?>
 {
     public override TimeSpan? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

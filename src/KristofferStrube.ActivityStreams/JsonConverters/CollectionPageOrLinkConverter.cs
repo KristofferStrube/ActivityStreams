@@ -4,7 +4,7 @@ using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams.JsonConverters;
 
-internal class CollectionPageOrLinkConverter : JsonConverter<ICollectionPageOrLink?>
+public class CollectionPageOrLinkConverter : JsonConverter<ICollectionPageOrLink?>
 {
     public override ICollectionPageOrLink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
