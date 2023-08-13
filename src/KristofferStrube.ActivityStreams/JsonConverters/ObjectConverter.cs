@@ -4,7 +4,7 @@ using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams.JsonConverters;
 
-internal class ObjectConverter : JsonConverter<IObject?>
+public class ObjectConverter : JsonConverter<IObject?>
 {
     public override IObject? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

@@ -1,8 +1,8 @@
 ﻿namespace KristofferStrube.ActivityStreams;
 
-internal static class ObjectTypes
+public static class ObjectTypes
 {
-    internal static readonly Dictionary<string, Type> Types = new()
+    public static readonly Dictionary<string, Type> Types = new()
     {
         { "Object", typeof(Object) },
         { "Collection", typeof(Collection) },

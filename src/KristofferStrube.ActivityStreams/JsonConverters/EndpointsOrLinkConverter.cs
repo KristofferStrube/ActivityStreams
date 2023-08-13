@@ -4,7 +4,7 @@ using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams.JsonConverters;
 
-internal class EndpointsOrLinkConverter : JsonConverter<IEndpointsOrLink?>
+public class EndpointsOrLinkConverter : JsonConverter<IEndpointsOrLink?>
 {
     public override IEndpointsOrLink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

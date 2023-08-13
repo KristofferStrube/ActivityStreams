@@ -4,7 +4,7 @@ using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams.JsonConverters;
 
-internal class DateTimeBooleanObjectOrLinkConverter : JsonConverter<DateTimeBooleanObjectOrLink?>
+public class DateTimeBooleanObjectOrLinkConverter : JsonConverter<DateTimeBooleanObjectOrLink?>
 {
     public override DateTimeBooleanObjectOrLink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {

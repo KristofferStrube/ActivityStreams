@@ -5,7 +5,7 @@ using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams.JsonConverters;
 
-internal class TermDefinitionConverter : JsonConverter<ITermDefinition?>
+public class TermDefinitionConverter : JsonConverter<ITermDefinition?>
 {
     public override ITermDefinition? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
