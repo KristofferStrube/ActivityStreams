@@ -3,9 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
-public class IntransitiveActiviy : Object
+public class IntransitiveActivity : Object
 {
-    public IntransitiveActiviy() => Type = new List<string>() { "IntransitiveActiviy" };
+    public IntransitiveActivity() => Type = new List<string>() { "IntransitiveActivity" };
 
     /// <summary>
     /// Describes one or more entities that either performed or are expected to perform the activity. Any single activity can have multiple actors. The actor may be specified using an indirect Link.
