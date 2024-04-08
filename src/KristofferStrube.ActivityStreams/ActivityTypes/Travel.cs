@@ -1,6 +1,6 @@
 ﻿namespace KristofferStrube.ActivityStreams;
 
-public class Travel : IntransitiveActiviy
+public class Travel : IntransitiveActivity
 {
     public Travel()
     {
