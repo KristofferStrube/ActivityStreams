@@ -9,7 +9,7 @@ public class CollectionPageTests
     public void Example_095()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Page 2 of Sally's blog posts",
@@ -24,7 +24,7 @@ public class CollectionPageTests
             """;
 
         // Act
-        var ex95 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex95 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex95.Should().BeAssignableTo<CollectionPage>();
@@ -38,7 +38,7 @@ public class CollectionPageTests
     public void Example_096()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Page 2 of Sally's blog posts",
@@ -57,7 +57,7 @@ public class CollectionPageTests
             """;
 
         // Act
-        var ex96 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex96 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex96.Should().BeAssignableTo<CollectionPage>();
@@ -72,7 +72,7 @@ public class CollectionPageTests
     public void Example_100()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Page 1 of Sally's blog posts",
@@ -87,7 +87,7 @@ public class CollectionPageTests
             """;
 
         // Act
-        var ex100 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex100 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex100.Should().BeAssignableTo<CollectionPage>();
@@ -101,7 +101,7 @@ public class CollectionPageTests
     public void Example_101()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Page 1 of Sally's blog posts",
@@ -120,7 +120,7 @@ public class CollectionPageTests
             """;
 
         // Act
-        var ex101 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex101 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex101.Should().BeAssignableTo<CollectionPage>();
@@ -135,7 +135,7 @@ public class CollectionPageTests
     public void Example_123()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Page 1 of Sally's notes",
@@ -156,7 +156,7 @@ public class CollectionPageTests
             """;
 
         // Act
-        var ex123 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex123 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex123.Should().BeAssignableTo<CollectionPage>();

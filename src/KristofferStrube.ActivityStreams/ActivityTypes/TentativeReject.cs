@@ -2,5 +2,8 @@
 
 public class TentativeReject : Reject
 {
-    public TentativeReject() => Type = new List<string>() { "TentativeReject" };
+    public TentativeReject()
+    {
+        Type = new List<string>() { "TentativeReject" };
+    }
 }

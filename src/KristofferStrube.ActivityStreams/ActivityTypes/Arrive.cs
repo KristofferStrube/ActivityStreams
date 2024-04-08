@@ -1,6 +1,9 @@
 ﻿namespace KristofferStrube.ActivityStreams;
 
-public class Arrive : IntransitiveActivity
+public class Arrive : IntransitiveActiviy
 {
-    public Arrive() => Type = new List<string>() { "Arrive" };
+    public Arrive()
+    {
+        Type = new List<string>() { "Arrive" };
+    }
 }

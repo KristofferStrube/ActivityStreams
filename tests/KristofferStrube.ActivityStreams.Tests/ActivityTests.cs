@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace KristofferStrube.ActivityStreams.Tests;
+﻿namespace KristofferStrube.ActivityStreams.Tests;
 
 public class ActivityTests
 {
@@ -11,7 +9,7 @@ public class ActivityTests
     public void Example_003()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Activity",
@@ -28,7 +26,7 @@ public class ActivityTests
             """;
 
         // Act
-        var ex3 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex3 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex3.Should().BeAssignableTo<Activity>();
@@ -49,7 +47,7 @@ public class ActivityTests
     public void Example_063()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally offered the Foo object",
@@ -60,7 +58,7 @@ public class ActivityTests
             """;
 
         // Act
-        var ex63 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex63 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex63.Should().BeAssignableTo<Offer>();
@@ -75,7 +73,7 @@ public class ActivityTests
     public void Example_064()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally offered the Foo object",
@@ -90,7 +88,7 @@ public class ActivityTests
             """;
 
         // Act
-        var ex64 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex64 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex64.Should().BeAssignableTo<Offer>();
@@ -105,7 +103,7 @@ public class ActivityTests
     public void Example_065()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally and Joe offered the Foo object",
@@ -123,7 +121,7 @@ public class ActivityTests
             """;
 
         // Act
-        var ex65 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex65 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex65.Should().BeAssignableTo<Offer>();
@@ -139,7 +137,7 @@ public class ActivityTests
     public void Example_085()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally listened to a piece of music on the Acme Music Service",
@@ -157,7 +155,7 @@ public class ActivityTests
             """;
 
         // Act
-        var ex85 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex85 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex85.Should().BeAssignableTo<Listen>();
@@ -172,7 +170,7 @@ public class ActivityTests
     public void Example_094()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally moved a post from List A to List B",
@@ -191,7 +189,7 @@ public class ActivityTests
             """;
 
         // Act
-        var ex94 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex94 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex94.Should().BeAssignableTo<Move>();
@@ -206,7 +204,7 @@ public class ActivityTests
     public void Example_097()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally liked a post",
@@ -217,7 +215,7 @@ public class ActivityTests
             """;
 
         // Act
-        var ex97 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex97 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex97.Should().BeAssignableTo<Like>();
@@ -232,7 +230,7 @@ public class ActivityTests
     public void Example_098()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Like",
@@ -245,7 +243,7 @@ public class ActivityTests
             """;
 
         // Act
-        var ex98 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex98 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex98.Should().BeAssignableTo<Like>();
@@ -260,7 +258,7 @@ public class ActivityTests
     public void Example_099()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally liked a note",
@@ -278,7 +276,7 @@ public class ActivityTests
             """;
 
         // Act
-        var ex99 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex99 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex99.Should().BeAssignableTo<Like>();
@@ -294,7 +292,7 @@ public class ActivityTests
     public void Example_103()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally checked that her flight was on time",
@@ -309,7 +307,7 @@ public class ActivityTests
             """;
 
         // Act
-        var ex103 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex103 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex103.Should().BeAssignableTo<Activity>();
@@ -324,7 +322,7 @@ public class ActivityTests
     public void Example_106()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally offered the post to John",
@@ -336,7 +334,7 @@ public class ActivityTests
             """;
 
         // Act
-        var ex106 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex106 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex106.Should().BeAssignableTo<Offer>();
@@ -351,7 +349,7 @@ public class ActivityTests
     public void Example_107()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally offered the post to John",
@@ -366,7 +364,7 @@ public class ActivityTests
             """;
 
         // Act
-        var ex107 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex107 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex107.Should().BeAssignableTo<Offer>();

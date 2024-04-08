@@ -9,7 +9,7 @@ public class TombstoneTests
     public void Example_142()
     {
         // Arrange
-        var input = """
+        string input = """
             {
             "@context": "https://www.w3.org/ns/activitystreams",
             "summary": "This image has been deleted",
@@ -20,7 +20,7 @@ public class TombstoneTests
             """;
 
         // Act
-        var ex142 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex142 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex142.Should().BeAssignableTo<Tombstone>();
@@ -34,7 +34,7 @@ public class TombstoneTests
     public void Example_143()
     {
         // Arrange
-        var input = """
+        string input = """
             {
             "@context": "https://www.w3.org/ns/activitystreams",
             "summary": "This image has been deleted",
@@ -44,7 +44,7 @@ public class TombstoneTests
             """;
 
         // Act
-        var ex143 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex143 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex143.Should().BeAssignableTo<Tombstone>();

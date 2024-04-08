@@ -4,7 +4,10 @@ namespace KristofferStrube.ActivityStreams;
 
 public class Profile : Object
 {
-    public Profile() => Type = new List<string>() { "Profile" };
+    public Profile()
+    {
+        Type = new List<string>() { "Profile" };
+    }
 
     /// <summary>
     /// On a Profile object, the describes property identifies the object described by the Profile.

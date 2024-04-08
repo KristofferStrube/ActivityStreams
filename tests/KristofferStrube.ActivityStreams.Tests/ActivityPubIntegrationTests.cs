@@ -1,5 +1,4 @@
 ﻿using KristofferStrube.ActivityStreams.JsonLD;
-using System.Collections.Generic;
 using System.Text.Json;
 
 namespace KristofferStrube.ActivityStreams.Tests;
@@ -13,7 +12,7 @@ public class ActivityPubIntegrationTests
     public void Example_008()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": ["https://www.w3.org/ns/activitystreams",
                            {"@language": "en"}],
@@ -27,7 +26,7 @@ public class ActivityPubIntegrationTests
             """;
 
         // Act
-        var ex8 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex8 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex8.Should().BeAssignableTo<Note>();
@@ -45,7 +44,7 @@ public class ActivityPubIntegrationTests
     public void Example_009()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": ["https://www.w3.org/ns/activitystreams",
                            {"@language": "ja"}],
@@ -66,7 +65,7 @@ public class ActivityPubIntegrationTests
             """;
 
         // Act
-        var ex9 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex9 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex9.Should().BeAssignableTo<Person>();
@@ -88,7 +87,7 @@ public class ActivityPubIntegrationTests
     public void Example_011()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": ["https://www.w3.org/ns/activitystreams",
                            {"@language": "en"}],
@@ -104,7 +103,7 @@ public class ActivityPubIntegrationTests
             """;
 
         // Act
-        var ex11 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex11 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex11.Should().BeAssignableTo<Like>();
@@ -124,14 +123,14 @@ public class ActivityPubIntegrationTests
         // Arrange
         var followActivity = new Follow()
         {
-            Type = new List<string>() { "Follow" },
+            Type = ["Follow"],
             JsonLDContext = new List<ReferenceTermDefinition>() { new(new("https://www.w3.org/ns/activitystreams")) },
             Actor = new List<Link>() { new() { Href = new Uri("https://kristoffer-strube.dk/API/AcitivtyPub/Users/Bot") } },
             Target = new List<Link>() { new() { Href = new Uri("https://hachyderm.io/@KristofferStrube") } }
         };
 
         // Act
-        var payload = Deserialize<IObjectOrLink>(Serialize(followActivity));
+        IObjectOrLink payload = Deserialize<IObjectOrLink>(Serialize(followActivity));
 
         // Assert
         payload.Should().BeAssignableTo<Follow>();
@@ -148,7 +147,7 @@ public class ActivityPubIntegrationTests
             Id = $"https://kristoffer-strube/API/ActivityPub/Users/Bot",
             PreferredUsername = "Bot",
             Inbox = new Link() { Href = new Uri($"https://kristoffer-strube.dk/API/ActivityPub/Users/Bot/inbox") },
-            Type = new List<string>() { "Person" },
+            Type = ["Person"],
             ExtensionData = new()
             {
                 { "publicKey", SerializeToElement(
@@ -163,7 +162,7 @@ public class ActivityPubIntegrationTests
         };
 
         // Act
-        var payload = Deserialize<IObjectOrLink>(Serialize(person));
+        IObjectOrLink payload = Deserialize<IObjectOrLink>(Serialize(person));
 
         // Assert
         payload.Should().BeAssignableTo<Person>();
@@ -182,11 +181,11 @@ public class ActivityPubIntegrationTests
         var accept = new Accept()
         {
             Id = $"https://kristoffer-strube.dk/API/ActivityPub/Activity/{Guid.NewGuid()}",
-            Object = new List<IObjectOrLink> { new Follow() }
+            Object = [new Follow()]
         };
 
         // Act
-        var payload = Deserialize<IObjectOrLink>(Serialize<IObject>(accept));
+        IObjectOrLink payload = Deserialize<IObjectOrLink>(Serialize<IObject>(accept));
 
         // Assert
         payload.Should().BeAssignableTo<Accept>();
@@ -202,7 +201,7 @@ public class ActivityPubIntegrationTests
         {
             JsonLDContext = new List<ReferenceTermDefinition>() { new(new("https://www.w3.org/ns/activitystreams")) },
             Id = $"https://kristoffer-strube.dk/API/ActivityPub/Users/bot",
-            Type = new List<string>() { "Person" },
+            Type = ["Person"],
             Endpoints = new Endpoints()
             {
                 SharedInbox = new Uri("https://https://hachyderm.io/inbox"),
@@ -215,7 +214,7 @@ public class ActivityPubIntegrationTests
         };
 
         // Act
-        var payload = Deserialize<IObjectOrLink>(Serialize<IObjectOrLink>(person));
+        IObjectOrLink payload = Deserialize<IObjectOrLink>(Serialize<IObjectOrLink>(person));
 
         // Assert
         payload.Should().BeAssignableTo<Person>();

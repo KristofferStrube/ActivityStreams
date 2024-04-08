@@ -1,6 +1,4 @@
-﻿using KristofferStrube.ActivityStreams.JsonLD;
-
-namespace KristofferStrube.ActivityStreams.Tests;
+﻿namespace KristofferStrube.ActivityStreams.Tests;
 
 public class PlaceTests
 {
@@ -11,7 +9,7 @@ public class PlaceTests
     public void Example112()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "name": "Liu Gu Lu Cun, Pingdu, Qingdao, Shandong, China",
@@ -23,7 +21,7 @@ public class PlaceTests
             """;
 
         // Act
-        var ex112 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex112 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex112.Should().BeAssignableTo<Place>();
@@ -37,7 +35,7 @@ public class PlaceTests
     public void Example113()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Place",
@@ -50,7 +48,7 @@ public class PlaceTests
             """;
 
         // Act
-        var ex113 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex113 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex113.Should().BeAssignableTo<Place>();
@@ -64,7 +62,7 @@ public class PlaceTests
     public void Example124()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Place",
@@ -77,7 +75,7 @@ public class PlaceTests
             """;
 
         // Act
-        var ex124 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex124 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex124.Should().BeAssignableTo<Place>();
@@ -91,7 +89,7 @@ public class PlaceTests
     public void Example125()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Place",
@@ -104,7 +102,7 @@ public class PlaceTests
             """;
 
         // Act
-        var ex125 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex125 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex125.Should().BeAssignableTo<Place>();
@@ -118,7 +116,7 @@ public class PlaceTests
     public void Example130()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Place",
@@ -131,7 +129,7 @@ public class PlaceTests
             """;
 
         // Act
-        var ex130 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex130 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex130.Should().BeAssignableTo<Place>();
@@ -145,7 +143,7 @@ public class PlaceTests
     public void Example136()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Place",
@@ -158,7 +156,7 @@ public class PlaceTests
             """;
 
         // Act
-        var ex136 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex136 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex136.Should().BeAssignableTo<Place>();

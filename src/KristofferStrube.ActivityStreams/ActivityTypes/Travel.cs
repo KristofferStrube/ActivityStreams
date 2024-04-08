@@ -1,6 +1,9 @@
 ﻿namespace KristofferStrube.ActivityStreams;
 
-public class Travel : IntransitiveActivity
+public class Travel : IntransitiveActiviy
 {
-    public Travel() => Type = new List<string>() { "Travel" };
+    public Travel()
+    {
+        Type = new List<string>() { "Travel" };
+    }
 }

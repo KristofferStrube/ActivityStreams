@@ -9,7 +9,7 @@ public class ProfileTests
     public void Example_141()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally's profile",
@@ -23,7 +23,7 @@ public class ProfileTests
             """;
 
         // Act
-        var ex141 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex141 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex141.Should().BeAssignableTo<Profile>();

@@ -2,5 +2,8 @@
 
 public class Document : Object
 {
-    public Document() => Type = new List<string>() { "Document" };
+    public Document()
+    {
+        Type = new List<string>() { "Document" };
+    }
 }

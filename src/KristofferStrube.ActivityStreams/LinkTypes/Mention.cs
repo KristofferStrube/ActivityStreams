@@ -2,5 +2,8 @@
 
 public class Mention : Link
 {
-    public Mention() => Type = new List<string>() { "Mention" };
+    public Mention()
+    {
+        Type = new List<string>() { "Mention" };
+    }
 }

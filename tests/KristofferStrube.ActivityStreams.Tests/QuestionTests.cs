@@ -1,6 +1,4 @@
-﻿using KristofferStrube.ActivityStreams.JsonLD;
-
-namespace KristofferStrube.ActivityStreams.Tests;
+﻿namespace KristofferStrube.ActivityStreams.Tests;
 
 public class QuestionTests
 {
@@ -11,7 +9,7 @@ public class QuestionTests
     public void Example_091()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Question",
@@ -30,7 +28,7 @@ public class QuestionTests
             """;
 
         // Act
-        var ex91 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex91 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex91.Should().BeAssignableTo<Question>();
@@ -46,7 +44,7 @@ public class QuestionTests
     public void Example_092()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Question",
@@ -65,7 +63,7 @@ public class QuestionTests
             """;
 
         // Act
-        var ex92 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex92 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex92.Should().BeAssignableTo<Question>();
@@ -81,7 +79,7 @@ public class QuestionTests
     public void Example_093_DateTime()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Question",
@@ -91,7 +89,7 @@ public class QuestionTests
             """;
 
         // Act
-        var ex93 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex93 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex93.Should().BeAssignableTo<Question>();
@@ -105,7 +103,7 @@ public class QuestionTests
     public void Example_093_boolean_string()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Question",
@@ -115,7 +113,7 @@ public class QuestionTests
             """;
 
         // Act
-        var ex93 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex93 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex93.Should().BeAssignableTo<Question>();
@@ -129,7 +127,7 @@ public class QuestionTests
     public void Example_093_boolean_string_number()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Question",
@@ -139,7 +137,7 @@ public class QuestionTests
             """;
 
         // Act
-        var ex93 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex93 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex93.Should().BeAssignableTo<Question>();
@@ -153,7 +151,7 @@ public class QuestionTests
     public void Example_093_boolean()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Question",
@@ -163,7 +161,7 @@ public class QuestionTests
             """;
 
         // Act
-        var ex93 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex93 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex93.Should().BeAssignableTo<Question>();
@@ -177,7 +175,7 @@ public class QuestionTests
     public void Example_093_number()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Question",
@@ -187,7 +185,7 @@ public class QuestionTests
             """;
 
         // Act
-        var ex93 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex93 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex93.Should().BeAssignableTo<Question>();

@@ -1,6 +1,4 @@
 ﻿using KristofferStrube.ActivityStreams.JsonLD;
-using System.Text;
-using System.Text.Json;
 
 namespace KristofferStrube.ActivityStreams.Tests;
 
@@ -13,7 +11,7 @@ public class ObjectTests
     public void Example_001()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Object",
@@ -23,7 +21,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex1 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex1 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex1.Should().BeAssignableTo<IObject>();
@@ -42,7 +40,7 @@ public class ObjectTests
     public void Example_061()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "name": "Foo",
@@ -51,7 +49,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex61 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex61 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex61.Id.Should().Be("http://example.org/foo");
@@ -67,7 +65,7 @@ public class ObjectTests
     public void Example_062()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A foo",
@@ -76,7 +74,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex62 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex62 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex62.Type.Should().Contain("http://example.org/Foo");
@@ -92,7 +90,7 @@ public class ObjectTests
     public void Example_066()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Note",
@@ -108,7 +106,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex66 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex66 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex66.Should().BeAssignableTo<Note>();
@@ -127,7 +125,7 @@ public class ObjectTests
     public void Example_067()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Image",
@@ -143,7 +141,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex67 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex67 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex67.Should().BeAssignableTo<Image>();
@@ -162,7 +160,7 @@ public class ObjectTests
     public void Example_068()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Image",
@@ -179,7 +177,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex68 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex68 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex68.Should().BeAssignableTo<Image>();
@@ -200,7 +198,7 @@ public class ObjectTests
     public void Example_069()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "name": "Holiday announcement",
@@ -214,7 +212,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex69 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex69 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex69.Should().BeAssignableTo<Note>();
@@ -232,7 +230,7 @@ public class ObjectTests
     public void Example_070()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally offered a post to John",
@@ -247,7 +245,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex70 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex70 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex70.Should().BeAssignableTo<Offer>();
@@ -266,7 +264,7 @@ public class ObjectTests
     public void Example_071()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally offered a post to John",
@@ -281,7 +279,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex71 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex71 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex71.Should().BeAssignableTo<Offer>();
@@ -300,7 +298,7 @@ public class ObjectTests
     public void Example_072()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally offered a post to John",
@@ -315,7 +313,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex72 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex72 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex72.Should().BeAssignableTo<Offer>();
@@ -334,7 +332,7 @@ public class ObjectTests
     public void Example_073()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Activities in context 1",
@@ -358,7 +356,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex73 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex73 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex73.Should().BeAssignableTo<Collection>();
@@ -376,7 +374,7 @@ public class ObjectTests
     public void Example_078()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A simple note",
@@ -390,7 +388,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex78 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex78 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex78.Should().BeAssignableTo<Note>();
@@ -409,7 +407,7 @@ public class ObjectTests
     public void Example_079()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A simple note",
@@ -426,7 +424,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex79 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex79 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex79.Should().BeAssignableTo<Note>();
@@ -445,7 +443,7 @@ public class ObjectTests
     public void Example_080()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A simple note",
@@ -471,7 +469,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex80 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex80 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex80.Should().BeAssignableTo<Note>();
@@ -491,7 +489,7 @@ public class ObjectTests
     public void Example_081()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "name": "A simple note",
@@ -506,7 +504,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex81 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex81 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex81.Should().BeAssignableTo<Note>();
@@ -527,7 +525,7 @@ public class ObjectTests
         // Arrange
         // We changed the second element in the below image list to be a url to validate that that is possible.
         // We also added an explicit Link after that.
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "name": "A simple note",
@@ -549,7 +547,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex82 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex82 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex82.Should().BeAssignableTo<Note>();
@@ -572,7 +570,7 @@ public class ObjectTests
     public void Example_083()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A simple note",
@@ -587,7 +585,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex83 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex83 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex83.Should().BeAssignableTo<Note>();
@@ -605,7 +603,7 @@ public class ObjectTests
     public void Example_084()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A simple note",
@@ -616,7 +614,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex84 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex84 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex84.Should().BeAssignableTo<Note>();
@@ -634,7 +632,7 @@ public class ObjectTests
     public void Example_088()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Person",
@@ -651,7 +649,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex88 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex88 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex88.Should().BeAssignableTo<Person>();
@@ -669,7 +667,7 @@ public class ObjectTests
     public void Example_089()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally's notes",
@@ -689,7 +687,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex89 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex89 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex89.Should().BeAssignableTo<Collection>();
@@ -708,7 +706,7 @@ public class ObjectTests
     public void Example_090()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally's notes",
@@ -728,7 +726,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex90 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex90 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex90.Should().BeAssignableTo<OrderedCollection>();
@@ -747,7 +745,7 @@ public class ObjectTests
     public void Example_102()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Video",
@@ -766,7 +764,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex102 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex102 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex102.Should().BeAssignableTo<Video>();
@@ -784,7 +782,7 @@ public class ObjectTests
     public void Example_104()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A simple note",
@@ -807,7 +805,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex104 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex104 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex104.Should().BeAssignableTo<Note>();
@@ -824,7 +822,7 @@ public class ObjectTests
     public void Example_105()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Image",
@@ -841,7 +839,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex105 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex105 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex105.Should().BeAssignableTo<Image>();
@@ -859,7 +857,7 @@ public class ObjectTests
     public void Example_108()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally offered the post to John",
@@ -874,7 +872,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex108 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex108 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex108.Should().BeAssignableTo<Offer>();
@@ -892,7 +890,7 @@ public class ObjectTests
     public void Example_109()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Document",
@@ -902,7 +900,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex109 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex109 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex109.Should().BeAssignableTo<Document>();
@@ -920,7 +918,7 @@ public class ObjectTests
     public void Example_110()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Document",
@@ -933,7 +931,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex110 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex110 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex110.Should().BeAssignableTo<Document>();
@@ -951,7 +949,7 @@ public class ObjectTests
     public void Example_111()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Document",
@@ -972,7 +970,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex111 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex111 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex111.Should().BeAssignableTo<Document>();
@@ -991,7 +989,7 @@ public class ObjectTests
     public void Example_113()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Place",
@@ -1004,7 +1002,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex113 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex113 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex113.Should().BeAssignableTo<Place>();
@@ -1021,7 +1019,7 @@ public class ObjectTests
     public void Example_114()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A simple note",
@@ -1031,7 +1029,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex114 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex114 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex114.Should().BeAssignableTo<Note>();
@@ -1049,7 +1047,7 @@ public class ObjectTests
     public void Example_115()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A simple note",
@@ -1063,7 +1061,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex115 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex115 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex115.Should().BeAssignableTo<Note>();
@@ -1085,7 +1083,7 @@ public class ObjectTests
     public void Example_116()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A simple note",
@@ -1096,7 +1094,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex116 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex116 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex116.Should().BeAssignableTo<Note>();
@@ -1114,7 +1112,7 @@ public class ObjectTests
     public void Example_117()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Note",
@@ -1123,7 +1121,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex117 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex117 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex117.Should().BeAssignableTo<Note>();
@@ -1141,7 +1139,7 @@ public class ObjectTests
     public void Example_118()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Note",
@@ -1154,7 +1152,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex118 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex118 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex118.Should().BeAssignableTo<Note>();
@@ -1175,7 +1173,7 @@ public class ObjectTests
     public void Example_119()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Video",
@@ -1186,7 +1184,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex119 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex119 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex119.Should().BeAssignableTo<Video>();
@@ -1205,7 +1203,7 @@ public class ObjectTests
     public void Example_126()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Link",
@@ -1217,7 +1215,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex126 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex126 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex126.Should().BeAssignableTo<Link>();
@@ -1236,7 +1234,7 @@ public class ObjectTests
     public void Example_127()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Event",
@@ -1247,7 +1245,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex127 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex127 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex127.Should().BeAssignableTo<Event>();
@@ -1265,7 +1263,7 @@ public class ObjectTests
     public void Example_128()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A simple note",
@@ -1276,7 +1274,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex128 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex128 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex128.Should().BeAssignableTo<Note>();
@@ -1294,7 +1292,7 @@ public class ObjectTests
     public void Example_129()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Event",
@@ -1305,7 +1303,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex129 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex129 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex129.Should().BeAssignableTo<Event>();
@@ -1322,7 +1320,7 @@ public class ObjectTests
     public void Example_133()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "name": "Cane Sugar Processing",
@@ -1332,7 +1330,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex133 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex133 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex133.Should().BeAssignableTo<Note>();
@@ -1350,7 +1348,7 @@ public class ObjectTests
     public void Example_134()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "name": "Cane Sugar Processing",
@@ -1364,7 +1362,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex134 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex134 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex134.Should().BeAssignableTo<Note>();
@@ -1385,7 +1383,7 @@ public class ObjectTests
     public void Example_137()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "name": "Cranberry Sauce Idea",
@@ -1396,7 +1394,7 @@ public class ObjectTests
             """;
 
         // Act
-        var ex137 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex137 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex137.Should().BeAssignableTo<Note>();

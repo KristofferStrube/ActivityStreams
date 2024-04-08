@@ -1,6 +1,4 @@
-﻿using KristofferStrube.ActivityStreams.JsonLD;
-
-namespace KristofferStrube.ActivityStreams.Tests;
+﻿namespace KristofferStrube.ActivityStreams.Tests;
 
 public class RelationshipTests
 {
@@ -11,7 +9,7 @@ public class RelationshipTests
     public void Example_139()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally is an acquaintance of John's",
@@ -29,7 +27,7 @@ public class RelationshipTests
             """;
 
         // Act
-        var ex139 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex139 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex139.Should().BeAssignableTo<Relationship>();

@@ -9,7 +9,7 @@ public class CollectionTests
     public void Example_074()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally's blog posts",
@@ -25,7 +25,7 @@ public class CollectionTests
             """;
 
         // Act
-        var ex74 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex74 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex74.Should().BeAssignableTo<Collection>();
@@ -39,7 +39,7 @@ public class CollectionTests
     public void Example_075()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally's blog posts",
@@ -59,7 +59,7 @@ public class CollectionTests
             """;
 
         // Act
-        var ex75 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex75 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex75.Should().BeAssignableTo<Collection>();
@@ -73,7 +73,7 @@ public class CollectionTests
     public void Example_076()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally's blog posts",
@@ -84,7 +84,7 @@ public class CollectionTests
             """;
 
         // Act
-        var ex76 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex76 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex76.Should().BeAssignableTo<Collection>();
@@ -98,7 +98,7 @@ public class CollectionTests
     public void Example_077()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally's blog posts",
@@ -113,7 +113,7 @@ public class CollectionTests
             """;
 
         // Act
-        var ex77 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex77 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex77.Should().BeAssignableTo<Collection>();
@@ -127,7 +127,7 @@ public class CollectionTests
     public void Example_086()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A collection",
@@ -138,7 +138,7 @@ public class CollectionTests
             """;
 
         // Act
-        var ex86 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex86 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex86.Should().BeAssignableTo<Collection>();
@@ -152,7 +152,7 @@ public class CollectionTests
     public void Example_087()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "A collection",
@@ -167,7 +167,7 @@ public class CollectionTests
             """;
 
         // Act
-        var ex87 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex87 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex87.Should().BeAssignableTo<Collection>();
@@ -181,7 +181,7 @@ public class CollectionTests
     public void Example_089()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally's notes",
@@ -201,7 +201,7 @@ public class CollectionTests
             """;
 
         // Act
-        var ex89 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex89 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex89.Should().BeAssignableTo<Collection>();
@@ -217,7 +217,7 @@ public class CollectionTests
     public void Example_090()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally's notes",
@@ -237,7 +237,7 @@ public class CollectionTests
             """;
 
         // Act
-        var ex90 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex90 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex90.Should().BeAssignableTo<OrderedCollection>();
@@ -253,7 +253,7 @@ public class CollectionTests
     public void Example_135()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Sally's notes",
@@ -273,7 +273,7 @@ public class CollectionTests
             """;
 
         // Act
-        var ex135 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex135 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex135.Should().BeAssignableTo<Collection>();

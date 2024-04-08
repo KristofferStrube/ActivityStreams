@@ -2,5 +2,8 @@
 
 public class Block : Ignore
 {
-    public Block() => Type = new List<string>() { "Block" };
+    public Block()
+    {
+        Type = new List<string>() { "Block" };
+    }
 }

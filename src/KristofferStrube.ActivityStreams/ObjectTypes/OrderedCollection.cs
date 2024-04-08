@@ -2,5 +2,8 @@
 
 public class OrderedCollection : Collection
 {
-    public OrderedCollection() => Type = new List<string>() { "OrderedCollection" };
+    public OrderedCollection()
+    {
+        Type = new List<string>() { "OrderedCollection" };
+    }
 }

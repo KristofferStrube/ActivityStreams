@@ -2,5 +2,8 @@
 
 public class Update : Activity
 {
-    public Update() => Type = new List<string>() { "Update" };
+    public Update()
+    {
+        Type = new List<string>() { "Update" };
+    }
 }

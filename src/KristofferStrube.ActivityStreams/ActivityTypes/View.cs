@@ -2,5 +2,8 @@
 
 public class View : Activity
 {
-    public View() => Type = new List<string>() { "View" };
+    public View()
+    {
+        Type = new List<string>() { "View" };
+    }
 }

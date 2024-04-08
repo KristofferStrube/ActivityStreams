@@ -10,7 +10,7 @@ public class LinkTests
     {
         // Arrange
         // We have added a preview to the below example to test that.
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Link",
@@ -31,7 +31,7 @@ public class LinkTests
             """;
 
         // Act
-        var ex2 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex2 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex2.Should().BeAssignableTo<Link>();
@@ -46,7 +46,7 @@ public class LinkTests
     public void Example_120()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Link",
@@ -57,7 +57,7 @@ public class LinkTests
             """;
 
         // Act
-        var ex120 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex120 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex120.Should().BeAssignableTo<Link>();
@@ -71,7 +71,7 @@ public class LinkTests
     public void Example_121()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Link",
@@ -82,7 +82,7 @@ public class LinkTests
             """;
 
         // Act
-        var ex121 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex121 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex121.Should().BeAssignableTo<Link>();
@@ -96,7 +96,7 @@ public class LinkTests
     public void Example_122()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Link",
@@ -108,7 +108,7 @@ public class LinkTests
             """;
 
         // Act
-        var ex122 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex122 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex122.Should().BeAssignableTo<Link>();
@@ -122,7 +122,7 @@ public class LinkTests
     public void Example_126()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Link",
@@ -134,7 +134,7 @@ public class LinkTests
             """;
 
         // Act
-        var ex126 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex126 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex126.Should().BeAssignableTo<Link>();
@@ -148,7 +148,7 @@ public class LinkTests
     public void Example_131()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Link",
@@ -161,7 +161,7 @@ public class LinkTests
             """;
 
         // Act
-        var ex131 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex131 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex131.Should().BeAssignableTo<Link>();
@@ -181,7 +181,7 @@ public class LinkTests
     public void Example_138()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "type": "Link",
@@ -192,7 +192,7 @@ public class LinkTests
             """;
 
         // Act
-        var ex138 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex138 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex138.Should().BeAssignableTo<Link>();

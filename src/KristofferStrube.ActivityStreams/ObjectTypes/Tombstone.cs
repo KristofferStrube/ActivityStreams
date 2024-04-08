@@ -5,7 +5,10 @@ namespace KristofferStrube.ActivityStreams;
 
 public class Tombstone : Object
 {
-    public Tombstone() => Type = new List<string>() { "Tombstone" };
+    public Tombstone()
+    {
+        Type = new List<string>() { "Tombstone" };
+    }
 
     /// <summary>
     /// On a Tombstone object, the formerType property identifies the type of the object that was deleted.

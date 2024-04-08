@@ -2,5 +2,8 @@
 
 public class Move : Activity
 {
-    public Move() => Type = new List<string>() { "Move" };
+    public Move()
+    {
+        Type = new List<string>() { "Move" };
+    }
 }

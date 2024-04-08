@@ -2,5 +2,8 @@
 
 public class Video : Document
 {
-    public Video() => Type = new List<string>() { "Video" };
+    public Video()
+    {
+        Type = new List<string>() { "Video" };
+    }
 }

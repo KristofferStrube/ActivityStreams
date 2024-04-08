@@ -1,5 +1,4 @@
 ﻿using KristofferStrube.ActivityStreams.JsonLD;
-using System.CodeDom.Compiler;
 using System.Text.Json;
 
 namespace KristofferStrube.ActivityStreams.Tests;
@@ -13,7 +12,7 @@ public class ContextTests
     public void Example_001()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "content": "My dog has fleas.",
               "summary": "A note",
@@ -23,12 +22,12 @@ public class ContextTests
             """;
 
         // Act
-        var ex1 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex1 = Deserialize<IObjectOrLink>(input);
 
         var equivalentNote = new Note()
         {
-            Summary = new List<string>() { "A note" },
-            Content = new List<string>() { "My dog has fleas." }
+            Summary = ["A note"],
+            Content = ["My dog has fleas."]
         };
 
         // Assert
@@ -46,7 +45,7 @@ public class ContextTests
     public void Example_002()
     {
         // Arrange
-        var input = """
+        string input = """
             {
               "@context": {
                  "@vocab": "https://www.w3.org/ns/activitystreams",
@@ -62,7 +61,7 @@ public class ContextTests
             """;
 
         // Act
-        var ex2 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex2 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex2.Should().BeAssignableTo<Note>();

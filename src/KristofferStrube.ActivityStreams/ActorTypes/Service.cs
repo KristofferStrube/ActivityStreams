@@ -2,5 +2,8 @@
 
 public class Service : Actor
 {
-    public Service() => Type = new List<string>() { "Service" };
+    public Service()
+    {
+        Type = new List<string>() { "Service" };
+    }
 }

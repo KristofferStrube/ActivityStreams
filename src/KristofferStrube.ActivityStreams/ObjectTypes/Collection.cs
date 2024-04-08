@@ -5,7 +5,10 @@ namespace KristofferStrube.ActivityStreams;
 
 public class Collection : Object, ICollectionOrLink
 {
-    public Collection() => Type = new List<string>() { "Collection" };
+    public Collection()
+    {
+        Type = new List<string>() { "Collection" };
+    }
 
     /// <summary>
     /// Identifies the items contained in a collection. The items might be ordered or unordered.

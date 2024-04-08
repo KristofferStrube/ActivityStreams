@@ -2,5 +2,8 @@
 
 public class Remove : Activity
 {
-    public Remove() => Type = new List<string>() { "Remove" };
+    public Remove()
+    {
+        Type = new List<string>() { "Remove" };
+    }
 }

@@ -2,5 +2,8 @@
 
 public class Invite : Offer
 {
-    public Invite() => Type = new List<string>() { "Invite" };
+    public Invite()
+    {
+        Type = new List<string>() { "Invite" };
+    }
 }

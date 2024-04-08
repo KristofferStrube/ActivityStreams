@@ -2,5 +2,8 @@
 
 public class Image : Document, IImageOrLink
 {
-    public Image() => Type = new List<string>() { "Image" };
+    public Image()
+    {
+        Type = new List<string>() { "Image" };
+    }
 }

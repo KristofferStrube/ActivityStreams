@@ -2,5 +2,8 @@
 
 public class Group : Actor
 {
-    public Group() => Type = new List<string>() { "Group" };
+    public Group()
+    {
+        Type = new List<string>() { "Group" };
+    }
 }

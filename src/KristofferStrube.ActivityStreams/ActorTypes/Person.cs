@@ -2,5 +2,8 @@
 
 public class Person : Actor
 {
-    public Person() => Type = new List<string>() { "Person" };
+    public Person()
+    {
+        Type = new List<string>() { "Person" };
+    }
 }

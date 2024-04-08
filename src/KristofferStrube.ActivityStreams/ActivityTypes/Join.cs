@@ -2,5 +2,8 @@
 
 public class Join : Activity
 {
-    public Join() => Type = new List<string>() { "Join" };
+    public Join()
+    {
+        Type = new List<string>() { "Join" };
+    }
 }

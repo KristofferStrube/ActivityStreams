@@ -2,5 +2,8 @@
 
 public class Like : Activity
 {
-    public Like() => Type = new List<string>() { "Like" };
+    public Like()
+    {
+        Type = new List<string>() { "Like" };
+    }
 }

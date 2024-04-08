@@ -10,7 +10,7 @@ public class OrderedCollectionPageTests
     {
         // Arrange
         // We changed the below to have startIndex not be the default value 0.
-        var input = """
+        string input = """
             {
               "@context": "https://www.w3.org/ns/activitystreams",
               "summary": "Page 1 of Sally's notes",
@@ -30,7 +30,7 @@ public class OrderedCollectionPageTests
             """;
 
         // Act
-        var ex132 = Deserialize<IObjectOrLink>(input);
+        IObjectOrLink ex132 = Deserialize<IObjectOrLink>(input);
 
         // Assert
         ex132.Should().BeAssignableTo<OrderedCollectionPage>();

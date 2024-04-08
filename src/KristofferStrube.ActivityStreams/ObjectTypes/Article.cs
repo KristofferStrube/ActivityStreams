@@ -2,5 +2,8 @@
 
 public class Article : Object
 {
-    public Article() => Type = new List<string>() { "Article" };
+    public Article()
+    {
+        Type = new List<string>() { "Article" };
+    }
 }
