@@ -29,7 +29,7 @@ public static class ObjectTypes
         { "Service", typeof(Service) },
         // Activities
         { "Activity", typeof(Activity) },
-        { "IntransitiveActiviy", typeof(IntransitiveActiviy) },
+        { "IntransitiveActivity", typeof(IntransitiveActivity) },
         { "Accept", typeof(Accept) },
         { "Add", typeof(Add) },
         { "Announce", typeof(Announce) },
