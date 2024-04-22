@@ -6,6 +6,10 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.3] - 2024-04-22
+### Fixed
+- Fixed that `Question` was changed to be an `Activity` instead of an `IntransitiveActiviy` in `0.2.2`.
+
 ## [0.2.2] - 2024-04-08
 ### Fixed
 - Fixed that `IntransitiveActivity` was misspelled as `IntransitiveActiviy` and that it was not derived from `Activity`. By [@deathau](https://github.com/deathau).
