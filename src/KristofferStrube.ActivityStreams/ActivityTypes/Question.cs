@@ -3,7 +3,7 @@ using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
-public class Question : Activity
+public class Question : IntransitiveActivity
 {
     public Question()
     {
