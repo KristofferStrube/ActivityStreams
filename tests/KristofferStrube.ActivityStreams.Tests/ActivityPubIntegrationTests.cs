@@ -69,11 +69,11 @@ public class ActivityPubIntegrationTests
 
         // Assert
         ex9.Should().BeAssignableTo<Person>();
-        ex9.As<Person>().Following.Href.Should().Be("https://kenzoishii.example.com/following.json");
-        ex9.As<Person>().Followers.Href.Should().Be("https://kenzoishii.example.com/followers.json");
-        ex9.As<Person>().Liked.Href.Should().Be("https://kenzoishii.example.com/liked.json");
-        ex9.As<Person>().Inbox.Href.Should().Be("https://kenzoishii.example.com/inbox.json");
-        ex9.As<Person>().Outbox.Href.Should().Be("https://kenzoishii.example.com/feed.json");
+        ex9.As<Person>().Following.ToString().Should().Be("https://kenzoishii.example.com/following.json");
+        ex9.As<Person>().Followers.ToString().Should().Be("https://kenzoishii.example.com/followers.json");
+        ex9.As<Person>().Liked.ToString().Should().Be("https://kenzoishii.example.com/liked.json");
+        ex9.As<Person>().Inbox.ToString().Should().Be("https://kenzoishii.example.com/inbox.json");
+        ex9.As<Person>().Outbox.ToString().Should().Be("https://kenzoishii.example.com/feed.json");
         ex9.As<Person>().PreferredUsername.Should().Be("kenzoishii");
         ex9.As<Person>().Name.First().Should().Be("石井健蔵");
         ex9.As<Person>().Summary.First().Should().Be("この方はただの例です");
@@ -146,7 +146,7 @@ public class ActivityPubIntegrationTests
             JsonLDContext = new List<ReferenceTermDefinition>() { new(new("https://www.w3.org/ns/activitystreams")) },
             Id = $"https://kristoffer-strube/API/ActivityPub/Users/Bot",
             PreferredUsername = "Bot",
-            Inbox = new Link() { Href = new Uri($"https://kristoffer-strube.dk/API/ActivityPub/Users/Bot/inbox") },
+            Inbox = new Uri($"https://kristoffer-strube.dk/API/ActivityPub/Users/Bot/inbox") ,
             Type = ["Person"],
             ExtensionData = new()
             {
@@ -167,7 +167,7 @@ public class ActivityPubIntegrationTests
         // Assert
         payload.Should().BeAssignableTo<Person>();
         payload.As<Person>().PreferredUsername.Should().Be("Bot");
-        payload.As<Person>().Inbox.Href.Should().Be("https://kristoffer-strube.dk/API/ActivityPub/Users/Bot/inbox");
+        payload.As<Person>().Inbox.ToString().Should().Be("https://kristoffer-strube.dk/API/ActivityPub/Users/Bot/inbox");
         payload.As<Person>().ExtensionData["publicKey"].Deserialize<Dictionary<string, string>>().Keys.Should().HaveCount(3);
         payload.As<Person>().ExtensionData["publicKey"].Deserialize<Dictionary<string, string>>()["id"].Should().Be($"https://kristoffer-strube/API/ActivityPub/Users/Bot#main-key");
         payload.As<Person>().ExtensionData["publicKey"].Deserialize<Dictionary<string, string>>()["owner"].Should().Be($"https://kristoffer-strube/API/ActivityPub/Users/Bot");
