@@ -6,6 +6,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [0.2.4] - 2025-07-08
+### Fixed
+- Fixed that the string representation of an `ILink` would not be serialized back to a string. Reported by [@dfyx](https://github.com/dfyx).
+- Fixed that the type `Organization` was misspelled.
+### Added
+- Added XML Documentation to all public types with links to the spec. definition.
+
 ## [0.2.3] - 2024-04-22
 ### Fixed
 - Fixed that `Question` was changed to be an `Activity` instead of an `IntransitiveActiviy` in `0.2.2`.
