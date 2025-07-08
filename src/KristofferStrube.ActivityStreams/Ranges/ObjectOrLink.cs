@@ -4,49 +4,40 @@ using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
+/// <summary>
+/// Represents something that is either an <see cref="Object"/> or a <see cref="Link"/>.
+/// </summary>
 public class ObjectOrLink : IObjectOrLink
 {
-    /// <summary>
-    /// The context of the JSON-LD object.
-    /// </summary>
+    /// <inheritdoc/>
     [JsonPropertyName("@context")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
     [JsonConverter(typeof(OneOrMultipleConverter<ITermDefinition>))]
     public IEnumerable<ITermDefinition>? JsonLDContext { get; set; } = new List<ITermDefinition>() { new ReferenceTermDefinition(new Uri("https://www.w3.org/ns/activitystreams")) };
 
-    /// <summary>
-    /// Provides the globally unique identifier for an Object or Link.
-    /// </summary>
+    /// <inheritdoc/>
     [JsonPropertyName("id")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public string? Id { get; set; }
 
-    /// <summary>
-    /// Provides globally unique types for an Object.
-    /// </summary>
+    /// <inheritdoc/>
     [JsonPropertyName("type")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [JsonConverter(typeof(OneOrMultipleConverter<string>))]
     public IEnumerable<string>? Type { get; set; }
 
-    /// <summary>
-    /// A simple, human-readable, plain-text name for the object. HTML markup must not be included. The name may be expressed using multiple language-tagged values.
-    /// </summary>
+    /// <inheritdoc/>
     [JsonPropertyName("name")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [JsonConverter(typeof(OneOrMultipleConverter<string>))]
     public IEnumerable<string>? Name { get; set; }
 
-    /// <summary>
-    /// A simple, human-readable, plain-text name for the object. HTML markup must not be included. The name may be expressed using multiple language-tagged values.
-    /// </summary>
+    /// <inheritdoc/>
     [JsonPropertyName("mediaType")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public string? MediaType { get; set; }
 
-    /// <summary>
-    /// Identifies an entity that provides a preview of this object.
-    /// </summary>
+    /// <inheritdoc/>
     [JsonPropertyName("preview")]
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     [JsonConverter(typeof(OneOrMultipleConverter<IObjectOrLink>))]

@@ -3,6 +3,10 @@ using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
+/// <summary>
+/// The value of <see cref="Source"/> is itself an object which uses its own content and mediaType fields to supply source information.
+/// </summary>
+/// <remarks><see href="https://www.w3.org/TR/activitypub/#source">See the API definition here</see>.</remarks>
 public class Source
 {
     /// <summary>
