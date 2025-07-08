@@ -2,8 +2,16 @@
 
 namespace KristofferStrube.ActivityStreams;
 
+/// <summary>
+/// Used to represent distinct subsets of items from a <see cref="Collection"/>.
+/// Refer to the Activity Streams 2.0 Core for a complete description of the CollectionPage object.
+/// </summary>
+/// <remarks><see href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collectionpage">See the API definition here</see>.</remarks>
 public class CollectionPage : Collection, ICollectionPageOrLink
 {
+    /// <summary>
+    /// Constructs a new <see cref="CollectionPage"/> and sets its <see cref="IObjectOrLink.Type"/> accordingly.
+    /// </summary>
     public CollectionPage()
     {
         Type = new List<string>() { "CollectionPage" };

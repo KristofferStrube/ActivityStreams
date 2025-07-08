@@ -4,8 +4,12 @@ using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams.JsonConverters;
 
+/// <summary>
+/// Defines how <see cref="IImageOrLink"/> should be serialized and deserialized.
+/// </summary>
 public class ImageOrLinkConverter : JsonConverter<IImageOrLink?>
 {
+    /// <inheritdoc/>
     public override IImageOrLink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (JsonDocument.TryParseValue(ref reader, out JsonDocument? doc))
@@ -28,6 +32,7 @@ public class ImageOrLinkConverter : JsonConverter<IImageOrLink?>
         throw new JsonException("Could not be parsed as a JsonDocument.");
     }
 
+    /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, IImageOrLink? value, JsonSerializerOptions options)
     {
         if (value is null)

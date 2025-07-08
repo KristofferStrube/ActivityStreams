@@ -3,8 +3,16 @@ using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
+/// <summary>
+/// A <see cref="Collection"/> is a subtype of <see cref="Object"/> that represents ordered or unordered sets of <see cref="Object"/> or <see cref="Link"/> instances.
+/// Refer to the Activity Streams 2.0 Core specification for a complete description of the Collection type.
+/// </summary>
+/// <remarks><see href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-collection">See the API definition here</see>.</remarks>
 public class Collection : Object, ICollectionOrLink
 {
+    /// <summary>
+    /// Constructs a new <see cref="Collection"/> object and sets its <see cref="IObjectOrLink.Type"/> accordingly.
+    /// </summary>
     public Collection()
     {
         Type = new List<string>() { "Collection" };

@@ -4,8 +4,12 @@ using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams.JsonConverters;
 
+/// <summary>
+/// Defines how <see cref="IObject"/> should be serialized and deserialized.
+/// </summary>
 public class ObjectConverter : JsonConverter<IObject?>
 {
+    /// <inheritdoc/>
     public override IObject? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (JsonDocument.TryParseValue(ref reader, out JsonDocument? doc))
@@ -44,6 +48,7 @@ public class ObjectConverter : JsonConverter<IObject?>
         throw new JsonException("Could not be parsed as a JsonDocument.");
     }
 
+    /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, IObject? value, JsonSerializerOptions options)
     {
         if (value is null)

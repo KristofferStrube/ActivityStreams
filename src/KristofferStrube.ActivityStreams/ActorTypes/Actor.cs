@@ -2,15 +2,25 @@
 
 namespace KristofferStrube.ActivityStreams;
 
+/// <summary>
+/// ActivityPub actors are generally one of the ActivityStreams Actor Types, but they don't have to be.
+/// For example, a <see cref="Profile"/> object might be used as an actor, or a type from an ActivityStreams extension.
+/// </summary>
+/// <remarks><see href="https://www.w3.org/TR/activitypub/#actors">See the API definition here</see>.</remarks>
 public class Actor : Object
 {
+    /// <summary>
+    /// Constructs a new <see cref="Actor"/> object and sets its <see cref="IObjectOrLink.Type"/> accordingly.
+    /// </summary>
     public Actor()
     {
         Type = new List<string>() { "Actor" };
     }
 
     /// <summary>
-    /// The outbox stream contains activities the user has published, subject to the ability of the requestor to retrieve the activity (that is, the contents of the outbox are filtered by the permissions of the person reading it). If a user submits a request without Authorization the server should respond with all of the Public posts. This could potentially be all relevant objects published by the user, though the number of available items is left to the discretion of those implementing and deploying the server.
+    /// The outbox stream contains activities the user has published, subject to the ability of the requestor to retrieve the activity (that is, the contents of the outbox are filtered by the permissions of the person reading it).
+    /// If a user submits a request without Authorization the server should respond with all of the Public posts.
+    /// This could potentially be all relevant objects published by the user, though the number of available items is left to the discretion of those implementing and deploying the server.
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("outbox")]
@@ -18,7 +28,10 @@ public class Actor : Object
     public ILink? Outbox { get; set; }
 
     /// <summary>
-    /// The inbox stream contains all activities received by the actor. The server SHOULD filter content according to the requester's permission. In general, the owner of an inbox is likely to be able to access all of their inbox contents. Depending on access control, some other content may be public, whereas other content may require authentication for non-owner users, if they can access the inbox at all.
+    /// The inbox stream contains all activities received by the actor.
+    /// The server should filter content according to the requester's permission.
+    /// In general, the owner of an inbox is likely to be able to access all of their inbox contents.
+    /// Depending on access control, some other content may be public, whereas other content may require authentication for non-owner users, if they can access the inbox at all.
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("inbox")]
@@ -26,7 +39,9 @@ public class Actor : Object
     public ILink? Inbox { get; set; }
 
     /// <summary>
-    /// This is a list of everyone who has sent a Follow activity for the actor, added as a side effect. This is where one would find a list of all the actors that are following the actor. The followers collection MUST be either an OrderedCollection or a Collection and MAY be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
+    /// This is a list of everyone who has sent a <see cref="Follow"/> activity for the actor, added as a side effect.
+    /// This is where one would find a list of all the actors that are following the actor.
+    /// The followers collection must be either an <see cref="OrderedCollection"/> or a <see cref="Collection"/> and may be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("followers")]
@@ -34,7 +49,8 @@ public class Actor : Object
     public ILink? Followers { get; set; }
 
     /// <summary>
-    /// This is a list of everybody that the actor has followed, added as a side effect. The following collection MUST be either an OrderedCollection or a Collection and MAY be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
+    /// This is a list of everybody that the actor has followed, added as a side effect.
+    /// The following collection must be either an <see cref="OrderedCollection"/> or a <see cref="Collection"/> and may be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("following")]
@@ -42,7 +58,8 @@ public class Actor : Object
     public ILink? Following { get; set; }
 
     /// <summary>
-    /// This is a list of every object from all of the actor's Like activities, added as a side effect. The liked collection MUST be either an OrderedCollection or a Collection and MAY be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
+    /// This is a list of every object from all of the actor's Like activities, added as a side effect.
+    /// The liked collection must be either an <see cref="OrderedCollection"/> or a <see cref="Collection"/> and may be filtered on privileges of an authenticated user or as appropriate when no authentication is given.
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("liked")]
@@ -58,7 +75,8 @@ public class Actor : Object
     public string? PreferredUsername { get; set; }
 
     /// <summary>
-    /// A json object which maps additional (typically server/domain-wide) endpoints which may be useful either for this actor or someone referencing this actor. This mapping may be nested inside the actor document as the value or may be a link to a JSON-LD document with these properties.
+    /// An object which maps additional (typically server/domain-wide) endpoints which may be useful either for this actor or someone referencing this actor.
+    /// This mapping may be nested inside the actor document as the value or may be a link to a JSON-LD document with these properties.
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("endpoints")]

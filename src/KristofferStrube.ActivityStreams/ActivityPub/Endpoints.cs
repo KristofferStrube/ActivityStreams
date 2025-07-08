@@ -4,6 +4,11 @@ using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams;
 
+/// <summary>
+/// An object which maps additional (typically server/domain-wide) endpoints which may be useful either for this actor or someone referencing this actor.
+/// This mapping may be nested inside the actor document as the value or may be a link to a JSON-LD document with these properties.
+/// </summary>
+/// <remarks><see href="https://www.w3.org/TR/activitypub/#endpoints">See the API definition here</see>.</remarks>
 public class Endpoints : IEndpointsOrLink
 {
     /// <summary>
@@ -47,7 +52,7 @@ public class Endpoints : IEndpointsOrLink
     public Uri? SignClientKey { get; set; }
 
     /// <summary>
-    /// An optional endpoint used for wide delivery of publicly addressed activities and activities sent to followers. sharedInbox endpoints SHOULD also be publicly readable OrderedCollection objects containing objects addressed to the Public special collection. Reading from the sharedInbox endpoint MUST NOT present objects which are not addressed to the Public endpoint.
+    /// An optional endpoint used for wide delivery of publicly addressed activities and activities sent to followers. sharedInbox endpoints SHOULD also be publicly readable OrderedCollection objects containing objects addressed to the Public special collection. Reading from the sharedInbox endpoint must NOT present objects which are not addressed to the Public endpoint.
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("sharedInbox")]
@@ -62,6 +67,9 @@ public class Endpoints : IEndpointsOrLink
     [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
     public Dictionary<string, JsonElement>? ExtensionData { get; set; }
 
+    /// <summary>
+    /// Extracts the extra data that maps to <see cref="Uri"/>s as <see cref="Uri"/>s.
+    /// </summary>
     [JsonIgnore]
     public Dictionary<string, Uri>? ExtensionUris => ExtensionData?.Where(kv => kv.Value.ValueKind is JsonValueKind.String && Uri.TryCreate(kv.Value.Deserialize<string>(), new(), out Uri? _)).Select(kv => (key: kv.Key, value: kv.Value.Deserialize<Uri>()!)).ToDictionary(kv => kv.key, kv => kv.value);
 }

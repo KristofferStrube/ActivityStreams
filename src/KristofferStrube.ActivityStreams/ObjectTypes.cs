@@ -1,7 +1,13 @@
 ﻿namespace KristofferStrube.ActivityStreams;
 
+/// <summary>
+/// Holds information about what types each <see cref="IObjectOrLink.Type"/> maps to.
+/// </summary>
 public static class ObjectTypes
 {
+    /// <summary>
+    /// A map from names of types to actual types. Used for deciding what type to deserialize <see cref="IObject"/>s as.
+    /// </summary>
     public static readonly Dictionary<string, Type> Types = new()
     {
         { nameof(Object), typeof(Object) },

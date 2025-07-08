@@ -4,8 +4,12 @@ using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams.JsonConverters;
 
+/// <summary>
+/// Defines how <see cref="DateTimeBooleanObjectOrLink"/> should be serialized and deserialized.
+/// </summary>
 public class DateTimeBooleanObjectOrLinkConverter : JsonConverter<DateTimeBooleanObjectOrLink?>
 {
+    /// <inheritdoc/>
     public override DateTimeBooleanObjectOrLink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (JsonDocument.TryParseValue(ref reader, out JsonDocument? doc))
@@ -45,6 +49,7 @@ public class DateTimeBooleanObjectOrLinkConverter : JsonConverter<DateTimeBoolea
         throw new JsonException("Could not be parsed as a JsonDocument.");
     }
 
+    /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, DateTimeBooleanObjectOrLink? value, JsonSerializerOptions options)
     {
         if (value?.Value is null)

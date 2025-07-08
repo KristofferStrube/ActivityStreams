@@ -4,8 +4,12 @@ using static System.Text.Json.JsonSerializer;
 
 namespace KristofferStrube.ActivityStreams.JsonConverters;
 
+/// <summary>
+/// Defines how <see cref="IEndpointsOrLink"/> should be serialized and deserialized.
+/// </summary>
 public class EndpointsOrLinkConverter : JsonConverter<IEndpointsOrLink?>
 {
+    /// <inheritdoc/>
     public override IEndpointsOrLink? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
     {
         if (JsonDocument.TryParseValue(ref reader, out JsonDocument? doc))
@@ -26,6 +30,7 @@ public class EndpointsOrLinkConverter : JsonConverter<IEndpointsOrLink?>
         throw new JsonException($"Could not be parsed as a JsonDocument.");
     }
 
+    /// <inheritdoc/>
     public override void Write(Utf8JsonWriter writer, IEndpointsOrLink? value, JsonSerializerOptions options)
     {
         if (value is Endpoints endpoints)

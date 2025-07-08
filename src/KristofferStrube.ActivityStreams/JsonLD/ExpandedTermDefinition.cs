@@ -2,6 +2,10 @@
 
 namespace KristofferStrube.ActivityStreams.JsonLD;
 
+/// <summary>
+/// An expanded representation of a JSON-LD context definition.
+/// </summary>
+/// <remarks><see href="https://www.w3.org/TR/json-ld11/#advanced-context-usage">See the API definition here</see>.</remarks>
 public class ExpandedTermDefinition : ITermDefinition
 {
     /// <summary>

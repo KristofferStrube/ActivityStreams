@@ -3,8 +3,18 @@ using System.Text.Json.Serialization;
 
 namespace KristofferStrube.ActivityStreams;
 
+/// <summary>
+/// Represents a logical or physical location.
+/// The <see cref="Place"/> object is used to represent both physical and logical locations.
+/// While numerous existing vocabularies exist for describing locations in a variety of ways, inconsistencies and incompatibilities between those vocabularies make it difficult to achieve appropriate interoperability between implementations.
+/// The <see cref="Place"/> object is included within the Activity vocabulary to provide a minimal, interoperable starting point for describing locations consistently across Activity Streams 2.0 implementations.
+/// </summary>
+/// <remarks><see href="https://www.w3.org/TR/activitystreams-vocabulary/#dfn-place">See the API definition here</see>.</remarks>
 public class Place : Object
 {
+    /// <summary>
+    /// Constructs a new <see cref="Place"/> object and sets its <see cref="IObjectOrLink.Type"/> accordingly.
+    /// </summary>
     public Place()
     {
         Type = new List<string>() { "Place" };
