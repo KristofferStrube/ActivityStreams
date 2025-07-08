@@ -198,5 +198,22 @@ public class LinkTests
         ex138.Should().BeAssignableTo<Link>();
         ex138.As<Link>().Width.Should().Be(100);
     }
+
+    /// <summary>
+    /// Example to show that links are deserialized and serialized to the same when represented as strings.
+    /// </summary>
+    [Fact]
+    public void StringLinksAreDeserializedAndSerializedAsTheSame()
+    {
+        // Arrange
+        string input = "\"http://example.org/image.png\"";
+
+        // Act
+        ILink link = Deserialize<ILink>(input);
+        string serialized = Serialize(link);
+
+        // Assert
+        serialized.Should().Be(input);
+    }
 }
 
