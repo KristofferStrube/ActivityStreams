@@ -1,9 +1,9 @@
 ﻿namespace KristofferStrube.ActivityStreams;
 
-public class Organisation : Actor
+public class Organization : Actor
 {
-    public Organisation()
+    public Organization()
     {
-        Type = new List<string>() { "Organisation" };
+        Type = new List<string>() { "Organization" };
     }
 }
