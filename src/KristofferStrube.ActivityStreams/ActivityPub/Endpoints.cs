@@ -52,7 +52,7 @@ public class Endpoints : IEndpointsOrLink
     public Uri? SignClientKey { get; set; }
 
     /// <summary>
-    /// An optional endpoint used for wide delivery of publicly addressed activities and activities sent to followers. sharedInbox endpoints SHOULD also be publicly readable OrderedCollection objects containing objects addressed to the Public special collection. Reading from the sharedInbox endpoint must NOT present objects which are not addressed to the Public endpoint.
+    /// An optional endpoint used for wide delivery of publicly addressed activities and activities sent to followers. sharedInbox endpoints should also be publicly readable OrderedCollection objects containing objects addressed to the Public special collection. Reading from the sharedInbox endpoint must not present objects which are not addressed to the Public endpoint.
     /// </summary>
     /// <remarks>This is only available as a part of ActivityPub.</remarks>
     [JsonPropertyName("sharedInbox")]
